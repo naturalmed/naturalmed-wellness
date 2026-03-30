@@ -277,7 +277,7 @@ function sendMail(e) {
         'Message:\n'  + message;
 
     const mailto = 'mailto:naturalmed.wellness@gmail.com' +
-        '?subject=' + encodeURIComponent('Website Enquiry \u2013 ' + issue) +
+        '?subject=' + encodeURIComponent('Request from site \u2013 ' + issue) +
         '&body='    + encodeURIComponent(body);
 
     window.location.href = mailto;
