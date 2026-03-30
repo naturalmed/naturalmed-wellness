@@ -1,0 +1,183 @@
+<!--
+  ══════════════════════════════════════════════════════════════════════
+  NOTIFY ME — EmailJS integration
+  Envia um email para naturalmed.wellness@gmail.com cada vez que
+  um utilizador se regista para receber novidades sobre seminários.
+  ══════════════════════════════════════════════════════════════════════
+
+  SETUP (uma única vez, ~5 minutos):
+
+  1. Crie conta gratuita em https://www.emailjs.com
+     (plano gratuito: 200 emails/mês, mais que suficiente)
+
+  2. Em "Email Services" → "Add New Service"
+     → seleccione Gmail → ligue a conta naturalmed.wellness@gmail.com
+     → anote o SERVICE ID (ex: service_abc1234)
+
+  3. Em "Email Templates" → "Create New Template"
+     Configure assim:
+       To email:  naturalmed.wellness@gmail.com
+       Subject:   Adicionado registo de interesse na newsletter
+       Body (texto simples ou HTML):
+       ─────────────────────────────────────────
+       Email address: {{user_email}}
+       Timestamp: {{timestamp}}
+       ─────────────────────────────────────────
+     → Grave e anote o TEMPLATE ID (ex: template_xyz5678)
+
+  4. Em "Account" → "Public Key"
+     → anote a PUBLIC KEY (ex: AbCdEfGhIjKlMnOp)
+
+  5. No código abaixo, substitua os três valores:
+       YOUR_PUBLIC_KEY   → a sua Public Key
+       YOUR_SERVICE_ID   → o seu Service ID
+       YOUR_TEMPLATE_ID  → o seu Template ID
+
+  ══════════════════════════════════════════════════════════════════════
+  INSTRUÇÃO DE INTEGRAÇÃO NO index.html:
+  Localize o bloco existente com o <input> de email e o botão
+  "Notify Me" na secção de seminários e substitua-o por este bloco.
+  O <script> do EmailJS SDK (primeira linha abaixo) pode ser colocado
+  junto dos outros <script> no fundo do <body> se preferir.
+  ══════════════════════════════════════════════════════════════════════
+-->
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- ── Notify Me form ──────────────────────────────────────────────── -->
+<form id="notifyForm" novalidate>
+
+  <!-- Honeypot anti-spam (bots preenchem, humanos não) -->
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+  <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:0.5rem;">
+    <input
+      type="email"
+      id="notifyEmail"
+      name="email"
+      placeholder="your@email.com"
+      required
+      autocomplete="email"
+      style="flex:1; min-width:220px; padding:12px 16px;
+             border:1.5px solid var(--cream-dark); border-radius:var(--r);
+             font-family:var(--font-sans); font-size:14px;
+             color:var(--text-dark); background:var(--white);
+             outline:none; transition:border-color var(--ease);"
+      onfocus="this.style.borderColor='var(--jade)'"
+      onblur="this.style.borderColor='var(--cream-dark)'"
+    >
+    <button
+      type="submit"
+      id="notifyBtn"
+      style="background:var(--jade); color:var(--jade-mist); border:none;
+             border-radius:var(--r); padding:12px 28px;
+             font-family:var(--font-sans); font-size:14px; font-weight:500;
+             cursor:pointer; white-space:nowrap;
+             transition:background var(--ease), transform var(--ease);"
+      onmouseover="this.style.background='var(--jade-dark)';this.style.transform='translateY(-2px)'"
+      onmouseout="this.style.background='var(--jade)';this.style.transform='none'"
+    >
+      Notify Me
+    </button>
+  </div>
+
+  <!-- Mensagem de sucesso -->
+  <div id="notifySuccess"
+       style="display:none; background:var(--jade-mist);
+              border:1px solid var(--jade-light); border-radius:var(--r);
+              padding:0.9rem 1.25rem; font-size:14px;
+              color:var(--jade-dark); margin-top:0.5rem;">
+    ✓ You're on the list! We'll notify you as soon as dates are announced.
+  </div>
+
+  <!-- Mensagem de erro -->
+  <div id="notifyError"
+       style="display:none; background:#fff3f3;
+              border:1px solid #f5c6c6; border-radius:var(--r);
+              padding:0.9rem 1.25rem; font-size:14px;
+              color:#b94a4a; margin-top:0.5rem;">
+    Something went wrong. Please try again or email us directly at
+    <a href="mailto:naturalmed.wellness@gmail.com" style="color:inherit;font-weight:600;">
+      naturalmed.wellness@gmail.com
+    </a>.
+  </div>
+
+  <p style="font-size:12px; color:var(--text-muted); margin-top:0.6rem;">
+    No spam — only announcements about NaturalMed events in Portugal.
+  </p>
+</form>
+
+<script>
+(function () {
+  /* ── EmailJS credentials — substituir pelos valores reais ─────── */
+  var EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
+  var EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+  var EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  /* ─────────────────────────────────────────────────────────────── */
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  var form    = document.getElementById('notifyForm');
+  var emailIn = document.getElementById('notifyEmail');
+  var btn     = document.getElementById('notifyBtn');
+  var success = document.getElementById('notifySuccess');
+  var error   = document.getElementById('notifyError');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var userEmail = emailIn.value.trim();
+
+    /* Validação básica do formato do email */
+    if (!userEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+      emailIn.style.borderColor = '#e05a5a';
+      emailIn.focus();
+      return;
+    }
+    emailIn.style.borderColor = 'var(--cream-dark)';
+
+    /* Construir timestamp legível com timezone offset */
+    var now    = new Date();
+    var pad    = function (n) { return String(n).padStart(2, '0'); };
+    var offset = now.getTimezoneOffset();
+    var sign   = offset <= 0 ? '+' : '-';
+    var absOff = Math.abs(offset);
+    var timestamp =
+      now.getFullYear()         + '-' +
+      pad(now.getMonth() + 1)   + '-' +
+      pad(now.getDate())         + '  ' +
+      pad(now.getHours())        + ':' +
+      pad(now.getMinutes())      + ':' +
+      pad(now.getSeconds())      +
+      '  (UTC' + sign + pad(Math.floor(absOff / 60)) + ':' + pad(absOff % 60) + ')';
+
+    /* Feedback visual enquanto envia */
+    btn.disabled    = true;
+    btn.textContent = 'Sending…';
+    success.style.display = 'none';
+    error.style.display   = 'none';
+
+    /* Parâmetros — os nomes {{user_email}} e {{timestamp}} têm de
+       corresponder exactamente às variáveis definidas no template EmailJS */
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      user_email : userEmail,
+      timestamp  : timestamp
+    })
+    .then(function () {
+      success.style.display = 'block';
+      form.reset();
+    })
+    .catch(function (err) {
+      console.error('EmailJS error:', err);
+      error.style.display = 'block';
+    })
+    .finally(function () {
+      btn.disabled    = false;
+      btn.textContent = 'Notify Me';
+    });
+  });
+})();
+</script>
