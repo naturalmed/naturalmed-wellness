@@ -1,0 +1,281 @@
+/* css/flyer.css - Print styles for NaturalMed Flyer */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap');
+
+/* Print-specific styles */
+@media print {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: white;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Page rules for print */
+@page {
+  size: A4;
+  margin: 8mm;
+}
+
+/* Base flyer styles */
+.flyer-document {
+  width: 100%;
+  height: 100%;
+  background: white;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+/* Header Section */
+.flyer-header {
+  background: #0F4A3A;
+  padding: 10px 15px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flyer-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flyer-logo {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.flyer-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+}
+
+.flyer-contact-info {
+  text-align: right;
+}
+
+.flyer-website {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: #C8A46A;
+  margin-bottom: 3px;
+}
+
+.flyer-location {
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* Image Grid */
+.flyer-image-grid {
+  padding: 8mm 8mm 6mm 8mm;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5mm;
+}
+
+.flyer-portrait img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  display: block;
+}
+
+.flyer-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+}
+
+.flyer-stacked img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+}
+
+/* Title Banner */
+.flyer-title-banner {
+  background: #0F4A3A;
+  padding: 6px 15px;
+  text-align: center;
+  margin: 0 8mm;
+}
+
+.flyer-title-banner h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 11pt;
+  letter-spacing: 1px;
+  color: white;
+  margin: 0;
+}
+
+/* Description Section */
+.flyer-description {
+  background: #F3F4F2;
+  padding: 6mm 15mm 5mm 15mm;
+  text-align: center;
+}
+
+.flyer-description p {
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.45;
+  max-width: 650px;
+  margin: 0 auto;
+  color: #2E2E2E;
+}
+
+/* Services Section */
+.flyer-services {
+  background: #F3F4F2;
+  padding: 0 15mm 6mm 15mm;
+}
+
+.flyer-services-list {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.flyer-service-tag {
+  border-radius: 20px;
+  border: 1px solid #7FAF9B;
+  padding: 3px 10px;
+  font-size: 8.5pt;
+  font-family: 'Inter', sans-serif;
+  color: #2E2E2E;
+  background: white;
+}
+
+/* Contacts Section */
+.flyer-contacts {
+  background: #0F4A3A;
+  padding: 6mm 15mm;
+  position: relative;
+  min-height: 160px;
+}
+
+.flyer-contacts-content {
+  max-width: 65%;
+}
+
+.flyer-contacts h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: white;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.flyer-contact-item {
+  margin-bottom: 6px;
+}
+
+.flyer-contact-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 7.5pt;
+  color: #C8A46A;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1px;
+}
+
+.flyer-contact-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  color: white;
+  line-height: 1.3;
+}
+
+.flyer-contact-value a {
+  color: white;
+  text-decoration: none;
+}
+
+.flyer-atcm {
+  margin-top: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 7pt;
+  color: #C8A46A;
+  font-style: italic;
+}
+
+/* QR Code */
+.flyer-qr {
+  position: absolute;
+  bottom: 8mm;
+  right: 15mm;
+  text-align: center;
+}
+
+.flyer-qr img {
+  width: 25mm;
+  height: 25mm;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.flyer-qr-caption {
+  font-family: 'Inter', sans-serif;
+  font-size: 6.5pt;
+  color: #C8A46A;
+}
+
+/* Footer - Ajustado para não partir */
+.flyer-footer {
+  padding: 3mm 15mm;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.flyer-divider {
+  height: 1px;
+  background: #C8A46A;
+  margin-bottom: 3mm;
+  width: 100%;
+}
+
+.flyer-footer p {
+  font-family: 'Inter', sans-serif;
+  font-size: 7.5pt;
+  color: #2E2E2E;
+  margin: 0;
+}
+
+/* Ensure everything fits on one page */
+@media print {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .flyer-document {
+    margin: 0;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    height: auto;
+  }
+}
