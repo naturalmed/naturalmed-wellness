@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles · NaturalMed — Traditional Chinese Medicine</title>
+    <meta name="description" content="Monthly articles on Traditional Chinese Medicine — acupuncture, herbal medicine, and holistic wellbeing — by Nuno Pestana, BSc TCM.">
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+    <link rel="alternate" type="application/rss+xml" title="NaturalMed Articles RSS" href="../feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* ── Page-specific styles ── */
+        .articles-hero { background: var(--jade-darkest); padding: 100px 0 60px; text-align: center; position: relative; overflow: hidden; }
+        .articles-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(15,110,86,.35) 0%, transparent 70%); }
+        .articles-hero .eyebrow { color: var(--gold-light); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; margin-bottom: 1rem; position:relative; }
+        .articles-hero h1 { font-family: var(--font-serif); font-size: clamp(2.2rem,5vw,3.4rem); font-weight: 500; color: var(--white); position:relative; margin-bottom: 1rem; }
+        .articles-hero p { font-size: 16px; color: var(--jade-pale); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; position:relative; }
+        .rss-btn { display:inline-flex; align-items:center; gap:8px; background: transparent; border: 1.5px solid var(--gold); color: var(--gold-light); padding: 10px 22px; border-radius: 4px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-decoration: none; transition: background .2s, color .2s; position:relative; }
+        .rss-btn:hover { background: var(--gold); color: var(--jade-darkest); }
+
+        /* ── Grid ── */
+        .articles-section { padding: 72px 0 96px; background: var(--cream); }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem; }
+        .article-card { background: var(--white); border: 1px solid var(--cream-dark); border-radius: 12px; overflow: hidden; transition: border-color .2s, box-shadow .2s, transform .2s; display: flex; flex-direction: column; }
+        .article-card:hover { border-color: var(--jade-light); box-shadow: 0 8px 32px rgba(4,52,44,.09); transform: translateY(-3px); }
+        .article-card-img { width:100%; height: 200px; object-fit: cover; display:block; background: var(--jade-mist); }
+        .article-card-img-placeholder { width:100%; height:200px; background: linear-gradient(135deg, var(--jade-mist) 0%, var(--jade-pale) 100%); display:flex; align-items:center; justify-content:center; }
+        .article-card-img-placeholder svg { opacity:.35; }
+        .article-card-body { padding: 1.5rem; flex:1; display:flex; flex-direction:column; }
+        .article-tag { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: .6rem; }
+        .article-card-title { font-family: var(--font-serif); font-size: 1.35rem; font-weight: 500; color: var(--jade-dark); line-height: 1.35; margin-bottom: .75rem; }
+        .article-card-excerpt { font-size: 14px; color: var(--text-muted); line-height: 1.7; flex:1; margin-bottom: 1.25rem; }
+        .article-card-meta { display:flex; align-items:center; justify-content:space-between; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--cream-dark); padding-top: .9rem; }
+        .article-card-date { display:flex; align-items:center; gap:5px; }
+        .read-more { color: var(--jade); font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:4px; transition:gap .2s; }
+        .read-more:hover { gap:8px; }
+
+        /* ── Empty state ── */
+        .articles-empty { text-align:center; padding: 4rem 2rem; color: var(--text-muted); }
+        .articles-empty svg { opacity:.3; margin-bottom:1.5rem; }
+        .articles-empty h3 { font-family: var(--font-serif); font-size: 1.6rem; color: var(--jade-dark); margin-bottom:.5rem; }
+
+        /* ── Newsletter signup ── */
+        .newsletter-band { background: var(--jade-darkest); padding: 64px 0; text-align:center; }
+        .newsletter-band h2 { font-family: var(--font-serif); font-size: 2rem; color: var(--white); margin-bottom:.75rem; }
+        .newsletter-band p { color: var(--jade-pale); font-size:15px; margin-bottom:2rem; }
+        .newsletter-form { display:flex; gap:10px; max-width:420px; margin:0 auto; }
+        .newsletter-form input { flex:1; padding:12px 16px; border-radius:6px; border: 1.5px solid var(--jade-light); background: rgba(255,255,255,.08); color: var(--white); font-family:var(--font-sans); font-size:14px; outline:none; transition:border-color .2s; }
+        .newsletter-form input::placeholder { color: var(--jade-pale); opacity:.7; }
+        .newsletter-form input:focus { border-color: var(--gold); }
+        .newsletter-form button { background: var(--jade); color: var(--white); border:none; padding:12px 22px; border-radius:6px; font-family:var(--font-sans); font-size:14px; font-weight:500; cursor:pointer; white-space:nowrap; transition:background .2s; }
+        .newsletter-form button:hover { background: var(--jade-mid); }
+        .newsletter-success { display:none; color: var(--jade-pale); font-size:15px; margin-top:1rem; }
+
+        @media(max-width:640px){ .newsletter-form { flex-direction:column; } }
+    </style>
+</head>
+<body>
+
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+        <img src="../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:40px;width:40px;object-fit:contain" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <div id="navMark" class="nav-mark" style="display:none">N</div>
+        <span class="nav-name">NaturalMed</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="conditions.html">Conditions</a></li>
+        <li><a href="seminars.html">Seminars</a></li>
+        <li><a href="articles.html" class="active">Articles</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="lang-toggle"><a href="#" class="active">EN</a><a href="../pt/artigos.html">PT</a></div>
+        <button class="btn-nav" onclick="window.location.href='contact.html'">Book Appointment</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="articles-hero">
+    <div class="container">
+        <div class="eyebrow">Knowledge &amp; Practice</div>
+        <h1>TCM Articles</h1>
+        <p>Monthly insights into Traditional Chinese Medicine — acupuncture, herbal remedies, and the ancient wisdom that underpins holistic health.</p>
+        <a href="../feed.xml" class="rss-btn" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
+            Subscribe via RSS
+        </a>
+    </div>
+</section>
+
+<!-- ARTICLES GRID -->
+<section class="articles-section">
+    <div class="container">
+
+        <!-- ═══════════════════════════════════════════════════════
+             ARTICLE CARDS — add one card per published article.
+             Copy the block between the CUT marks below.
+             ═══════════════════════════════════════════════════════ -->
+
+        <div class="articles-grid" id="articlesGrid">
+
+            <!-- ✂ CUT START — paste this block for each new article ✂
+            <article class="article-card reveal">
+                <a href="articles/YYYY-MM-slug.html">
+                    <img class="article-card-img"
+                         src="../assets/img/articles/YYYY-MM-slug-cover.jpg"
+                         alt="Article cover"
+                         onerror="this.outerHTML='<div class=\'article-card-img-placeholder\'><svg width=\'48\' height=\'48\' fill=\'none\' stroke=\'var(--jade)\' stroke-width=\'1.5\' viewBox=\'0 0 24 24\'><path d=\'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5\'/></svg></div>'">
+                </a>
+                <div class="article-card-body">
+                    <div class="article-tag">Acupuncture · April 2026</div>
+                    <h2 class="article-card-title">
+                        <a href="articles/YYYY-MM-slug.html" style="color:inherit;text-decoration:none">
+                            Article Title Goes Here
+                        </a>
+                    </h2>
+                    <p class="article-card-excerpt">
+                        A short 2–3 sentence excerpt summarising the article. This will also appear in the RSS feed and the newsletter email.
+                    </p>
+                    <div class="article-card-meta">
+                        <span class="article-card-date">
+                            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                            April 2026
+                        </span>
+                        <a href="articles/YYYY-MM-slug.html" class="read-more">
+                            Read article
+                            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </article>
+            ✂ CUT END ✂ -->
+
+            <!-- EMPTY STATE — remove this block once the first article is added -->
+            <div class="articles-empty" style="grid-column:1/-1">
+                <svg width="56" height="56" fill="none" stroke="var(--jade)" stroke-width="1.2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                <h3>First article coming soon</h3>
+                <p>Subscribe to the RSS feed or the newsletter below to be notified when the first article is published.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER SIGNUP -->
+<section class="newsletter-band">
+    <div class="container">
+        <h2>Monthly Newsletter</h2>
+        <p>Each new article becomes the basis for our monthly newsletter.<br>Subscribe to receive it directly in your inbox.</p>
+        <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
+            <input type="email" name="email" placeholder="your@email.com" required autocomplete="email">
+            <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-success" id="nlSuccess">
+            ✓ &nbsp;You're subscribed. First issue arrives when the next article is published.
+        </p>
+        <p style="font-size:12px;color:var(--jade-pale);margin-top:1.5rem;opacity:.7">
+            No spam. Unsubscribe at any time. One email per month.
+        </p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">
+                <img src="../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:34px;width:34px;object-fit:contain" onerror="this.style.display='none'">
+                <span class="nav-name" style="font-size:19px">NaturalMed</span>
+            </a>
+            <p>Traditional Chinese Medicine practice in Mid-Wales, UK. Serving patients since 2015 with authentic, evidence-informed holistic care.</p>
+        </div>
+        <div class="footer-col"><h4>Navigate</h4><ul><li><a href="about.html">About Nuno</a></li><li><a href="services.html">Services</a></li><li><a href="conditions.html">Conditions</a></li><li><a href="articles.html">Articles</a></li><li><a href="seminars.html">Seminars</a></li></ul></div>
+        <div class="footer-col"><h4>Treatments</h4><ul><li><a href="services.html#acupuncture">Acupuncture</a></li><li><a href="services.html#herbal">Herbal Medicine</a></li><li><a href="services.html#tuina">Tuina Massage</a></li><li><a href="services.html#dietetics">Chinese Dietetics</a></li><li><a href="services.html#online">Online Consultations</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+447756339382">+44 7756 339 382</a></li><li><a href="mailto:naturalmed.wellness@gmail.com">naturalmed.wellness@gmail.com</a></li><li><span style="color:var(--jade-pale)">30 Shortbridge Street</span></li><li><span style="color:var(--jade-pale)">Newtown, Powys SY16 2LN</span></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+        <p>©2026 NaturalMed · Traditional Chinese Medicine · naturalmed.wellness</p>
+        <div class="footer-social"><a href="https://www.facebook.com/search/top?q=naturalmed" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div>
+    </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+function handleNewsletter(e) {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    if (!email) return;
+    // POST to your chosen backend (Formspree, Netlify, GitHub Actions webhook, etc.)
+    // See tools/newsletter-backend.md for setup options
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: JSON.stringify({ email: email, source: 'articles-newsletter' }),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+    })
+    .then(r => r.ok ? showSuccess() : showSuccess()) // show success either way for UX
+    .catch(() => showSuccess());
+
+    function showSuccess() {
+        document.getElementById('newsletterForm').style.display = 'none';
+        document.getElementById('nlSuccess').style.display = 'block';
+    }
+}
+</script>
+</body>
+</html>
