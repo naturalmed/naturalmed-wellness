@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  <channel>
+    <title>NaturalMed — TCM Articles</title>
+    <link>https://www.naturalmed-wellness.com/en/articles.html</link>
+    <description>Monthly articles on Traditional Chinese Medicine — acupuncture, herbal medicine and holistic wellbeing — by Nuno Pestana, BSc TCM, Member ATCM UK.</description>
+    <language>en-gb</language>
+    <copyright>© 2026 NaturalMed. All rights reserved.</copyright>
+    <managingEditor>naturalmed.wellness@gmail.com (Nuno Pestana)</managingEditor>
+    <webMaster>naturalmed.wellness@gmail.com</webMaster>
+    <lastBuildDate>Mon, 31 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://www.naturalmed-wellness.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <image>
+      <url>https://www.naturalmed-wellness.com/assets/img/naturalmed-logo.png</url>
+      <title>NaturalMed</title>
+      <link>https://www.naturalmed-wellness.com/en/articles.html</link>
+    </image>
+    <ttl>1440</ttl>
+
+    <!-- Articles are added here by tools/add-article.py — do not edit manually -->
+
+  </channel>
+</rss>
