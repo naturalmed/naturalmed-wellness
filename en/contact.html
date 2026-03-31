@@ -195,7 +195,6 @@
                             <option value="Initial Assessment">Initial Assessment</option>
                             <option value="Online Consultation">Online Consultation</option>
                             <option value="Prices">Prices</option>
-                            <option value="Subscribe Newsletter">Subscribe Newsletter</option>   
                             <option value="Treatments we offer">Treatments We Offer</option>
                             <option value="Tuina Massage">Tuina Massage</option>
                             <option value="Other">Other</option>
@@ -277,7 +276,7 @@ function sendMail(e) {
         'Message:\n'  + message;
 
     const mailto = 'mailto:naturalmed.wellness@gmail.com' +
-        '?subject=' + encodeURIComponent('Request from site \u2013 ' + issue) +
+        '?subject=' + encodeURIComponent('Website Enquiry \u2013 ' + issue) +
         '&body='    + encodeURIComponent(body);
 
     window.location.href = mailto;
