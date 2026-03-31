@@ -255,6 +255,36 @@ window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', windo
 const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
+// Pre-fill form fields from URL parameters (e.g. from articles.html Subscribe)
+(function() {
+    const p = new URLSearchParams(window.location.search);
+    const emailVal   = p.get('email');
+    const subjectVal = p.get('subject');
+    if (emailVal) {
+        const ef = document.querySelector('input[name="email"]');
+        if (ef) ef.value = decodeURIComponent(emailVal);
+    }
+    if (subjectVal === 'newsletter') {
+        const sf = document.querySelector('select[name="issue"]');
+        if (sf) {
+            // Try to select "Newsletter / General Enquiry" or similar option
+            for (let i = 0; i < sf.options.length; i++) {
+                if (sf.options[i].value.toLowerCase().includes('newsletter') ||
+                    sf.options[i].value.toLowerCase().includes('general')) {
+                    sf.selectedIndex = i; break;
+                }
+            }
+        }
+    }
+    // Scroll to form if arriving from newsletter link
+    if (emailVal) {
+        setTimeout(() => {
+            const form = document.getElementById('enquiryForm');
+            if (form) form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 400);
+    }
+})();
+
 function sendMail(e) {
     e.preventDefault();
     const f = e.target;

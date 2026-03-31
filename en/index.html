@@ -86,11 +86,6 @@
         .sem-img-label h3{font-family:var(--font-serif);font-size:24px;font-weight:500;color:var(--jade-mist)}
         .audience-tags{display:flex;flex-wrap:wrap;gap:8px;margin:1.4rem 0}
         .aud-tag{background:var(--jade-mist);color:var(--jade-dark);font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid rgba(93,202,165,0.35)}
-        .waitlist-form{display:flex;gap:8px;margin-top:1.5rem}
-        .waitlist-input{flex:1;padding:11px 14px;border:1.5px solid var(--cream-dark);border-radius:var(--r);font-family:var(--font-sans);font-size:14px;color:var(--text-dark);background:var(--cream);outline:none;transition:border-color var(--ease),background var(--ease)}
-        .waitlist-input:focus{border-color:var(--jade);background:var(--white)}
-        .waitlist-btn{background:var(--jade);color:var(--jade-mist);border:none;border-radius:var(--r);padding:11px 20px;font-family:var(--font-sans);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background var(--ease),transform var(--ease)}
-        .waitlist-btn:hover{background:var(--jade-dark);transform:translateY(-1px)}
         .waitlist-note{font-size:11px;color:var(--text-muted);margin-top:8px}
         .cta-section{position:relative;padding:7rem 2rem;overflow:hidden;text-align:center}
         .cta-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1515023115689-589c33041d3c?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;will-change:transform}
@@ -241,13 +236,9 @@
                 <h2 class="section-title reveal d1">TCM Seminars<br>&amp; Workshops</h2>
                 <p class="section-lead reveal d2">Nuno is planning a series of Traditional Chinese Medicine seminars and workshops in Portugal — open to the general public, healthcare professionals and TCM students alike.</p>
                 <div class="audience-tags reveal d3"><span class="aud-tag">General Public</span><span class="aud-tag">Healthcare Professionals</span><span class="aud-tag">TCM Students</span></div>
-                <p style="font-size:14px;color:var(--text-muted);line-height:1.7" class="reveal d3">Dates and locations to be announced. Join the waiting list to be notified first.</p>
-                <div class="reveal d4">
-                    <form class="waitlist-form" onsubmit="handleWaitlist(event)">
-                        <input class="waitlist-input" type="email" placeholder="Your email address" required>
-                        <button class="waitlist-btn" type="submit">Notify Me</button>
-                    </form>
-                    <p class="waitlist-note">No spam — only announcements about NaturalMed events in Portugal.</p>
+                <p style="font-size:14px;color:var(--text-muted);line-height:1.7" class="reveal d3">Dates and locations to be announced. Register your interest and we will be in touch as soon as registrations open.</p>
+                <div class="reveal d4" style="margin-top:1.5rem">
+                    <button class="btn-primary" onclick="window.location.href='contact.html'">I Am Interested!</button>
                 </div>
             </div>
         </div>
@@ -315,14 +306,6 @@ function type() {
     setTimeout(type, del ? 52 : 88);
 }
 setTimeout(type, 1300);
-function handleWaitlist(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    const input = e.target.querySelector('input');
-    btn.textContent = "You're on the list!";
-    btn.style.background = 'var(--jade-dark)';
-    input.disabled = btn.disabled = true;
-}
 </script>
 </body>
 </html>
