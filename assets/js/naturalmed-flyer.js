@@ -154,9 +154,9 @@ function generateFlyer() {
             doc.setTextColor(GOLD[0], GOLD[1], GOLD[2]);
             doc.text('CONTACTS', ML, footerY + 9);
 
-            doc.setDrawColor(GOLD[0], GOLD[1], GOLD[2]);
-            doc.setLineWidth(0.4);
-            doc.line(ML, footerY + 10.5, ML + 28, footerY + 10.5);
+          //*  doc.setDrawColor(GOLD[0], GOLD[1], GOLD[2]);
+          //*  doc.setLineWidth(0.4);
+          //*  doc.line(ML, footerY + 10.5, ML + 28, footerY + 10.5);
 
             // Contact lines
             var contacts = [
