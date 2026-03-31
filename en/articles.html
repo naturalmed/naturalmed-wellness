@@ -19,22 +19,7 @@
         .articles-hero .eyebrow { color: var(--gold-light); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight: 500; margin-bottom: 1rem; position:relative; }
         .articles-hero h1 { font-family: var(--font-serif); font-size: clamp(2.2rem,5vw,3.4rem); font-weight: 500; color: var(--white); position:relative; margin-bottom: 1rem; }
         .articles-hero p { font-size: 16px; color: var(--jade-pale); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7; position:relative; }
-        .rss-btn { display:inline-flex; align-items:center; gap:8px; background: transparent; border: 1.5px solid var(--gold); color: var(--gold-light); padding: 10px 22px; border-radius: 4px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; text-decoration: none; cursor:pointer; transition: background .2s, color .2s; position:relative; }
-        .rss-btn:hover { background: var(--gold); color: var(--jade-darkest); }
 
-        /* ── RSS modal ── */
-        .rss-modal-overlay { display:none; position:fixed; inset:0; background:rgba(4,52,44,.55); z-index:9000; align-items:center; justify-content:center; }
-        .rss-modal-overlay.open { display:flex; }
-        .rss-modal { background:var(--white); border-radius:12px; padding:2rem; max-width:420px; width:90%; position:relative; }
-        .rss-modal h3 { font-family:var(--font-serif); font-size:1.4rem; color:var(--jade-dark); margin:0 0 .5rem; }
-        .rss-modal p { font-size:14px; color:var(--text-muted); line-height:1.7; margin:0 0 1.25rem; }
-        .rss-modal-url { display:flex; gap:8px; margin-bottom:1.25rem; }
-        .rss-modal-url input { flex:1; padding:9px 12px; border:1.5px solid var(--jade-light); border-radius:6px; font-size:12px; font-family:monospace; color:var(--jade-dark); background:var(--jade-mist); outline:none; }
-        .rss-copy-btn { background:var(--jade); color:var(--white); border:none; padding:9px 16px; border-radius:6px; font-size:13px; font-weight:500; cursor:pointer; white-space:nowrap; transition:background .2s; }
-        .rss-copy-btn:hover { background:var(--jade-dark); }
-        .rss-feedly-link { display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:var(--white); padding:10px 22px; border-radius:6px; font-size:14px; font-weight:500; text-decoration:none; transition:background .2s; width:100%; justify-content:center; }
-        .rss-feedly-link:hover { background:var(--gold-light); }
-        .rss-modal-close { position:absolute; top:14px; right:16px; background:none; border:none; font-size:22px; color:var(--text-muted); cursor:pointer; line-height:1; }
 
         /* ── Grid ── */
         .articles-section { padding: 72px 0 96px; background: var(--cream); }
@@ -101,10 +86,7 @@
         <div class="eyebrow">Knowledge &amp; Practice</div>
         <h1>TCM Articles</h1>
         <p>Monthly insights into Traditional Chinese Medicine — acupuncture, herbal remedies, and the ancient wisdom that underpins holistic health.</p>
-        <button class="rss-btn" onclick="showRSSModal()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
-            Subscribe via RSS
-        </button>
+
     </div>
 </section>
 
@@ -196,25 +178,6 @@
     </div>
 </footer>
 
-<!-- RSS Subscribe Modal -->
-<div class="rss-modal-overlay" id="rssModal" onclick="if(event.target===this)closeRSSModal()">
-    <div class="rss-modal">
-        <button class="rss-modal-close" onclick="closeRSSModal()" aria-label="Close">&times;</button>
-        <h3>Subscribe via RSS</h3>
-        <p>RSS feeds need a <strong>reader app</strong> to work — they cannot be viewed directly in a browser. Copy the URL below and paste it into your preferred RSS app.</p>
-        <div class="rss-modal-url">
-            <input type="text" id="rssFeedUrl" value="https://www.naturalmed-wellness.com/feed.xml" readonly onclick="this.select()">
-            <button class="rss-copy-btn" onclick="copyFeedURL()">Copy</button>
-        </div>
-        <p style="font-size:13px;color:var(--text-muted);margin-bottom:1rem">Or subscribe in one click using <strong>Feedly</strong> (free RSS reader):</p>
-        <a href="https://feedly.com/i/subscription/feed/https://www.naturalmed-wellness.com/feed.xml"
-           class="rss-feedly-link" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/></svg>
-            Subscribe in Feedly
-        </a>
-    </div>
-</div>
-
 <script>
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
@@ -222,20 +185,6 @@ const ro = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-function showRSSModal()  { document.getElementById('rssModal').classList.add('open'); }
-function closeRSSModal() { document.getElementById('rssModal').classList.remove('open'); }
-function copyFeedURL() {
-    var input = document.getElementById('rssFeedUrl');
-    input.select();
-    navigator.clipboard.writeText(input.value).then(function() {
-        var btn = document.querySelector('.rss-copy-btn');
-        btn.textContent = '✓ Copied!';
-        setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
-    }).catch(function() {
-        document.execCommand('copy');
-    });
-}
 
 function handleNewsletter(e) {
     e.preventDefault();
