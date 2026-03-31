@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <!-- Cloudflare Turnstile script -->
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
         .hero-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;will-change:transform}
@@ -88,13 +86,12 @@
         .sem-img-label h3{font-family:var(--font-serif);font-size:24px;font-weight:500;color:var(--jade-mist)}
         .audience-tags{display:flex;flex-wrap:wrap;gap:8px;margin:1.4rem 0}
         .aud-tag{background:var(--jade-mist);color:var(--jade-dark);font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid rgba(93,202,165,0.35)}
-        .waitlist-form{display:flex;flex-direction:column;gap:12px;margin-top:1.5rem}
+        .waitlist-form{display:flex;gap:8px;margin-top:1.5rem}
         .waitlist-input{flex:1;padding:11px 14px;border:1.5px solid var(--cream-dark);border-radius:var(--r);font-family:var(--font-sans);font-size:14px;color:var(--text-dark);background:var(--cream);outline:none;transition:border-color var(--ease),background var(--ease)}
         .waitlist-input:focus{border-color:var(--jade);background:var(--white)}
         .waitlist-btn{background:var(--jade);color:var(--jade-mist);border:none;border-radius:var(--r);padding:11px 20px;font-family:var(--font-sans);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;transition:background var(--ease),transform var(--ease)}
         .waitlist-btn:hover{background:var(--jade-dark);transform:translateY(-1px)}
         .waitlist-note{font-size:11px;color:var(--text-muted);margin-top:8px}
-        .cf-turnstile{margin:0 auto;display:flex;justify-content:center}
         .cta-section{position:relative;padding:7rem 2rem;overflow:hidden;text-align:center}
         .cta-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1515023115689-589c33041d3c?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;will-change:transform}
         .cta-overlay{position:absolute;inset:0;background:rgba(4,52,44,0.84)}
@@ -105,7 +102,6 @@
         .cta-contacts{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
         .cta-item{display:flex;align-items:center;gap:8px;color:var(--jade-pale);font-size:14px;transition:color var(--ease)}
         .cta-item:hover{color:var(--white)}
-        .waitlist-form .cf-turnstile{justify-content:flex-start}
     </style>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
@@ -122,8 +118,8 @@
         <li><a href="#about">About</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="#conditions">Conditions</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
         <li><a href="#seminars">Seminars</a></li>
+        <li><a href="articles.html">Articles</a></li>
         <li><a href="contact.html">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -249,8 +245,6 @@
                 <div class="reveal d4">
                     <form class="waitlist-form" onsubmit="handleWaitlist(event)">
                         <input class="waitlist-input" type="email" placeholder="Your email address" required>
-                        <!-- Cloudflare Turnstile widget -->
-                        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light"></div>
                         <button class="waitlist-btn" type="submit">Notify Me</button>
                     </form>
                     <p class="waitlist-note">No spam — only announcements about NaturalMed events in Portugal.</p>
@@ -287,7 +281,7 @@
             </a>
             <p>Traditional Chinese Medicine practice in Mid-Wales, UK. Serving patients since 2015 with authentic, evidence-informed holistic care.</p>
         </div>
-        <div class="footer-col"><h4>Navigate</h4><ul><li><a href="about.html">About Nuno</a></li><li><a href="services.html">Services</a></li><li><a href="#conditions">Conditions</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#seminars">Seminars PT</a></li></ul></div>
+        <div class="footer-col"><h4>Navigate</h4><ul><li><a href="about.html">About Nuno</a></li><li><a href="services.html">Services</a></li><li><a href="conditions.html">Conditions</a></li><li><a href="seminars.html">Seminars</a></li><li><a href="articles.html">Articles</a></li></ul></div>
         <div class="footer-col"><h4>Treatments</h4><ul><li><a href="services.html#acupuncture">Acupuncture</a></li><li><a href="services.html#herbal">Herbal Medicine</a></li><li><a href="services.html#tuina">Tuina Massage</a></li><li><a href="services.html#dietetics">Chinese Dietetics</a></li><li><a href="services.html#online">Online Consultations</a></li></ul></div>
         <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+447756339382">+44 7756 339 382</a></li><li><a href="mailto:naturalmed.wellness@gmail.com">naturalmed.wellness@gmail.com</a></li><li><span style="color:var(--jade-pale)">30 Shortbridge Street</span></li><li><span style="color:var(--jade-pale)">Newtown, Powys SY16 2LN</span></li></ul></div>
     </div>
@@ -296,7 +290,6 @@
         <div class="footer-social"><a href="https://www.facebook.com/search/top?q=naturalmed" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></div>
     </div>
 </footer>
-
 <script>
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
@@ -322,213 +315,13 @@ function type() {
     setTimeout(type, del ? 52 : 88);
 }
 setTimeout(type, 1300);
-
-// ============================================================
-// GITHUB API - Save subscriber emails to news-emails.json
-// ============================================================
-
-// CONFIGURATION - You need to set these for GitHub API access
-// Create a Personal Access Token at: GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
-// Give it 'repo' scope to write to your repository
-const GITHUB_REPO = 'SEU_USERNAME/SEU_REPOSITORIO';  // Ex: 'joaosilva/naturalmed-website'
-const GITHUB_TOKEN = 'SEU_GITHUB_TOKEN';             // Seu token de acesso pessoal
-const FILE_PATH = 'assets/data/news-emails.json';    // Caminho do ficheiro no repositório
-
-// Função para ler o ficheiro atual do GitHub
-async function getCurrentEmailsFile() {
-    try {
-        const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}`;
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `token ${GITHUB_TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
-        
-        if (response.status === 404) {
-            // Ficheiro não existe - retornar estrutura vazia
-            return { content: null, sha: null, data: { subscribers: [] } };
-        }
-        
-        const data = await response.json();
-        const content = atob(data.content);
-        const jsonData = JSON.parse(content);
-        return { content, sha: data.sha, data: jsonData };
-    } catch (error) {
-        console.error('Error reading file from GitHub:', error);
-        return { content: null, sha: null, data: { subscribers: [] } };
-    }
-}
-
-// Função para atualizar o ficheiro no GitHub
-async function updateEmailsFile(subscribers, sha) {
-    const fileData = {
-        subscribers: subscribers,
-        lastUpdated: new Date().toISOString()
-    };
-    
-    const content = JSON.stringify(fileData, null, 2);
-    const encodedContent = btoa(unescape(encodeURIComponent(content)));
-    
-    const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${FILE_PATH}`;
-    const body = {
-        message: `Add new subscriber - ${new Date().toLocaleString()}`,
-        content: encodedContent,
-        branch: 'main'  // ou 'master' dependendo da sua branch principal
-    };
-    
-    if (sha) {
-        body.sha = sha;
-    }
-    
-    const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `token ${GITHUB_TOKEN}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/vnd.github.v3+json'
-        },
-        body: JSON.stringify(body)
-    });
-    
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(`GitHub API error: ${errorData.message}`);
-    }
-    
-    return await response.json();
-}
-
-// Função para adicionar um novo email à lista
-async function addSubscriberEmail(email, turnstileToken) {
-    try {
-        // Verificar se o token está configurado
-        if (GITHUB_TOKEN === 'SEU_GITHUB_TOKEN' || GITHUB_REPO === 'SEU_USERNAME/SEU_REPOSITORIO') {
-            console.warn('GitHub token or repo not configured. Please update GITHUB_TOKEN and GITHUB_REPO variables.');
-            // Fallback para localStorage durante testes
-            return saveToLocalStorage(email, turnstileToken);
-        }
-        
-        const { data, sha } = await getCurrentEmailsFile();
-        const subscribers = data.subscribers || [];
-        
-        // Verificar se email já existe
-        const exists = subscribers.some(sub => sub.email === email);
-        if (exists) {
-            return { success: false, message: 'Email already subscribed' };
-        }
-        
-        // Adicionar novo email
-        subscribers.push({
-            email: email,
-            date: new Date().toISOString(),
-            turnstileToken: turnstileToken,
-            source: 'newsletter'
-        });
-        
-        // Atualizar ficheiro no GitHub
-        await updateEmailsFile(subscribers, sha);
-        
-        return { success: true, message: 'Email added successfully' };
-    } catch (error) {
-        console.error('Error adding subscriber:', error);
-        return { success: false, message: error.message };
-    }
-}
-
-// Fallback para localStorage durante desenvolvimento
-function saveToLocalStorage(email, turnstileToken) {
-    const STORAGE_KEY = 'naturalmed_emails_fallback';
-    let data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{"subscribers":[]}');
-    
-    const exists = data.subscribers.some(sub => sub.email === email);
-    if (!exists) {
-        data.subscribers.push({
-            email: email,
-            date: new Date().toISOString(),
-            turnstileToken: turnstileToken,
-            source: 'newsletter'
-        });
-        data.lastUpdated = new Date().toISOString();
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        return { success: true, message: 'Email saved locally (demo mode)' };
-    }
-    return { success: false, message: 'Email already subscribed' };
-}
-
-// ============================================================
-// NEWSLETTER HANDLER
-// ============================================================
-
-async function handleWaitlist(e) {
+function handleWaitlist(e) {
     e.preventDefault();
-    const form = e.target;
-    const emailInput = form.querySelector('input[type="email"]');
-    const email = emailInput.value.trim();
-    
-    // Get Turnstile response token
-    const turnstileResponse = form.querySelector('[name="cf-turnstile-response"]')?.value;
-    
-    if (!turnstileResponse) {
-        alert('Please complete the verification.');
-        return;
-    }
-
-    const btn = form.querySelector('button');
-    const originalText = btn.textContent;
-    btn.textContent = "Subscribing...";
-    btn.disabled = true;
-
-    try {
-        const result = await addSubscriberEmail(email, turnstileResponse);
-        
-        if (result.success) {
-            btn.textContent = "You're on the list!";
-            btn.style.background = 'var(--jade-dark)';
-            emailInput.disabled = true;
-            sessionStorage.setItem('waitlistDone', '1');
-            sessionStorage.setItem('waitlistEmail', email);
-            // Reset Turnstile
-            if (typeof turnstile !== 'undefined') turnstile.reset();
-        } else {
-            alert(result.message || 'Subscription failed. Please try again.');
-            btn.textContent = originalText;
-            btn.disabled = false;
-        }
-    } catch (error) {
-        console.error('Subscription error:', error);
-        alert('Subscription failed. Please try again.');
-        btn.textContent = originalText;
-        btn.disabled = false;
-    }
-}
-
-// Restore form state on page load
-(function() {
-    const done = sessionStorage.getItem('waitlistDone');
-    const savedEmail = sessionStorage.getItem('waitlistEmail');
-    if (done && savedEmail) {
-        const form = document.querySelector('.waitlist-form');
-        if (form) {
-            const btn = form.querySelector('button');
-            const input = form.querySelector('input');
-            if (btn && input) {
-                input.value = savedEmail;
-                btn.textContent = "You're on the list!";
-                btn.style.background = 'var(--jade-dark)';
-                input.disabled = btn.disabled = true;
-            }
-        }
-    }
-})();
-
-// Display configuration info in console
-console.log('NaturalMed Website Loaded');
-if (GITHUB_TOKEN === 'SEU_GITHUB_TOKEN' || GITHUB_REPO === 'SEU_USERNAME/SEU_REPOSITORIO') {
-    console.log('⚠️ GitHub API not configured. Emails will be saved to localStorage only.');
-    console.log('📝 To enable saving to GitHub, update GITHUB_TOKEN and GITHUB_REPO variables.');
-} else {
-    console.log('✅ GitHub API configured. Subscriber emails will be saved to assets/data/news-emails.json');
+    const btn = e.target.querySelector('button');
+    const input = e.target.querySelector('input');
+    btn.textContent = "You're on the list!";
+    btn.style.background = 'var(--jade-dark)';
+    input.disabled = btn.disabled = true;
 }
 </script>
 </body>
