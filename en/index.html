@@ -333,43 +333,36 @@ setTimeout(type, 1300);
 
 // Hamburger menu toggle
 (function() {
-    var navEl = document.getElementById('mainNav');
+    var nav = document.getElementById('mainNav');
     var btn = document.getElementById('navHamburger');
-    if (!navEl || !btn) return;
+    if (!nav || !btn) return;
 
-    function closeMenu() {
-        navEl.classList.remove('nav-open');
+    function close() {
+        nav.classList.remove('nav-open');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Open menu');
     }
-    function openMenu() {
-        navEl.classList.add('nav-open');
-        btn.setAttribute('aria-expanded', 'true');
-        btn.setAttribute('aria-label', 'Close menu');
-    }
 
+    // Toggle on hamburger tap
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
-        if (navEl.classList.contains('nav-open')) { closeMenu(); } else { openMenu(); }
+        nav.classList.toggle('nav-open')
+            ? btn.setAttribute('aria-expanded', 'true') && btn.setAttribute('aria-label', 'Close menu')
+            : (btn.setAttribute('aria-expanded', 'false'), btn.setAttribute('aria-label', 'Open menu'));
     });
 
-    // Close on any nav link tap/click (covers iOS touch + desktop click)
-    navEl.querySelectorAll('.nav-links a').forEach(function(link) {
-        link.addEventListener('click', function() { closeMenu(); });
-        link.addEventListener('touchend', function() { closeMenu(); });
-    });
+    // Close when ANY link inside .nav-links is tapped — event delegation
+    var links = nav.querySelector('.nav-links');
+    if (links) {
+        links.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' || e.target.closest('a')) { close(); }
+        });
+    }
 
-    // Close when tapping/clicking outside
+    // Close on outside click/tap
     document.addEventListener('click', function(e) {
-        if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
-            closeMenu();
-        }
+        if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
     });
-    document.addEventListener('touchstart', function(e) {
-        if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
-            closeMenu();
-        }
-    }, { passive: true });
 })();
 </script>
 </body>
