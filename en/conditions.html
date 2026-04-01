@@ -268,25 +268,38 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     var btn = document.getElementById('navHamburger');
     if (!nav || !btn) return;
     var dropdown = nav.querySelector('.nav-links');
+    var MOBILE = 900; // matches CSS breakpoint
 
+    // close: removes class + aria only — no inline style (safe for desktop)
     function close() {
         nav.classList.remove('nav-open');
-        if (dropdown) dropdown.style.display = 'none'; // inline beats bfcache
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Open menu');
     }
 
+    // open: clears any inline style left by pagehide, then shows menu
     function open() {
+        if (dropdown) dropdown.style.removeProperty('display');
         nav.classList.add('nav-open');
-        if (dropdown) dropdown.style.display = '';     // reset → CSS class takes over
         btn.setAttribute('aria-expanded', 'true');
         btn.setAttribute('aria-label', 'Close menu');
     }
 
-    // Always start closed — covers fresh load AND bfcache restore
+    // pagehide (mobile only): force inline display:none before bfcache snapshot
+    window.addEventListener('pagehide', function() {
+        if (window.innerWidth <= MOBILE && dropdown) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    // pageshow: strip the inline style set by pagehide, then close cleanly
+    window.addEventListener('pageshow', function() {
+        if (dropdown) dropdown.style.removeProperty('display');
+        close();
+    });
+
+    // Initial state on load
     close();
-    window.addEventListener('pageshow', close);
-    window.addEventListener('pagehide', close);
 
     // Hamburger tap
     btn.addEventListener('click', function(e) {
@@ -299,7 +312,7 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
         dropdown.addEventListener('click', close);
     }
 
-    // Tap outside
+    // Tap/click outside nav
     document.addEventListener('click', function(e) {
         if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
     });
