@@ -129,6 +129,9 @@
         <div class="lang-toggle"><a href="#" class="active">EN</a><a href="../pt/seminarios.html">PT</a></div>
         <button class="btn-nav" onclick="window.location.href='contact.html'">Book Appointment</button>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
 </nav>
 
 <div class="page-hero">
@@ -306,6 +309,37 @@ window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.
 const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
+
+// Hamburger menu toggle
+(function() {
+    var navEl = document.getElementById('mainNav');
+    var btn = document.getElementById('navHamburger');
+    if (!navEl || !btn) return;
+    btn.addEventListener('click', function() {
+        var isOpen = navEl.classList.toggle('nav-open');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    // Close on link click
+    navEl.querySelectorAll('.nav-links a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            navEl.classList.remove('nav-open');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', 'Open menu');
+            document.body.style.overflow = '';
+        });
+    });
+    // Close on outside tap/click
+    document.addEventListener('click', function(e) {
+        if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
+            navEl.classList.remove('nav-open');
+            btn.setAttribute('aria-expanded', 'false');
+            btn.setAttribute('aria-label', 'Open menu');
+            document.body.style.overflow = '';
+        }
+    });
+})();
 </script>
 </body>
 </html>
