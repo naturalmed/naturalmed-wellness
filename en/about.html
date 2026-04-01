@@ -214,23 +214,28 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
         btn.setAttribute('aria-label', 'Open menu');
     }
 
-    // Toggle on hamburger tap
+    // iOS bfcache fix: always close menu when page is shown (fresh load OR cache restore)
+    window.addEventListener('pageshow', close);
+
+    // Toggle hamburger button
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
-        nav.classList.toggle('nav-open')
-            ? btn.setAttribute('aria-expanded', 'true') && btn.setAttribute('aria-label', 'Close menu')
-            : (btn.setAttribute('aria-expanded', 'false'), btn.setAttribute('aria-label', 'Open menu'));
+        if (nav.classList.contains('nav-open')) {
+            close();
+        } else {
+            nav.classList.add('nav-open');
+            btn.setAttribute('aria-expanded', 'true');
+            btn.setAttribute('aria-label', 'Close menu');
+        }
     });
 
-    // Close when ANY link inside .nav-links is tapped — event delegation
-    var links = nav.querySelector('.nav-links');
-    if (links) {
-        links.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A' || e.target.closest('a')) { close(); }
-        });
+    // Close on any click inside the nav-links dropdown (catches all link taps)
+    var dropdown = nav.querySelector('.nav-links');
+    if (dropdown) {
+        dropdown.addEventListener('click', close);
     }
 
-    // Close on outside click/tap
+    // Close when tapping/clicking outside the nav
     document.addEventListener('click', function(e) {
         if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
     });
