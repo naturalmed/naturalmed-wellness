@@ -208,63 +208,57 @@ nav.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotat
 nav.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; width: 0; }
 nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Mobile nav — dropdown lives INSIDE the fixed nav bar ─── */
+/* ── Mobile nav — hamburger with absolute dropdown ─────────── */
 @media (max-width: 900px) {
 
-    /* Nav expands vertically when open */
+    /* Nav stays single-row (no flex-wrap) — logo left, right side right */
     nav {
-        flex-wrap: wrap;
-        align-content: flex-start;
         padding: 0 1.25rem;
-        height: var(--nav-h);
-        overflow: hidden;
-        transition: height 0.28s cubic-bezier(0.4,0,0.2,1);
+        position: relative;   /* anchor for absolute dropdown */
     }
-    nav.nav-open { height: auto; overflow: visible; }
 
-    /* Hamburger visible */
+    /* Show hamburger button */
     .nav-hamburger { display: flex; }
 
-    /* Links hidden until open */
+    /* Completely hide nav-links from the flex row */
     .nav-links {
-        display: flex;
+        display: none;
+        /* When open: drop down below the bar */
+        position: absolute;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
         flex-direction: column;
-        width: 100%;
         gap: 0;
-        padding: 0.25rem 0 1rem;
-        border-top: 1px solid rgba(93,202,165,0.18);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.28s cubic-bezier(0.4,0,0.2,1),
-                    opacity 0.2s ease;
-        opacity: 0;
-        pointer-events: none;
+        padding: 0.5rem 0 1.25rem;
+        background: rgba(4,52,44,0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 2px solid rgba(93,202,165,0.2);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        z-index: 998;
     }
-    nav.nav-open .nav-links {
-        max-height: 600px;
-        opacity: 1;
-        pointer-events: auto;
-    }
+
+    /* Open state */
+    nav.nav-open .nav-links { display: flex; }
+
     .nav-links li { width: 100%; }
     .nav-links a {
         display: block;
-        padding: 13px 0.5rem;
+        padding: 14px 1.5rem;
         font-size: 15px;
-        border-bottom: 1px solid rgba(93,202,165,0.08);
         color: var(--jade-pale);
+        border-bottom: 1px solid rgba(93,202,165,0.1);
     }
     .nav-links a::after { display: none; }
     .nav-links a:hover,
     .nav-links a.active {
-        background: rgba(93,202,165,0.08);
+        background: rgba(93,202,165,0.1);
         color: var(--white);
-        padding-left: 1rem;
-        transition: padding-left 0.15s ease, color 0.15s ease;
     }
 
-    /* Keep lang-toggle accessible, hide Book Appointment button */
+    /* Hide Book Appointment button */
     .nav-right .btn-nav { display: none; }
-    .nav-right { gap: 8px; }
 }
 
 /* ── General layout — tablet & mobile ───────────────────── */
