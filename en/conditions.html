@@ -268,16 +268,13 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     var btn = document.getElementById('navHamburger');
     if (!nav || !btn) return;
     var dropdown = nav.querySelector('.nav-links');
-    var MOBILE = 900; // matches CSS breakpoint
 
-    // close: removes class + aria only — no inline style (safe for desktop)
     function close() {
         nav.classList.remove('nav-open');
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Open menu');
     }
 
-    // open: clears any inline style left by pagehide, then shows menu
     function open() {
         if (dropdown) dropdown.style.removeProperty('display');
         nav.classList.add('nav-open');
@@ -285,34 +282,31 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
         btn.setAttribute('aria-label', 'Close menu');
     }
 
-    // pagehide (mobile only): force inline display:none before bfcache snapshot
+    // pagehide: always set inline display:none before iOS bfcache snapshot
+    // (no width check — window.innerWidth is unreliable during pagehide on iOS)
     window.addEventListener('pagehide', function() {
-        if (window.innerWidth <= MOBILE && dropdown) {
-            dropdown.style.display = 'none';
-        }
+        if (dropdown) dropdown.style.display = 'none';
     });
 
-    // pageshow: strip the inline style set by pagehide, then close cleanly
+    // pageshow: close FIRST (removes nav-open), THEN remove inline style
+    // Order matters: removing inline before nav-open would briefly expose CSS flex
     window.addEventListener('pageshow', function() {
-        if (dropdown) dropdown.style.removeProperty('display');
         close();
+        if (dropdown) dropdown.style.removeProperty('display');
     });
 
-    // Initial state on load
+    // Initial state
     close();
 
-    // Hamburger tap
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
         nav.classList.contains('nav-open') ? close() : open();
     });
 
-    // Any link inside dropdown closes menu
     if (dropdown) {
         dropdown.addEventListener('click', close);
     }
 
-    // Tap/click outside nav
     document.addEventListener('click', function(e) {
         if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
     });
