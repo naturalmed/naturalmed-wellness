@@ -324,35 +324,39 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     var nav = document.getElementById('mainNav');
     var btn = document.getElementById('navHamburger');
     if (!nav || !btn) return;
+    var dropdown = nav.querySelector('.nav-links');
 
     function close() {
         nav.classList.remove('nav-open');
+        if (dropdown) dropdown.style.display = 'none'; // inline beats bfcache
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Open menu');
     }
 
-    // iOS bfcache fix: always close menu when page is shown (fresh load OR cache restore)
-    window.addEventListener('pageshow', close);
+    function open() {
+        nav.classList.add('nav-open');
+        if (dropdown) dropdown.style.display = '';     // reset → CSS class takes over
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+    }
 
-    // Toggle hamburger button
+    // Always start closed — covers fresh load AND bfcache restore
+    close();
+    window.addEventListener('pageshow', close);
+    window.addEventListener('pagehide', close);
+
+    // Hamburger tap
     btn.addEventListener('click', function(e) {
         e.stopPropagation();
-        if (nav.classList.contains('nav-open')) {
-            close();
-        } else {
-            nav.classList.add('nav-open');
-            btn.setAttribute('aria-expanded', 'true');
-            btn.setAttribute('aria-label', 'Close menu');
-        }
+        nav.classList.contains('nav-open') ? close() : open();
     });
 
-    // Close on any click inside the nav-links dropdown (catches all link taps)
-    var dropdown = nav.querySelector('.nav-links');
+    // Any link inside dropdown closes menu
     if (dropdown) {
         dropdown.addEventListener('click', close);
     }
 
-    // Close when tapping/clicking outside the nav
+    // Tap outside
     document.addEventListener('click', function(e) {
         if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
     });
