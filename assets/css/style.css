@@ -208,46 +208,63 @@ nav.nav-open .nav-hamburger span:nth-child(1) { transform: translateY(7px) rotat
 nav.nav-open .nav-hamburger span:nth-child(2) { opacity: 0; width: 0; }
 nav.nav-open .nav-hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* ── Mobile nav overlay ───────────────────────────────────── */
+/* ── Mobile nav — dropdown lives INSIDE the fixed nav bar ─── */
 @media (max-width: 900px) {
 
-    /* Show hamburger, hide desktop links */
+    /* Nav expands vertically when open */
+    nav {
+        flex-wrap: wrap;
+        align-content: flex-start;
+        padding: 0 1.25rem;
+        height: var(--nav-h);
+        overflow: hidden;
+        transition: height 0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    nav.nav-open { height: auto; overflow: visible; }
+
+    /* Hamburger visible */
     .nav-hamburger { display: flex; }
+
+    /* Links hidden until open */
     .nav-links {
-        display: none;
-        position: fixed;
-        top: var(--nav-h); left: 0; right: 0;
-        background: rgba(4,52,44,0.98);
-        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+        display: flex;
         flex-direction: column;
+        width: 100%;
         gap: 0;
-        padding: 0.5rem 0 1.5rem;
-        border-bottom: 1px solid rgba(93,202,165,0.2);
-        box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-        z-index: 999;
-        animation: slideDown 0.25s ease forwards;
+        padding: 0.25rem 0 1rem;
+        border-top: 1px solid rgba(93,202,165,0.18);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.28s cubic-bezier(0.4,0,0.2,1),
+                    opacity 0.2s ease;
+        opacity: 0;
+        pointer-events: none;
     }
-    @keyframes slideDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to   { opacity: 1; transform: translateY(0); }
+    nav.nav-open .nav-links {
+        max-height: 600px;
+        opacity: 1;
+        pointer-events: auto;
     }
-    nav.nav-open .nav-links { display: flex; }
     .nav-links li { width: 100%; }
     .nav-links a {
         display: block;
-        padding: 13px 2rem;
+        padding: 13px 0.5rem;
         font-size: 15px;
         border-bottom: 1px solid rgba(93,202,165,0.08);
+        color: var(--jade-pale);
     }
     .nav-links a::after { display: none; }
     .nav-links a:hover,
-    .nav-links a.active { background: rgba(93,202,165,0.08); }
+    .nav-links a.active {
+        background: rgba(93,202,165,0.08);
+        color: var(--white);
+        padding-left: 1rem;
+        transition: padding-left 0.15s ease, color 0.15s ease;
+    }
 
-    /* Shrink nav padding */
-    nav { padding: 0 1.25rem; }
-
-    /* Hide Book Appointment button in nav (keep lang toggle) */
+    /* Keep lang-toggle accessible, hide Book Appointment button */
     .nav-right .btn-nav { display: none; }
+    .nav-right { gap: 8px; }
 }
 
 /* ── General layout — tablet & mobile ───────────────────── */
