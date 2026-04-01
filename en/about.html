@@ -214,8 +214,11 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
         btn.setAttribute('aria-label', 'Open menu');
     }
 
-    // iOS bfcache fix: always close menu when page is shown (fresh load OR cache restore)
-    window.addEventListener('pageshow', close);
+    // iOS bfcache fix — two-pronged:
+    // 1. pagehide: remove nav-open BEFORE page is stored in cache (most reliable)
+    window.addEventListener('pagehide', close);
+    // 2. pageshow: close on restore, using setTimeout to run after DOM is fully ready
+    window.addEventListener('pageshow', function() { setTimeout(close, 50); });
 
     // Toggle hamburger button
     btn.addEventListener('click', function(e) {
