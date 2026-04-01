@@ -104,6 +104,15 @@
         .footer-social{display:flex;gap:10px}
         .social-link{width:32px;height:32px;border-radius:50%;border:1px solid rgba(93,202,165,.3);display:flex;align-items:center;justify-content:center;transition:background var(--ease),border-color var(--ease)}
         .social-link:hover{background:rgba(93,202,165,.1);border-color:var(--jade-light)}
+    
+        @media (max-width: 900px) {
+            .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .aud-grid { grid-template-columns: 1fr 1fr; }
+            .topics-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 600px) {
+            .aud-grid { grid-template-columns: 1fr; }
+        }
     </style>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
@@ -315,30 +324,40 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
     var navEl = document.getElementById('mainNav');
     var btn = document.getElementById('navHamburger');
     if (!navEl || !btn) return;
-    btn.addEventListener('click', function() {
-        var isOpen = navEl.classList.toggle('nav-open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    function closeMenu() {
+        navEl.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+        navEl.classList.add('nav-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+    }
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (navEl.classList.contains('nav-open')) { closeMenu(); } else { openMenu(); }
     });
-    // Close on link click
-    navEl.querySelectorAll('.nav-links a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            navEl.classList.remove('nav-open');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-        });
+
+    // Close on any nav link tap/click (covers iOS touch + desktop click)
+    navEl.querySelectorAll('.nav-links a').forEach(function(link) {
+        link.addEventListener('click', function() { closeMenu(); });
+        link.addEventListener('touchend', function() { closeMenu(); });
     });
-    // Close on outside tap/click
+
+    // Close when tapping/clicking outside
     document.addEventListener('click', function(e) {
         if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
-            navEl.classList.remove('nav-open');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
+            closeMenu();
         }
     });
+    document.addEventListener('touchstart', function(e) {
+        if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
+            closeMenu();
+        }
+    }, { passive: true });
 })();
 </script>
 </body>

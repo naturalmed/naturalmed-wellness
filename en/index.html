@@ -97,6 +97,27 @@
         .cta-contacts{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
         .cta-item{display:flex;align-items:center;gap:8px;color:var(--jade-pale);font-size:14px;transition:color var(--ease)}
         .cta-item:hover{color:var(--white)}
+    
+        /* ── index.html mobile responsive ── */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .about-img { aspect-ratio: 3/2; max-height: 360px; }
+            .about-img-frame { display: none; }
+            .about-badge { position: static; display: inline-flex; gap: 10px; align-items: center;
+                           margin-top: 1rem; padding: 0.75rem 1.25rem; }
+            .about-badge-num { font-size: 28px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .cond-grid { grid-template-columns: 1fr; }
+            .testi-grid { grid-template-columns: 1fr; }
+            .sem-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-scroll { display: none; }
+        }
+        @media (max-width: 600px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: clamp(36px, 9vw, 52px); }
+            .hero-sub { font-size: 15px; }
+            .cta-contacts { flex-direction: column; align-items: center; gap: 1rem; }
+        }
     </style>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
@@ -315,30 +336,40 @@ setTimeout(type, 1300);
     var navEl = document.getElementById('mainNav');
     var btn = document.getElementById('navHamburger');
     if (!navEl || !btn) return;
-    btn.addEventListener('click', function() {
-        var isOpen = navEl.classList.toggle('nav-open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        btn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+
+    function closeMenu() {
+        navEl.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+        navEl.classList.add('nav-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+    }
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (navEl.classList.contains('nav-open')) { closeMenu(); } else { openMenu(); }
     });
-    // Close on link click
-    navEl.querySelectorAll('.nav-links a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            navEl.classList.remove('nav-open');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
-        });
+
+    // Close on any nav link tap/click (covers iOS touch + desktop click)
+    navEl.querySelectorAll('.nav-links a').forEach(function(link) {
+        link.addEventListener('click', function() { closeMenu(); });
+        link.addEventListener('touchend', function() { closeMenu(); });
     });
-    // Close on outside tap/click
+
+    // Close when tapping/clicking outside
     document.addEventListener('click', function(e) {
         if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
-            navEl.classList.remove('nav-open');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.setAttribute('aria-label', 'Open menu');
-            document.body.style.overflow = '';
+            closeMenu();
         }
     });
+    document.addEventListener('touchstart', function(e) {
+        if (navEl.classList.contains('nav-open') && !navEl.contains(e.target)) {
+            closeMenu();
+        }
+    }, { passive: true });
 })();
 </script>
 </body>
