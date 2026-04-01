@@ -113,6 +113,14 @@
         @media (max-width: 600px) {
             .aud-grid { grid-template-columns: 1fr; }
         }
+    
+        /* Mobile nav override — must come after .nav-links{display:flex} above */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            nav.nav-open .nav-links { display: flex; }
+            .nav-hamburger { display: flex; }
+            .nav-right .btn-nav { display: none; }
+        }
     </style>
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
