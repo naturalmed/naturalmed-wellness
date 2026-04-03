@@ -1,0 +1,108 @@
+# ============================================================
+# NaturalMed — Sveltia CMS Configuration
+# Repo: https://github.com/naturalmed/naturalmed-wellness
+# ============================================================
+
+backend:
+  name: github
+  repo: naturalmed/naturalmed-wellness
+  branch: main
+  # OAuth proxy — Cloudflare Worker (see SVELTIA_SETUP.md)
+  base_url: https://naturalmed-cms-auth.naturalmed-wellness.workers.dev
+
+media_folder: assets/img/uploads
+public_folder: /assets/img/uploads
+site_url: https://www.naturalmed-wellness.com
+
+collections:
+
+  # ── 1. ARTICLES ────────────────────────────────────────────
+  - name: articles
+    label: "📰 Articles"
+    label_singular: "Article"
+    description: "Monthly TCM articles. Saving an article triggers an automatic build that updates the listing page and RSS feed."
+    folder: _content/articles
+    create: true
+    slug: "{{year}}-{{month}}-{{fields.slug}}"
+    preview_path: "en/articles/{{year}}-{{month}}-{{fields.slug}}.html"
+    media_folder: "/assets/img/articles"
+    public_folder: "/assets/img/articles"
+    fields:
+      - { label: "Title",   name: title,  widget: string }
+      - { label: "Slug (URL path)",  name: slug,  widget: string,
+          hint: "Lowercase letters, numbers and hyphens only. E.g. acupuncture-and-pain",
+          pattern: ['^[a-z0-9-]+$', "Only lowercase letters, numbers and hyphens"] }
+      - { label: "Publish Date",     name: date,  widget: datetime,
+          date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Category"
+        name: category
+        widget: select
+        options: [Acupuncture, "Herbal Medicine", "Chinese Dietetics",
+                  "Qi Theory", "Tuina Massage", "Women's Health",
+                  "Mental Wellbeing", "Seasonal Health"]
+      - { label: "Reading time (minutes)", name: reading_time, widget: number,
+          default: 8, value_type: int, min: 1, max: 30 }
+      - { label: "Excerpt (for RSS & newsletter)", name: excerpt, widget: text,
+          hint: "2–3 sentences shown in the newsletter and RSS feed. Max 250 chars.",
+          pattern: ['^.{1,250}$', "Max 250 characters"] }
+      - { label: "Cover image", name: cover, widget: image, required: false,
+          media_folder: "/assets/img/articles", public_folder: "/assets/img/articles" }
+      - { label: "Body", name: body, widget: markdown,
+          buttons: [bold, italic, link, heading-two, heading-three, quote,
+                    bulleted-list, numbered-list] }
+
+  # ── 2. SEMINARS ────────────────────────────────────────────
+  - name: seminars
+    label: "📅 Seminars"
+    description: "Content for the Seminars & Workshops page."
+    files:
+      - name: seminars_content
+        label: "Seminars page content"
+        file: _content/seminars.yml
+        fields:
+          - { label: "Page subtitle", name: subtitle, widget: string }
+          - { label: "Intro paragraph", name: intro, widget: text }
+          - label: "Seminars list"
+            name: seminars
+            widget: list
+            label_singular: "Seminar"
+            fields:
+              - { label: "Title",       name: title,       widget: string }
+              - { label: "Date",        name: date,        widget: datetime,
+                  date_format: "DD MMMM YYYY", time_format: false, required: false }
+              - { label: "Location",    name: location,    widget: string }
+              - label: "Audience"
+                name: audience
+                widget: select
+                multiple: true
+                options: ["General Public", "Healthcare Professionals", "TCM Students"]
+              - { label: "Description", name: description, widget: text }
+              - label: "Status"
+                name: status
+                widget: select
+                options: [Announced, "Registration Open", "Sold Out", Completed, TBC]
+                default: TBC
+
+  # ── 3. PAGE TEXT ───────────────────────────────────────────
+  - name: pages
+    label: "📄 Page Text"
+    description: "Edit key text blocks without touching HTML."
+    files:
+      - name: about_text
+        label: "About — Biography"
+        file: _content/pages/about.yml
+        fields:
+          - { label: "Short bio",    name: short_bio, widget: text }
+          - { label: "Full biography", name: full_bio, widget: markdown }
+          - { label: "Pull quote",   name: quote,     widget: string }
+      - name: conditions_intro
+        label: "Conditions — Introduction"
+        file: _content/pages/conditions.yml
+        fields:
+          - { label: "Lead paragraph", name: lead, widget: text }
+      - name: home_text
+        label: "Home — Key text"
+        file: _content/pages/home.yml
+        fields:
+          - { label: "Hero subtitle",  name: hero_sub,  widget: string }
+          - { label: "CTA lead text",  name: cta_lead,  widget: text }
