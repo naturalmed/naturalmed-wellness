@@ -351,3 +351,166 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# ═══════════════════════════════════════════════════════════════
+# SEMINARS BUILD
+# ═══════════════════════════════════════════════════════════════
+
+import yaml as _yaml_mod  # pyyaml
+
+SEMINARS_YML  = ROOT / '_content' / 'seminars.yml'
+SEMINARS_HTML = ROOT / 'en' / 'seminars.html'
+
+
+def _inject(html, marker, new_content):
+    """Replace content between <!-- CMS:marker --> and <!-- /CMS:marker -->."""
+    start = f'<!-- CMS:{marker} -->'
+    end   = f'<!-- /CMS:{marker} -->'
+    if start not in html:
+        return html  # marker not found, skip silently
+    before = html[:html.index(start) + len(start)]
+    after  = html[html.index(end):]
+    return before + new_content + after
+
+
+def build_seminars():
+    if not SEMINARS_YML.exists():
+        print('⚠ _content/seminars.yml not found — skipping seminars build')
+        return
+
+    data = _yaml_mod.safe_load(SEMINARS_YML.read_text(encoding='utf-8')) or {}
+    html = SEMINARS_HTML.read_text(encoding='utf-8')
+
+    # ── Subtitle ────────────────────────────────────────────────
+    subtitle = data.get('subtitle', '')
+    if subtitle:
+        html = _inject(html, 'seminars_subtitle',
+            f'<p class="section-lead reveal d2" style="color:var(--jade-pale);max-width:640px;margin:0.75rem auto 0">{subtitle}</p>')
+
+    # ── Intro paragraphs ────────────────────────────────────────
+    intro = data.get('intro', '')
+    if intro:
+        paras = ''.join(f'<p class="reveal d{i+2}">{p.strip()}</p>\n                ' 
+                        for i, p in enumerate(intro.split('\n\n')) if p.strip())
+        html = _inject(html, 'seminars_intro_start', '\n                ' + paras)
+
+    # ── Upcoming seminars list ──────────────────────────────────
+    seminars = data.get('seminars', [])
+    if seminars:
+        STATUS_COLOURS = {
+            'Registration Open': 'var(--jade)',
+            'Announced':         'var(--gold)',
+            'Sold Out':          '#dc2626',
+            'Completed':         'var(--text-muted)',
+            'TBC':               'var(--text-muted)',
+        }
+        cards = ''
+        for s in seminars:
+            status      = s.get('status', 'TBC')
+            colour      = STATUS_COLOURS.get(status, 'var(--text-muted)')
+            date_str    = str(s.get('date', 'To be confirmed'))
+            audience    = ', '.join(s.get('audience', [])) if isinstance(s.get('audience'), list) else str(s.get('audience', ''))
+            cards += f'''
+<div style="background:var(--white);border:1px solid var(--cream-dark);border-top:3px solid var(--jade);
+            border-radius:var(--r-lg);padding:1.75rem;margin-bottom:1.25rem">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
+        <h3 style="font-family:var(--font-serif);font-size:1.3rem;color:var(--jade-dark);margin:0">{s.get('title','')}</h3>
+        <span style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:{colour};
+                     background:rgba(0,0,0,.04);padding:3px 10px;border-radius:20px">{status}</span>
+    </div>
+    <p style="font-size:14px;color:var(--text-muted);margin:0 0 .4rem">📅 {date_str} &nbsp;·&nbsp; 📍 {s.get('location','')}</p>
+    <p style="font-size:14px;color:var(--text-muted);margin:0 0 .75rem">👥 {audience}</p>
+    <p style="font-size:14px;color:var(--text-mid);line-height:1.7;margin:0">{s.get('description','')}</p>
+</div>'''
+
+        section = f'''
+<section style="background:var(--cream);padding:4rem 2rem">
+    <div class="container">
+        <div class="eyebrow center reveal" style="color:var(--gold)">Upcoming Events</div>
+        <h2 class="section-title reveal d1" style="text-align:center">Seminars &amp; Workshops</h2>
+        {cards}
+    </div>
+</section>
+'''
+        html = _inject(html, 'seminars_upcoming_start',
+            '\n' + section + '\n')
+
+    SEMINARS_HTML.write_text(html, encoding='utf-8')
+    print('✓ Rebuilt en/seminars.html')
+
+
+# ═══════════════════════════════════════════════════════════════
+# PAGE TEXT BUILD
+# ═══════════════════════════════════════════════════════════════
+
+PAGES_DIR   = ROOT / '_content' / 'pages'
+INDEX_HTML  = ROOT / 'en' / 'index.html'
+ABOUT_HTML  = ROOT / 'en' / 'about.html'
+
+
+def _md_inline(text):
+    """Convert **bold** and *italic* in short text snippets."""
+    import re as _re
+    text = _re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
+    text = _re.sub(r'\*(.+?)\*',     r'<em>\1</em>', text)
+    return text
+
+
+def build_page_text():
+    # ── Home ────────────────────────────────────────────────────
+    home_yml = PAGES_DIR / 'home.yml'
+    if home_yml.exists():
+        data = _yaml_mod.safe_load(home_yml.read_text(encoding='utf-8')) or {}
+        html = INDEX_HTML.read_text(encoding='utf-8')
+        if data.get('hero_sub'):
+            html = _inject(html, 'home_hero_sub',
+                f'<p class="hero-sub">{_md_inline(data["hero_sub"])}</p>')
+        if data.get('cta_lead'):
+            html = _inject(html, 'home_cta_lead',
+                f'<p class="cta-lead reveal d2">{_md_inline(data["cta_lead"])}</p>')
+        INDEX_HTML.write_text(html, encoding='utf-8')
+        print('✓ Updated en/index.html (home text)')
+
+    # ── About ───────────────────────────────────────────────────
+    about_yml = PAGES_DIR / 'about.yml'
+    if about_yml.exists():
+        data = _yaml_mod.safe_load(about_yml.read_text(encoding='utf-8')) or {}
+        html = ABOUT_HTML.read_text(encoding='utf-8')
+        if data.get('short_bio'):
+            html = _inject(html, 'about_short_bio',
+                f'<p class="section-lead reveal d2">{_md_inline(data["short_bio"])}</p>')
+        if data.get('quote'):
+            q = data['quote'].strip('"\'')
+            html = _inject(html, 'about_quote',
+                f'<blockquote class="bio-quote reveal d2">"{q}"</blockquote>')
+        ABOUT_HTML.write_text(html, encoding='utf-8')
+        print('✓ Updated en/about.html (bio text)')
+
+    # ── Conditions ──────────────────────────────────────────────
+    cond_yml = PAGES_DIR / 'conditions.yml'
+    if cond_yml.exists():
+        data  = _yaml_mod.safe_load(cond_yml.read_text(encoding='utf-8')) or {}
+        cpath = ROOT / 'en' / 'conditions.html'
+        html  = cpath.read_text(encoding='utf-8')
+        if data.get('lead'):
+            html = _inject(html, 'conditions_lead',
+                f'<p class="section-lead reveal d2" style="color:var(--jade-pale);margin:0 auto">{_md_inline(data["lead"])}</p>')
+        cpath.write_text(html, encoding='utf-8')
+        print('✓ Updated en/conditions.html (lead text)')
+
+
+# ── Patch main() to call the new builders ───────────────────────
+
+_original_main = main
+
+def main():
+    _original_main()
+    try:
+        import yaml  # noqa — ensure pyyaml available
+        build_seminars()
+        build_page_text()
+    except ImportError:
+        print('⚠ pyyaml not installed — seminars and page text not built')
+        print('  Run: pip install pyyaml')
+
