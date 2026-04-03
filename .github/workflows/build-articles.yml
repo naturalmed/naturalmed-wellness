@@ -1,20 +1,18 @@
-name: Build Articles
+name: Build Articles & Pages
 
-# Runs whenever a markdown file is saved/deleted in _content/articles/
 on:
   push:
     paths:
       - '_content/articles/**'
       - '_content/seminars.yml'
-
-  # Allow manual trigger from GitHub Actions tab
+      - '_content/pages/**'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write      # needed to commit the built files back
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -28,16 +26,17 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install python-markdown pyyaml --break-system-packages 2>/dev/null || pip install markdown pyyaml
+        run: pip install markdown pyyaml
 
-      - name: Build articles
+      - name: Build articles, seminars and page text
         run: python3 tools/build_articles.py
 
       - name: Commit built files
         run: |
           git config user.name  "NaturalMed CMS Bot"
           git config user.email "naturalmed.wellness@gmail.com"
-          git add en/articles/*.html en/articles.html feed.xml
-          # Only commit if there are changes
-          git diff --staged --quiet || git commit -m "🤖 Build: update articles, listing and RSS feed"
+          git add en/articles/*.html en/articles.html feed.xml \
+                  en/seminars.html en/index.html en/about.html \
+                  en/conditions.html 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "🤖 Build: update site from CMS content"
           git push
