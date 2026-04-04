@@ -271,8 +271,8 @@ def _inject(html, marker, new_content):
     """Replace content between <!-- CMS:marker --> and <!-- /CMS:marker -->."""
     start = f'<!-- CMS:{marker} -->'
     end   = f'<!-- /CMS:{marker} -->'
-    if start not in html:
-        return html  # marker not found, skip silently
+    if start not in html or end not in html:
+        return html  # marker not found or incomplete, skip silently
     before = html[:html.index(start) + len(start)]
     after  = html[html.index(end):]
     return before + new_content + after
