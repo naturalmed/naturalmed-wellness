@@ -489,9 +489,16 @@ NEWSLETTER_TMPL = '''\
 <body>
 <div class="wrapper">
 
-  <!-- Admin send hint (hidden when printing) -->
-  <div class="send-hint">
-    <strong>📧 To send:</strong> In Gmail, click <em>Compose</em> → drag this file into the message body → set To: your subscribers group → Subject: <strong>{subject}</strong>
+  <!-- Admin send hint — hidden when printing or after clicking "Ready to send" -->
+  <div class="send-hint" id="sendHint">
+    <strong>📧 To send:</strong> Open Gmail → Compose → Bcc: Newsletter NaturalMed → Subject: <strong>{subject}</strong><br>
+    Then click the button below to hide this bar, select all (Cmd+A), copy (Cmd+C) and paste into Gmail (Cmd+V).
+    <br><br>
+    <button onclick="document.getElementById('sendHint').style.display='none'" style="
+        background:#BA7517;color:#fff;border:none;border-radius:6px;
+        padding:8px 20px;font-size:13px;cursor:pointer;margin-top:4px">
+      ✓ Hide this bar — ready to copy
+    </button>
   </div>
 
   <div class="email-card">
