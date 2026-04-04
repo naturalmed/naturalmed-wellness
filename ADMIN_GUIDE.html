@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NaturalMed — Admin Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --jade-darkest: #04342C;
+  --jade-dark:    #085041;
+  --jade:         #0F6E56;
+  --jade-light:   #5DCAA5;
+  --jade-pale:    #9FE1CB;
+  --jade-mist:    #E1F5EE;
+  --gold:         #BA7517;
+  --gold-light:   #EF9F27;
+  --gold-mist:    #FAEEDA;
+  --cream:        #F8F5F0;
+  --cream-dark:   #EDE9E2;
+  --white:        #FFFFFF;
+  --text-dark:    #1A2820;
+  --text-mid:     #2D4A3E;
+  --text-muted:   #4A7060;
+  --serif:        'Cormorant Garamond', Georgia, serif;
+  --sans:         'Outfit', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--cream); color: var(--text-dark); line-height: 1.7; }
+
+/* ── HEADER ──────────────────────────────────────────── */
+.site-header {
+  background: var(--jade-darkest);
+  padding: 3rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% -10%, rgba(15,110,86,.4) 0%, transparent 70%);
+}
+.header-logo {
+  width: 56px; height: 56px; border-radius: 50%;
+  border: 2px solid rgba(93,202,165,.4);
+  margin: 0 auto 1.25rem;
+  display: block;
+  position: relative;
+}
+.site-header h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 500;
+  color: var(--jade-mist);
+  position: relative;
+  margin-bottom: .5rem;
+}
+.site-header .subtitle {
+  font-size: 14px;
+  color: var(--jade-pale);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* ── NAV / TOC ───────────────────────────────────────── */
+.toc {
+  background: var(--jade-dark);
+  padding: 1.5rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 16px rgba(4,52,44,.3);
+}
+.toc a {
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--jade-pale);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 1.5px solid transparent;
+  transition: color .2s, border-color .2s;
+}
+.toc a:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+/* ── MAIN LAYOUT ─────────────────────────────────────── */
+.main { max-width: 820px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+/* ── SECTIONS ────────────────────────────────────────── */
+.section { margin-bottom: 4rem; }
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--cream-dark);
+}
+.section-num {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--jade);
+  color: var(--white);
+  font-family: var(--serif);
+  font-size: 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.section h2 {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--jade-darkest);
+}
+.section p, .section li {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.85;
+}
+.section ul, .section ol {
+  padding-left: 1.5rem;
+  margin: .75rem 0 1.25rem;
+}
+.section li { margin-bottom: .4rem; }
+
+/* ── STEPS ───────────────────────────────────────────── */
+.steps { display: flex; flex-direction: column; gap: 1rem; margin: 1.25rem 0; }
+.step {
+  display: flex;
+  gap: 1rem;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  align-items: flex-start;
+}
+.step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gold-mist);
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.step-body { flex: 1; }
+.step-body strong { color: var(--jade-darkest); display: block; margin-bottom: 2px; }
+.step-body p { font-size: 14px; color: var(--text-muted); margin: 0; }
+
+/* ── CALLOUT BOXES ───────────────────────────────────── */
+.callout {
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.callout-tip   { background: var(--jade-mist); border-left: 4px solid var(--jade); }
+.callout-warn  { background: var(--gold-mist); border-left: 4px solid var(--gold); }
+.callout-info  { background: #EEF2FF; border-left: 4px solid #6366F1; }
+.callout-icon  { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.callout-body  { flex: 1; }
+.callout-body strong { color: var(--jade-darkest); display: block; margin-bottom: 4px; font-size: 14px; }
+.callout-body p, .callout-body ul { font-size: 14px; color: var(--text-mid); margin: 0; }
+.callout-body ul { padding-left: 1.25rem; margin-top: 4px; }
+
+/* ── CODE / COMMAND ──────────────────────────────────── */
+.cmd {
+  display: inline-block;
+  background: var(--jade-darkest);
+  color: var(--jade-pale);
+  font-family: monospace;
+  font-size: 13px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: .02em;
+}
+.url {
+  display: inline-block;
+  background: var(--cream-dark);
+  color: var(--jade-dark);
+  font-family: monospace;
+  font-size: 13px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+/* ── FIELD TABLE ─────────────────────────────────────── */
+.field-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 14px; }
+.field-table th {
+  background: var(--jade-darkest);
+  color: var(--jade-mist);
+  text-align: left;
+  padding: 10px 14px;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.field-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--cream-dark);
+  color: var(--text-mid);
+  vertical-align: top;
+}
+.field-table tr:nth-child(even) td { background: var(--cream); }
+.field-table td:first-child { font-weight: 500; color: var(--jade-dark); white-space: nowrap; }
+.required { color: var(--gold); font-size: 11px; margin-left: 4px; }
+
+/* ── WORKFLOW DIAGRAM ────────────────────────────────── */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1.5rem 0;
+  position: relative;
+}
+.flow-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+.flow-item:last-child { padding-bottom: 0; }
+.flow-dot {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--jade);
+  color: var(--white);
+  font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.flow-line {
+  position: absolute;
+  left: 17px;
+  top: 36px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--jade-light), var(--cream-dark));
+}
+.flow-item:last-child .flow-line { display: none; }
+.flow-body { padding-top: 6px; }
+.flow-body strong { color: var(--jade-darkest); display: block; font-size: 15px; }
+.flow-body p { font-size: 14px; color: var(--text-muted); margin: 2px 0 0; }
+
+/* ── KEYBOARD SHORTCUT ───────────────────────────────── */
+.kbd {
+  display: inline-block;
+  background: var(--white);
+  border: 1.5px solid var(--cream-dark);
+  border-bottom: 3px solid var(--cream-dark);
+  border-radius: 5px;
+  padding: 2px 8px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  box-shadow: 0 1px 0 var(--cream-dark);
+}
+
+/* ── DIVIDER ─────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--cream-dark);
+  margin: 3rem 0;
+}
+
+/* ── FOOTER ──────────────────────────────────────────── */
+.site-footer {
+  background: var(--jade-darkest);
+  padding: 2rem;
+  text-align: center;
+}
+.site-footer p { font-size: 13px; color: var(--jade-pale); }
+
+@media (max-width: 600px) {
+  .toc { gap: 1rem; padding: 1rem; }
+  .toc a { font-size: 11px; }
+  .step, .callout { flex-direction: column; gap: .5rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <img class="header-logo" src="https://www.naturalmed-wellness.com/assets/img/naturalmed-logo.png" alt="NaturalMed">
+  <h1>NaturalMed Admin Guide</h1>
+  <p class="subtitle">Complete instructions for managing your website &amp; newsletter</p>
+</header>
+
+<nav class="toc">
+  <a href="#cms">Sveltia CMS</a>
+  <a href="#articles">Articles</a>
+  <a href="#seminars">Seminars</a>
+  <a href="#pagetext">Page Text</a>
+  <a href="#newsletter">Newsletter</a>
+  <a href="#contacts">Contacts</a>
+  <a href="#sending">Sending</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main class="main">
+
+  <!-- ── SECTION 1: CMS OVERVIEW ── -->
+  <section class="section" id="cms">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Accessing the CMS</h2>
+    </div>
+
+    <p>The CMS (Content Management System) is the tool you use to manage your website content — articles, seminars and page text — without touching any code.</p>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">🌐</div>
+      <div class="callout-body">
+        <strong>CMS address</strong>
+        <p>Open your browser and go to: <span class="url">https://www.naturalmed-wellness.com/admin/</span></p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Open the CMS</strong>
+          <p>Go to the address above in any browser (Safari, Chrome, Firefox).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Click "Sign In with GitHub"</strong>
+          <p>A GitHub window will open asking you to authorise the connection.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Click "Authorize naturalmed"</strong>
+          <p>This connects the CMS to your website repository. You only need to do this once.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>You are in!</strong>
+          <p>You will see three collections on the left: Articles, Seminars, and Page Text.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⏱</div>
+      <div class="callout-body">
+        <strong>After saving, wait ~1 minute</strong>
+        <p>When you save anything in the CMS, the website rebuilds automatically. This takes about 60 seconds. You can check progress at: <span class="url">https://github.com/naturalmed/naturalmed-wellness/actions</span></p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 2: ARTICLES ── -->
+  <section class="section" id="articles">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Writing Articles</h2>
+    </div>
+
+    <p>Articles are the main content of your website. Each article you publish automatically appears on the Articles page, in the RSS feed, and generates a newsletter ready to send.</p>
+
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-dot">✍️</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Write article in CMS</strong>
+          <p>Fill in all the fields and click Save</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">⚙️</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Website rebuilds automatically (~1 minute)</strong>
+          <p>No action needed from you</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">🌐</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Article appears live on the website</strong>
+          <p>en/articles.html is updated with the new card</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">📧</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Newsletter is ready to send</strong>
+          <p>Available at naturalmed-wellness.com/newsletter/[slug].html</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">How to create a new article</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Click "Articles" in the left menu</strong>
+          <p>You will see a list of all existing articles (or "no entries yet" if this is the first).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Click "New" (top right)</strong>
+          <p>A blank form opens with all the fields to fill in.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Fill in all the fields</strong>
+          <p>See the field guide below for what to write in each field.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Click "Save" (top right)</strong>
+          <p>The article is saved and the website starts rebuilding. Wait ~1 minute.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Article fields guide</h3>
+
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>What to write</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Title <span class="required">required</span></td>
+          <td>The full title of your article, e.g. "Acupuncture and Chronic Pain: A TCM Perspective"</td>
+        </tr>
+        <tr>
+          <td>Slug <span class="required">required</span></td>
+          <td>A short URL-friendly version of the title using only lowercase letters, numbers and hyphens. E.g. <span class="cmd">acupuncture-and-chronic-pain</span>. No spaces, no accents.</td>
+        </tr>
+        <tr>
+          <td>Date <span class="required">required</span></td>
+          <td>The publication date. Click the calendar icon and select today's date, or the date you want the article to appear.</td>
+        </tr>
+        <tr>
+          <td>Category <span class="required">required</span></td>
+          <td>Select one from the dropdown: Acupuncture, Herbal Medicine, Chinese Dietetics, Qi Theory, Tuina Massage, Women's Health, Mental Wellbeing, or Seasonal Health.</td>
+        </tr>
+        <tr>
+          <td>Reading time</td>
+          <td>Estimated minutes to read. A rough guide: count the paragraphs and divide by 3. Default is 8 minutes.</td>
+        </tr>
+        <tr>
+          <td>Excerpt <span class="required">required</span></td>
+          <td>2–3 sentences summarising the article. This appears in the newsletter email and on the articles listing page. Maximum 250 characters.</td>
+        </tr>
+        <tr>
+          <td>Cover image</td>
+          <td>Optional. Click to upload a photo (JPG or PNG, ideally 1200×630 pixels). Can be left empty — a placeholder will be used.</td>
+        </tr>
+        <tr>
+          <td>Body <span class="required">required</span></td>
+          <td>The full article text. Use the toolbar buttons for headings, bold, italic, bullet points and links.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">✍️</div>
+      <div class="callout-body">
+        <strong>Writing tips for the Body field</strong>
+        <ul>
+          <li>Use <strong>## Heading</strong> for section titles (click the H2 button in the toolbar)</li>
+          <li>Use <strong>**word**</strong> for bold text (or click the B button)</li>
+          <li>Use <strong>- item</strong> for bullet points (or click the list button)</li>
+          <li>Leave a blank line between paragraphs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 3: SEMINARS ── -->
+  <section class="section" id="seminars">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Managing Seminars</h2>
+    </div>
+
+    <p>The Seminars section lets you add, edit and remove seminar information that appears on the Seminars page of your website.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Click "Seminars" in the left menu</strong>
+          <p>Then click "Seminars page content".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Edit the introductory text if needed</strong>
+          <p>The "Page subtitle" and "Intro paragraph" fields control the text at the top of the seminars page.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Add a seminar — click "Add seminars list item"</strong>
+          <p>Fill in: Title, Date (optional if TBC), Location, Audience, Description, and Status.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Click "Save"</strong>
+          <p>The seminars page rebuilds automatically in ~1 minute.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-body">
+        <strong>Status options explained</strong>
+        <ul>
+          <li><strong>TBC</strong> — dates not confirmed yet</li>
+          <li><strong>Announced</strong> — dates confirmed, registration not open yet</li>
+          <li><strong>Registration Open</strong> — people can register</li>
+          <li><strong>Sold Out</strong> — no more places available</li>
+          <li><strong>Completed</strong> — seminar has taken place</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 4: PAGE TEXT ── -->
+  <section class="section" id="pagetext">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Editing Page Text</h2>
+    </div>
+
+    <p>Page Text lets you update key sentences on the Home, About, and Conditions pages without any technical knowledge.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Click "Page Text" in the left menu</strong>
+          <p>You will see three sub-sections: About — Biography, Conditions — Introduction, and Home — Key text.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Click the section you want to edit</strong>
+          <p>For example, "About — Biography" to update your bio text or pull quote.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Edit the text and click "Save"</strong>
+          <p>The page rebuilds in ~1 minute.</p>
+        </div>
+      </div>
+    </div>
+
+    <table class="field-table">
+      <thead><tr><th>Section</th><th>What you can edit</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Home — Key text</td>
+          <td>The subtitle line under the main heading, and the paragraph above the "Book a Consultation" button.</td>
+        </tr>
+        <tr>
+          <td>About — Biography</td>
+          <td>Your short bio (shown at the top of the About page), your full biography, and the italic pull quote beside your photo.</td>
+        </tr>
+        <tr>
+          <td>Conditions — Introduction</td>
+          <td>The introductory paragraph at the top of the Conditions page.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 5: NEWSLETTER ── -->
+  <section class="section" id="newsletter">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>The Newsletter</h2>
+    </div>
+
+    <p>Every time you publish a new article, a newsletter is automatically generated and published at a private URL. You then send it to your subscribers directly from Gmail.</p>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📨</div>
+      <div class="callout-body">
+        <strong>Newsletter URL pattern</strong>
+        <p>Each newsletter lives at:<br>
+        <span class="url">https://www.naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</span><br><br>
+        Example: <span class="url">https://www.naturalmed-wellness.com/newsletter/2026-04-acupuncture-and-chronic-pain.html</span></p>
+      </div>
+    </div>
+
+    <p style="margin-top:1rem">The slug in the URL is the same as the one you entered in the article form. The year and month are added automatically from the publication date.</p>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 6: CONTACTS ── -->
+  <section class="section" id="contacts">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>Managing Subscriber Contacts</h2>
+    </div>
+
+    <p>Your subscribers are stored as a Google Contacts label called <strong>"Newsletter NaturalMed"</strong>. To add a new subscriber:</p>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">📖</div>
+      <div class="callout-body">
+        <strong>Google Contacts address</strong>
+        <p><span class="url">https://contacts.google.com</span> — sign in with naturalmed.wellness@gmail.com</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Open contacts.google.com</strong>
+          <p>Make sure you are signed in as naturalmed.wellness@gmail.com.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Click the "+" button (bottom right) → "Create a contact"</strong>
+          <p>Enter the subscriber's first name, last name, and email address. Click Save.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Open the new contact → click the three dots ⋮ → "Label as"</strong>
+          <p>Select "Newsletter NaturalMed". The contact is now in your mailing group.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">To remove a subscriber</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>In Google Contacts, click "Newsletter NaturalMed" in the left menu</strong>
+          <p>All your subscribers are listed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Click the three dots ⋮ next to the contact → "Remove from label"</strong>
+          <p>The contact stays in your general contacts but is removed from the newsletter group.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 7: SENDING ── -->
+  <section class="section" id="sending">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <h2>Sending the Newsletter</h2>
+    </div>
+
+    <p>Once your article is published and the website has rebuilt (~1 minute), follow these steps to send the newsletter to all your subscribers.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Open the newsletter page in your browser</strong>
+          <p>The URL is: <span class="url">https://www.naturalmed-wellness.com/newsletter/YYYY-MM-your-slug.html</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Click "✓ Hide this bar — ready to copy"</strong>
+          <p>This removes the yellow instruction bar so it does not appear in the email.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Select all and copy</strong>
+          <p>Press <span class="kbd">⌘ Cmd</span> + <span class="kbd">A</span> to select everything, then <span class="kbd">⌘ Cmd</span> + <span class="kbd">C</span> to copy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Open Gmail and compose a new email</strong>
+          <p>Go to <span class="url">https://mail.google.com</span> and click "Compose".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Fill in the "To:" field with your own email</strong>
+          <p>Type <span class="cmd">naturalmed.wellness@gmail.com</span> in the To field.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Click "Bcc" and add the subscriber group</strong>
+          <p>Click the "Bcc" link (top right of the To field). Type <span class="cmd">Newsletter NaturalMed</span> and select the group when it appears. Using Bcc means subscribers cannot see each other's email addresses.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <strong>Fill in the Subject line</strong>
+          <p>Use: <span class="cmd">New article from NaturalMed: [Article Title]</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <strong>Click in the email body and paste</strong>
+          <p>Press <span class="kbd">⌘ Cmd</span> + <span class="kbd">V</span>. The newsletter appears formatted with all colours and images.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">9</div>
+        <div class="step-body">
+          <strong>Click "Send"</strong>
+          <p>All subscribers receive a beautifully formatted newsletter without seeing each other's addresses.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>Always use Bcc, never To</strong>
+        <p>If you add the group to the "To:" or "Cc:" fields, every subscriber will see the email addresses of all the others. This is a privacy issue. Always add the Newsletter NaturalMed group to <strong>Bcc</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 8: FAQ ── -->
+  <section class="section" id="faq">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1.25rem">
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">I saved an article but it is not appearing on the website yet.</p>
+        <p style="font-size:14px;color:var(--text-muted)">Wait 1–2 minutes and refresh the page. The website rebuilds automatically after every save. You can check the progress at <span class="url">https://github.com/naturalmed/naturalmed-wellness/actions</span> — a green tick means it completed successfully.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">I want to edit an article I already published.</p>
+        <p style="font-size:14px;color:var(--text-muted)">In the CMS, click "Articles" and click the article you want to edit. Make your changes and click "Save". The website updates automatically.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">What is the Slug field and how do I fill it in?</p>
+        <p style="font-size:14px;color:var(--text-muted)">The slug is the URL address for your article. It must use only lowercase letters, numbers and hyphens — no spaces, no accents, no punctuation. For example, an article called "Acupuncture &amp; Chronic Pain" would have the slug <span class="cmd">acupuncture-and-chronic-pain</span>.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">How do I find the newsletter URL for an article?</p>
+        <p style="font-size:14px;color:var(--text-muted)">The pattern is always: <span class="url">https://www.naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</span> where YYYY-MM is the year and month of the article and slug is what you entered in the Slug field.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">A subscriber asked to be removed from the newsletter. What do I do?</p>
+        <p style="font-size:14px;color:var(--text-muted)">Go to contacts.google.com, find the person, click the three dots ⋮ and choose "Remove from label" → Newsletter NaturalMed. They will not receive future newsletters.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">The yellow bar is still showing in the email I received.</p>
+        <p style="font-size:14px;color:var(--text-muted)">Before copying the newsletter, you must first click the "✓ Hide this bar — ready to copy" button on the newsletter page. Then do Cmd+A and Cmd+C.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">I am not sure if the GitHub Action ran successfully.</p>
+        <p style="font-size:14px;color:var(--text-muted)">Go to <span class="url">https://github.com/naturalmed/naturalmed-wellness/actions</span>. A green circle means success. A red circle means something went wrong — contact your developer.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── QUICK REFERENCE ── -->
+  <div style="background:var(--jade-darkest);border-radius:14px;padding:2rem;margin-top:2rem">
+    <h2 style="font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--jade-mist);margin-bottom:1.5rem;text-align:center">Quick Reference</h2>
+    <table class="field-table" style="background:transparent">
+      <thead><tr><th>Task</th><th>Where to go</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--jade-pale)">Write an article</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/admin/</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Check build status</td>
+          <td style="color:var(--jade-light)">github.com/naturalmed/naturalmed-wellness/actions</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Find newsletter</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Manage subscribers</td>
+          <td style="color:var(--jade-light)">contacts.google.com</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Send newsletter</td>
+          <td style="color:var(--jade-light)">mail.google.com → Compose → Bcc: Newsletter NaturalMed</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Keyboard shortcut — select all</td>
+          <td style="color:var(--jade-light)"><span class="kbd">⌘ Cmd</span> + <span class="kbd">A</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Keyboard shortcut — copy</td>
+          <td style="color:var(--jade-light)"><span class="kbd">⌘ Cmd</span> + <span class="kbd">C</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Keyboard shortcut — paste</td>
+          <td style="color:var(--jade-light)"><span class="kbd">⌘ Cmd</span> + <span class="kbd">V</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>NaturalMed Admin Guide · naturalmed-wellness.com</p>
+</footer>
+
+</body>
+</html>
