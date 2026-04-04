@@ -279,11 +279,12 @@ def _inject(html, marker, new_content):
 
 
 def build_seminars():
+    import yaml
     if not SEMINARS_YML.exists():
         print('⚠ _content/seminars.yml not found — skipping seminars build')
         return
 
-    data = _yaml_mod.safe_load(SEMINARS_YML.read_text(encoding='utf-8')) or {}
+    data = yaml.safe_load(SEMINARS_YML.read_text(encoding='utf-8')) or {}
     html = SEMINARS_HTML.read_text(encoding='utf-8')
 
     # ── Subtitle ────────────────────────────────────────────────
@@ -362,10 +363,11 @@ def _md_inline(text):
 
 
 def build_page_text():
+    import yaml
     # ── Home ────────────────────────────────────────────────────
     home_yml = PAGES_DIR / 'home.yml'
     if home_yml.exists():
-        data = _yaml_mod.safe_load(home_yml.read_text(encoding='utf-8')) or {}
+        data = yaml.safe_load(home_yml.read_text(encoding='utf-8')) or {}
         html = INDEX_HTML.read_text(encoding='utf-8')
         if data.get('hero_sub'):
             html = _inject(html, 'home_hero_sub',
@@ -379,7 +381,7 @@ def build_page_text():
     # ── About ───────────────────────────────────────────────────
     about_yml = PAGES_DIR / 'about.yml'
     if about_yml.exists():
-        data = _yaml_mod.safe_load(about_yml.read_text(encoding='utf-8')) or {}
+        data = yaml.safe_load(about_yml.read_text(encoding='utf-8')) or {}
         html = ABOUT_HTML.read_text(encoding='utf-8')
         if data.get('short_bio'):
             html = _inject(html, 'about_short_bio',
@@ -394,7 +396,7 @@ def build_page_text():
     # ── Conditions ──────────────────────────────────────────────
     cond_yml = PAGES_DIR / 'conditions.yml'
     if cond_yml.exists():
-        data  = _yaml_mod.safe_load(cond_yml.read_text(encoding='utf-8')) or {}
+        data  = yaml.safe_load(cond_yml.read_text(encoding='utf-8')) or {}
         cpath = ROOT / 'en' / 'conditions.html'
         html  = cpath.read_text(encoding='utf-8')
         if data.get('lead'):
