@@ -265,104 +265,6 @@ def make_rss_item(slug_full, meta, pub_date):
 
 # ── Main ─────────────────────────────────────────────────────
 
-def main():
-    md_files = sorted(glob.glob(str(CONTENT_DIR / '*.md')), reverse=True)
-    print(f'Found {len(md_files)} article(s) in _content/articles/')
-
-    articles = []
-    for md_path in md_files:
-        text = Path(md_path).read_text(encoding='utf-8')
-        meta, body_md = parse_frontmatter(text)
-        if not meta.get('title'):
-            print(f'  SKIP (no title): {md_path}')
-            continue
-
-        pub_date  = parse_date(meta.get('date', ''))
-        raw_slug  = meta.get('slug') or slugify(meta.get('title', 'article'))
-        slug_full = pub_date.strftime('%Y-%m') + '-' + raw_slug
-        body_html = md_to_html(body_md)
-        excerpt   = meta.get('excerpt', '')
-        cover     = meta.get('cover', '')
-        cover_abs = cover or f'{BASE_URL}/assets/img/articles/{slug_full}-cover.jpg'
-        cover_img = (f'<img class="article-cover" src="{cover}" alt="{meta.get("title","")}">'
-                     if cover else '')
-
-        # Build article HTML
-        html = ARTICLE_TEMPLATE.format(
-            title          = meta.get('title', ''),
-            title_escaped  = meta.get('title', '').replace('"', '&quot;'),
-            excerpt        = excerpt,
-            excerpt_escaped= excerpt[:150].replace('"', '&quot;'),
-            category       = meta.get('category', 'TCM'),
-            month_label    = month_label(pub_date),
-            reading_time   = meta.get('reading_time', '8'),
-            date_iso       = pub_date.strftime('%Y-%m-%dT00:00:00+00:00'),
-            cover_abs      = cover_abs,
-            cover_img      = cover_img,
-            body_html      = body_html,
-        )
-
-        out_path = ARTICLES_DIR / f'{slug_full}.html'
-        out_path.write_text(html, encoding='utf-8')
-        print(f'  ✓ Built: en/articles/{slug_full}.html')
-        articles.append((slug_full, meta, pub_date))
-
-    # ── Rebuild articles.html listing ────────────────────────
-    listing = ARTICLES_HTML.read_text(encoding='utf-8')
-
-    if articles:
-        cards = '\n'.join(make_card(*a) for a in articles)
-        grid_block = f'''        <div class="articles-grid" id="articlesGrid">
-{cards}
-        </div>'''
-    else:
-        grid_block = '''        <div class="articles-grid" id="articlesGrid">
-            <div class="articles-empty" style="grid-column:1/-1">
-                <h3>First article coming soon</h3>
-                <p>Subscribe to the newsletter below to be notified when the first article is published.</p>
-            </div>
-        </div>'''
-
-    # Replace everything between the articles-grid div tags
-    listing = re.sub(
-        r'<div class="articles-grid"[^>]*>.*?</div>\s*(?=\s*</div>\s*</section>)',
-        grid_block + '\n        ',
-        listing,
-        flags=re.DOTALL
-    )
-    ARTICLES_HTML.write_text(listing, encoding='utf-8')
-    print(f'✓ Rebuilt en/articles.html ({len(articles)} article(s))')
-
-    # ── Rebuild feed.xml ─────────────────────────────────────
-    feed = FEED_XML.read_text(encoding='utf-8')
-    items = '\n'.join(make_rss_item(*a) for a in articles)
-    now_rfc = format_datetime(datetime.now(timezone.utc))
-    feed = re.sub(r'<lastBuildDate>.*?</lastBuildDate>',
-                  f'<lastBuildDate>{now_rfc}</lastBuildDate>', feed)
-    # Replace everything between channel comment markers
-    feed = re.sub(
-        r'(<!-- Articles are added here.*?-->).*?(</channel>)',
-        rf'\1\n{items}\n  \2',
-        feed,
-        flags=re.DOTALL
-    )
-    FEED_XML.write_text(feed, encoding='utf-8')
-    print(f'✓ Rebuilt feed.xml ({len(articles)} item(s))')
-
-if __name__ == '__main__':
-    main()
-
-
-# ═══════════════════════════════════════════════════════════════
-# SEMINARS BUILD
-# ═══════════════════════════════════════════════════════════════
-
-import yaml as _yaml_mod  # pyyaml
-
-SEMINARS_YML  = ROOT / '_content' / 'seminars.yml'
-SEMINARS_HTML = ROOT / 'en' / 'seminars.html'
-
-
 def _inject(html, marker, new_content):
     """Replace content between <!-- CMS:marker --> and <!-- /CMS:marker -->."""
     start = f'<!-- CMS:{marker} -->'
@@ -502,25 +404,8 @@ def build_page_text():
 
 # ── Patch main() to call the new builders ───────────────────────
 
-_original_main = main
-
-def main():
-    _original_main()
-    try:
-        import yaml  # noqa — ensure pyyaml available
-        build_seminars()
-        build_page_text()
-    except ImportError:
-        print('⚠ pyyaml not installed — seminars and page text not built')
-        print('  Run: pip install pyyaml')
-
-
-
-# ═══════════════════════════════════════════════════════════════
-# NEWSLETTER BUILDER
-# ═══════════════════════════════════════════════════════════════
-
 NEWSLETTER_DIR  = ROOT / 'newsletter'
+
 NEWSLETTER_TMPL = '''\
 <!DOCTYPE html>
 <html lang="en">
@@ -719,28 +604,82 @@ def build_newsletter(articles):
     print(f'✓ Built {built} newsletter(s) in /newsletter/')
 
 
-# ── Patch main() again to include newsletter ─────────────────────
-
-_main_with_pages = main
+# ── Single main entry point ──────────────────────────────────────
 
 def main():
-    # Run original chain (articles + seminars + page text)
-    import yaml  # noqa
-    # Collect articles first
-    md_files = sorted(
-        __import__('glob').glob(str(CONTENT_DIR / '*.md')), reverse=True
-    )
-    articles_data = []
+    import yaml  # pyyaml — required for seminars and page text
+
+    # ── 1. Build articles + listing + RSS ──
+    md_files = sorted(__import__('glob').glob(str(CONTENT_DIR / '*.md')), reverse=True)
+    articles = []
     for md_path in md_files:
         text = Path(md_path).read_text(encoding='utf-8')
-        meta, _ = parse_frontmatter(text)
+        meta, body_md = parse_frontmatter(text)
         if not meta.get('title'):
+            print(f'  SKIP (no title): {md_path}')
             continue
-        pub_date = parse_date(meta.get('date', ''))
-        raw_slug = meta.get('slug') or slugify(meta.get('title', 'article'))
+        pub_date  = parse_date(meta.get('date', ''))
+        raw_slug  = meta.get('slug') or slugify(meta.get('title', 'article'))
         slug_full = pub_date.strftime('%Y-%m') + '-' + raw_slug
-        articles_data.append((slug_full, meta, pub_date))
+        body_html = md_to_html(body_md)
+        excerpt   = meta.get('excerpt', '')
+        cover     = meta.get('cover', '')
+        cover_abs = cover or f'{BASE_URL}/assets/img/articles/{slug_full}-cover.jpg'
+        cover_img = (f'<img class="article-cover" src="{cover}" alt="{meta.get("title","")}">' if cover else '')
 
-    _main_with_pages()
-    build_newsletter(articles_data)
+        html = ARTICLE_TEMPLATE.format(
+            title          = meta.get('title', ''),
+            title_escaped  = meta.get('title', '').replace('"', '&quot;'),
+            excerpt        = excerpt,
+            excerpt_escaped= excerpt[:150].replace('"', '&quot;'),
+            category       = meta.get('category', 'TCM'),
+            month_label    = month_label(pub_date),
+            reading_time   = meta.get('reading_time', '8'),
+            date_iso       = pub_date.strftime('%Y-%m-%dT00:00:00+00:00'),
+            cover_abs      = cover_abs,
+            cover_img      = cover_img,
+            body_html      = body_html,
+        )
+        out_path = ARTICLES_DIR / f'{slug_full}.html'
+        out_path.write_text(html, encoding='utf-8')
+        print(f'  ✓ Built: en/articles/{slug_full}.html')
+        articles.append((slug_full, meta, pub_date))
 
+    # ── 2. Rebuild articles.html listing ──
+    listing = ARTICLES_HTML.read_text(encoding='utf-8')
+    if articles:
+        cards = '\n'.join(make_card(*a) for a in articles)
+        grid_block = f'''        <div class="articles-grid" id="articlesGrid">\n{cards}\n        </div>'''
+    else:
+        grid_block = '''        <div class="articles-grid" id="articlesGrid">\n            <div class="articles-empty" style="grid-column:1/-1"><h3>First article coming soon</h3></div>\n        </div>'''
+    import re as _re
+    listing = _re.sub(
+        r'<div class="articles-grid"[^>]*>.*?</div>\s*(?=\s*</div>\s*</section>)',
+        grid_block + '\n        ', listing, flags=_re.DOTALL)
+    ARTICLES_HTML.write_text(listing, encoding='utf-8')
+    print(f'✓ Rebuilt en/articles.html ({len(articles)} article(s))')
+
+    # ── 3. Rebuild feed.xml ──
+    from email.utils import format_datetime
+    from datetime import timezone
+    feed = FEED_XML.read_text(encoding='utf-8')
+    items = '\n'.join(make_rss_item(*a) for a in articles)
+    now_rfc = format_datetime(datetime.now(timezone.utc))
+    feed = _re.sub(r'<lastBuildDate>.*?</lastBuildDate>', f'<lastBuildDate>{now_rfc}</lastBuildDate>', feed)
+    feed = _re.sub(r'(<!-- Articles are added here.*?-->).*?(</channel>)', rf'\1\n{items}\n  \2', feed, flags=_re.DOTALL)
+    FEED_XML.write_text(feed, encoding='utf-8')
+    print(f'✓ Rebuilt feed.xml ({len(articles)} item(s))')
+
+    # ── 4. Build seminars ──
+    build_seminars()
+
+    # ── 5. Build page text ──
+    build_page_text()
+
+    # ── 6. Build newsletters ──
+    NEWSLETTER_DIR.mkdir(exist_ok=True)
+    build_newsletter(articles)
+
+
+if __name__ == '__main__':
+    main()
