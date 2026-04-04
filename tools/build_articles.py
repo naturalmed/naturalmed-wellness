@@ -30,6 +30,8 @@ ARTICLES_DIR = ROOT / 'en' / 'articles'
 ARTICLES_HTML = ROOT / 'en' / 'articles.html'
 FEED_XML     = ROOT / 'feed.xml'
 BASE_URL     = 'https://www.naturalmed-wellness.com'
+SEMINARS_YML  = ROOT / '_content' / 'seminars.yml'
+SEMINARS_HTML = ROOT / 'en' / 'seminars.html'
 
 # ── Helpers ──────────────────────────────────────────────────
 
