@@ -35,8 +35,8 @@ jobs:
         run: |
           git config user.name  "NaturalMed CMS Bot"
           git config user.email "naturalmed.wellness@gmail.com"
-          git add en/articles/*.html en/articles.html feed.xml \
-                  en/seminars.html en/index.html en/about.html \
-                  en/conditions.html newsletter/*.html 2>/dev/null || true
+          git add -A en/articles/ en/articles.html feed.xml \
+                     en/seminars.html en/index.html en/about.html \
+                     en/conditions.html newsletter/
           git diff --staged --quiet || git commit -m "🤖 Build: update site and newsletter from CMS"
           git push
