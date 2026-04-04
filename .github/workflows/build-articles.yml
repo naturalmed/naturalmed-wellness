@@ -1,4 +1,4 @@
-name: Build Articles & Pages
+name: Build Articles, Pages & Newsletter
 
 on:
   push:
@@ -28,7 +28,7 @@ jobs:
       - name: Install dependencies
         run: pip install markdown pyyaml
 
-      - name: Build articles, seminars and page text
+      - name: Build everything
         run: python3 tools/build_articles.py
 
       - name: Commit built files
@@ -37,6 +37,6 @@ jobs:
           git config user.email "naturalmed.wellness@gmail.com"
           git add en/articles/*.html en/articles.html feed.xml \
                   en/seminars.html en/index.html en/about.html \
-                  en/conditions.html 2>/dev/null || true
-          git diff --staged --quiet || git commit -m "🤖 Build: update site from CMS content"
+                  en/conditions.html newsletter/*.html 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "🤖 Build: update site and newsletter from CMS"
           git push
