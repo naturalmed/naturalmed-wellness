@@ -514,3 +514,233 @@ def main():
         print('⚠ pyyaml not installed — seminars and page text not built')
         print('  Run: pip install pyyaml')
 
+
+
+# ═══════════════════════════════════════════════════════════════
+# NEWSLETTER BUILDER
+# ═══════════════════════════════════════════════════════════════
+
+NEWSLETTER_DIR  = ROOT / 'newsletter'
+NEWSLETTER_TMPL = '''\
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{subject}</title>
+<style>
+  /* Reset */
+  body,table,td,a{{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}}
+  body{{margin:0;padding:0;background:#F8F5F0;font-family:'Georgia',serif}}
+  
+  .wrapper{{background:#F8F5F0;padding:32px 16px}}
+  .email-card{{max-width:600px;margin:0 auto;background:#ffffff;
+               border-radius:12px;overflow:hidden;
+               box-shadow:0 4px 24px rgba(4,52,44,0.10)}}
+
+  /* Header */
+  .header{{background:#04342C;padding:28px 40px;text-align:center}}
+  .header img{{height:48px;width:48px;border-radius:50%;
+               border:2px solid rgba(93,202,165,0.4)}}
+  .header-name{{font-family:Georgia,serif;font-size:22px;font-weight:normal;
+                color:#E1F5EE;margin:10px 0 2px;letter-spacing:0.03em}}
+  .header-tagline{{font-size:12px;color:#9FE1CB;letter-spacing:0.12em;
+                   text-transform:uppercase;margin:0}}
+
+  /* Eyebrow */
+  .eyebrow{{background:#085041;padding:10px 40px;text-align:center;
+            font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+            color:#EF9F27;font-family:Georgia,serif}}
+
+  /* Body */
+  .body{{padding:40px}}
+  .article-label{{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;
+                  color:#BA7517;margin:0 0 12px;font-family:Georgia,serif}}
+  .article-title{{font-family:Georgia,serif;font-size:28px;font-weight:normal;
+                  color:#04342C;line-height:1.25;margin:0 0 20px}}
+  .cover-img{{width:100%;max-height:300px;object-fit:cover;
+              border-radius:8px;display:block;margin-bottom:24px}}
+  .excerpt{{font-size:16px;color:#2D4A3E;line-height:1.85;margin:0 0 32px}}
+  
+  /* CTA button */
+  .cta-wrap{{text-align:center;margin:0 0 40px}}
+  .cta-btn{{display:inline-block;background:#BA7517;color:#FAEEDA;
+            text-decoration:none;padding:14px 36px;border-radius:8px;
+            font-family:Georgia,serif;font-size:15px;font-weight:normal;
+            letter-spacing:0.02em}}
+
+  /* Divider */
+  .divider{{border:none;border-top:1px solid #EDE9E2;margin:0 0 32px}}
+
+  /* About */
+  .about{{background:#E1F5EE;border-radius:8px;padding:24px;margin-bottom:32px}}
+  .about p{{font-size:13px;color:#085041;line-height:1.7;margin:0}}
+  .about strong{{color:#04342C}}
+
+  /* Social */
+  .social{{text-align:center;margin-bottom:24px}}
+  .social a{{display:inline-block;margin:0 8px;color:#0F6E56;
+             font-size:13px;text-decoration:none}}
+
+  /* Footer */
+  .footer{{background:#04342C;padding:24px 40px;text-align:center}}
+  .footer p{{font-size:11px;color:#9FE1CB;margin:4px 0;line-height:1.7}}
+  .footer a{{color:#EF9F27;text-decoration:none}}
+
+  /* Print/send hint bar */
+  .send-hint{{background:#FFF8E7;border:1px solid #EF9F27;border-radius:8px;
+              padding:14px 20px;margin-bottom:24px;font-family:sans-serif;
+              font-size:13px;color:#7A4F00;text-align:center;
+              line-height:1.6}}
+  .send-hint strong{{color:#7A4F00}}
+
+  @media print{{.send-hint{{display:none}}}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Admin send hint (hidden when printing) -->
+  <div class="send-hint">
+    <strong>📧 To send:</strong> In Gmail, click <em>Compose</em> → drag this file into the message body → set To: your subscribers group → Subject: <strong>{subject}</strong>
+  </div>
+
+  <div class="email-card">
+
+    <!-- Header -->
+    <div class="header">
+      <img src="https://www.naturalmed-wellness.com/assets/img/naturalmed-logo.png"
+           alt="NaturalMed" onerror="this.style.display='none'">
+      <p class="header-name">NaturalMed</p>
+      <p class="header-tagline">Traditional Chinese Medicine · Mid-Wales, UK</p>
+    </div>
+
+    <!-- Eyebrow -->
+    <div class="eyebrow">Monthly Article · {month_label}</div>
+
+    <!-- Body -->
+    <div class="body">
+      <p class="article-label">{category}</p>
+      <h1 class="article-title">{title}</h1>
+
+      {cover_html}
+
+      <p class="excerpt">{excerpt}</p>
+
+      <div class="cta-wrap">
+        <a href="{article_url}" class="cta-btn">Read the full article →</a>
+      </div>
+
+      <hr class="divider">
+
+      <!-- About box -->
+      <div class="about">
+        <p><strong>Nuno Pestana, BSc TCM</strong> — Traditional Chinese Medicine practitioner
+        at NaturalMed in Newtown, Powys. Trained at Chengdu University of TCM, registered
+        member of ATCM UK. <a href="https://www.naturalmed-wellness.com/en/about.html"
+        style="color:#085041">Read more about Nuno →</a></p>
+      </div>
+
+      <!-- Social -->
+      <div class="social">
+        <a href="https://www.facebook.com/NaturalMedAcupuncture">Facebook</a>
+        <a href="https://www.instagram.com/naturalmed_acupuncture">Instagram</a>
+        <a href="https://www.naturalmed-wellness.com/en/contact.html">Book Appointment</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>© 2026 NaturalMed · 30 Shortbridge Street, Newtown, Powys SY16 2LN</p>
+      <p><a href="https://www.naturalmed-wellness.com/en/privacy.html">Privacy Policy</a>
+         &nbsp;·&nbsp;
+         <a href="mailto:naturalmed.wellness@gmail.com">naturalmed.wellness@gmail.com</a></p>
+      <p style="margin-top:8px;font-size:10px;color:#5DCAA5">
+        You are receiving this because you subscribed at naturalmed-wellness.com.
+        To unsubscribe reply with "unsubscribe" in the subject line.</p>
+    </div>
+
+  </div><!-- /.email-card -->
+</div><!-- /.wrapper -->
+</body>
+</html>
+'''
+
+
+def build_newsletter(articles):
+    """Generate one newsletter HTML page per article (most recent only if new)."""
+    if not articles:
+        return
+
+    NEWSLETTER_DIR.mkdir(exist_ok=True)
+
+    # Build a newsletter for each article that doesn't have one yet
+    built = 0
+    index_items = []
+
+    for slug_full, meta, pub_date in articles:
+        out_path = NEWSLETTER_DIR / f'{slug_full}.html'
+        article_url = f'{BASE_URL}/en/articles/{slug_full}.html'
+        cover = meta.get('cover', '')
+        cover_html = (f'<img class="cover-img" src="{cover}" alt="{meta.get("title","")}">'
+                      if cover else '')
+
+        subject = f'New article from NaturalMed: {meta.get("title","")}'
+        html = NEWSLETTER_TMPL.format(
+            subject      = subject,
+            title        = meta.get('title', ''),
+            category     = meta.get('category', 'Traditional Chinese Medicine'),
+            month_label  = month_label(pub_date),
+            excerpt      = meta.get('excerpt', ''),
+            article_url  = article_url,
+            cover_html   = cover_html,
+        )
+        out_path.write_text(html, encoding='utf-8')
+        built += 1
+        print(f'  ✓ Newsletter: newsletter/{slug_full}.html')
+
+        # Collect for index
+        index_items.append(
+            f'<li><a href="{slug_full}.html">{month_label(pub_date)} — {meta.get("title","")}</a></li>'
+        )
+
+    # Rebuild newsletter index
+    index_path = NEWSLETTER_DIR / 'index.html'
+    if index_path.exists():
+        idx_html = index_path.read_text(encoding='utf-8')
+        items_html = '\n    '.join(index_items)
+        idx_html = re.sub(
+            r'<!-- CMS:newsletter_list_start -->.*?<!-- CMS:newsletter_list_end -->',
+            f'<!-- CMS:newsletter_list_start -->\n    {items_html}\n    <!-- CMS:newsletter_list_end -->',
+            idx_html, flags=re.DOTALL
+        )
+        index_path.write_text(idx_html, encoding='utf-8')
+
+    print(f'✓ Built {built} newsletter(s) in /newsletter/')
+
+
+# ── Patch main() again to include newsletter ─────────────────────
+
+_main_with_pages = main
+
+def main():
+    # Run original chain (articles + seminars + page text)
+    import yaml  # noqa
+    # Collect articles first
+    md_files = sorted(
+        __import__('glob').glob(str(CONTENT_DIR / '*.md')), reverse=True
+    )
+    articles_data = []
+    for md_path in md_files:
+        text = Path(md_path).read_text(encoding='utf-8')
+        meta, _ = parse_frontmatter(text)
+        if not meta.get('title'):
+            continue
+        pub_date = parse_date(meta.get('date', ''))
+        raw_slug = meta.get('slug') or slugify(meta.get('title', 'article'))
+        slug_full = pub_date.strftime('%Y-%m') + '-' + raw_slug
+        articles_data.append((slug_full, meta, pub_date))
+
+    _main_with_pages()
+    build_newsletter(articles_data)
+
