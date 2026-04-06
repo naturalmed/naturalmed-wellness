@@ -5,7 +5,7 @@ date: 2026-04-04
 category: Acupuncture
 reading_time: 6
 excerpt: Chronic pain affects millions of people worldwide, yet conventional medicine often struggles to offer lasting relief. Traditional Chinese Medicine offers a fundamentally different approach — one that treats the root cause, not just the symptom.
-cover: ''
+cover: /Volumes/Dados/Projectos/NaturalMed/naturalmed-wellness-main/assets/img/naturalmed-needles.jpg
 ---
 
 ## How TCM Understands Pain
