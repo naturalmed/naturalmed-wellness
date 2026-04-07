@@ -50,12 +50,27 @@ nav {
     height: var(--nav-h); z-index: 1000;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 2.5rem;
-    background: rgba(4,52,44,0.92);
+    background: linear-gradient(
+        to right,
+        rgba(15,110,86,0.96)  0%,
+        rgba(8,80,65,0.95)   30%,
+        rgba(4,52,44,0.97)   65%,
+        rgba(4,52,44,0.98)  100%
+    );
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid rgba(93,202,165,0.15);
-    transition: background var(--ease), box-shadow var(--ease);
+    transition: box-shadow var(--ease);
 }
-nav.scrolled { background: rgba(4,52,44,0.98); box-shadow: 0 2px 24px rgba(0,0,0,0.25); }
+nav.scrolled {
+    background: linear-gradient(
+        to right,
+        rgba(15,110,86,0.98)  0%,
+        rgba(8,80,65,0.98)   30%,
+        rgba(4,52,44,1.00)   65%,
+        rgba(4,52,44,1.00)  100%
+    );
+    box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+}
 .nav-logo { display: flex; align-items: center; gap: 10px; cursor: pointer; }
 .nav-mark {
     width: 38px; height: 38px; border-radius: 50%;
