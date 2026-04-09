@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 420" width="440" height="420">
+  <defs>
+    <style>
+      .skin { fill: #F5DEB3; stroke: #C4A882; stroke-width: 1.2; }
+      .ear { fill: #E8CFA0; stroke: #B8956A; stroke-width: 1.5; }
+      .hair { fill: #2A1A0A; stroke: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#BA7517"/>
+    </marker>
+  </defs>
+  
+  <rect width="440" height="420" fill="#F8F5F0" rx="8"/>
+  <text x="220" y="28" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="500" fill="#04342C">Anmian point — "Peaceful sleep"</text>
+  
+  <g transform="translate(55, 30)">
+  
+    <!-- Head profile facing left -->
+    <path d="M 160,330 
+             C 140,310 120,280 110,245
+             C 100,210 95,175 100,140
+             C 105,105 120,72 148,50
+             C 176,28 210,22 240,30
+             C 270,38 292,58 305,85
+             C 318,112 322,145 318,178
+             C 314,211 302,240 288,265
+             C 274,290 256,310 235,325
+             C 214,340 190,345 168,338
+             Z" class="skin"/>
+    
+    <!-- Hair -->
+    <path d="M 160,335 
+             C 140,310 120,280 110,245
+             C 100,210 95,175 100,140
+             C 105,105 120,72 148,50
+             C 176,28 210,22 240,30
+             C 270,38 292,58 305,85
+             C 318,112 322,145 318,178
+             C 314,200 308,220 300,235
+             C 285,215 265,200 240,192
+             C 215,184 195,188 178,200
+             C 165,210 155,230 152,260
+             C 150,280 152,305 158,325
+             Z" class="hair"/>
+    
+    <!-- Neck -->
+    <path d="M 168,338 C 165,350 162,365 160,375 L 195,375 C 200,360 205,345 210,335" fill="#F5DEB3" stroke="#C4A882" stroke-width="1"/>
+    
+    <!-- Nose -->
+    <path d="M 110,200 C 100,210 95,220 98,228 C 101,236 108,238 112,235" fill="none" stroke="#C4A882" stroke-width="1.2"/>
+    
+    <!-- Lips -->
+    <path d="M 110,258 C 118,254 128,254 135,258" fill="none" stroke="#C4A882" stroke-width="1"/>
+    <path d="M 112,262 C 120,266 128,266 134,262" fill="none" stroke="#C4A882" stroke-width="0.8"/>
+    
+    <!-- Eye -->
+    <ellipse cx="135" cy="188" rx="12" ry="5" fill="none" stroke="#C4A882" stroke-width="1.2"/>
+    <circle cx="135" cy="188" r="3" fill="#2A1A0A"/>
+    
+    <!-- Eyebrow -->
+    <path d="M 120,178 C 130,174 142,174 152,178" fill="none" stroke="#3A2A1A" stroke-width="1.5"/>
+    
+    <!-- Ear -->
+    <path d="M 218,185 
+             C 228,175 242,178 247,190 
+             C 252,202 250,218 245,230 
+             C 240,240 233,245 228,242 
+             C 224,240 222,234 224,226
+             C 226,218 227,210 226,202
+             C 225,196 222,191 220,188
+             Z" class="ear"/>
+    <path d="M 226,190 C 233,188 240,192 242,200 C 244,208 240,218 235,222" fill="none" stroke="#B8956A" stroke-width="1"/>
+    <path d="M 229,195 C 234,194 237,198 237,204 C 237,210 234,215 231,217" fill="none" stroke="#B8956A" stroke-width="0.8"/>
+    
+    <!-- Earlobe -->
+    <ellipse cx="226" cy="244" rx="6" ry="8" fill="#E8CFA0" stroke="#B8956A" stroke-width="1.2"/>
+    
+    <!-- ═══ ANMIAN POINT — behind and above the ear, on the skull ═══ -->
+    <circle cx="262" cy="192" r="7" fill="#BA7517" stroke="#fff" stroke-width="2.5"/>
+    <circle cx="262" cy="192" r="12" fill="none" stroke="#BA7517" stroke-width="1.5" opacity="0.4">
+      <animate attributeName="r" values="12;17;12" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0.15;0.4" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Arrow from label to point -->
+    <path d="M 175,105 C 210,120 240,150 257,183" stroke="#BA7517" stroke-width="1.5" fill="none" marker-end="url(#arrowhead)"/>
+    
+    <!-- Label box -->
+    <rect x="95" y="77" width="90" height="36" rx="6" fill="#04342C"/>
+    <text x="140" y="93" text-anchor="middle" fill="#FAEEDA" font-family="Georgia, serif" font-size="14" font-weight="500">Anmian</text>
+    <text x="140" y="107" text-anchor="middle" fill="#9FE1CB" font-family="'Outfit', sans-serif" font-size="10">Peaceful sleep</text>
+    
+    <!-- Fengchi GB-20 reference point (base of skull, further back) -->
+    <circle cx="282" cy="218" r="3" fill="none" stroke="#5DCAA5" stroke-width="1"/>
+    <line x1="285" y1="218" x2="310" y2="248" stroke="#5DCAA5" stroke-width="0.8" stroke-dasharray="4 3"/>
+    <text x="283" y="262" font-family="'Outfit', system-ui, sans-serif" font-size="9" fill="#085041">Fengchi (GB-20)</text>
+
+    <!-- Yifeng SJ-17 reference point (behind earlobe) -->
+    <circle cx="238" cy="240" r="3" fill="none" stroke="#5DCAA5" stroke-width="1"/>
+    <line x1="238" y1="248" x2="255" y2="295" stroke="#5DCAA5" stroke-width="0.8" stroke-dasharray="4 3"/>
+    <text x="230" y="308" font-family="'Outfit', system-ui, sans-serif" font-size="9" fill="#085041">Yifeng (SJ-17)</text>
+    
+    <!-- Midway annotation -->
+    <text x="285" y="188" font-family="'Outfit', system-ui, sans-serif" font-size="8" fill="#BA7517">midway between</text>
+    <text x="285" y="198" font-family="'Outfit', system-ui, sans-serif" font-size="8" fill="#BA7517">Yifeng &amp; Fengchi</text>
+  
+  </g>
+
+  <rect x="40" y="383" width="360" height="28" rx="4" fill="#E1F5EE"/>
+  <text x="220" y="401" text-anchor="middle" font-family="'Outfit', system-ui, sans-serif" font-size="10" fill="#085041">Massage both sides gently in small circles for 2-3 minutes</text>
+</svg>
