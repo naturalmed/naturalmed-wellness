@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ═══ EDITAR: título, descrição, data, imagem de capa ═══ -->
+    <title>TÍTULO DO ARTIGO · Artigos NaturalMed MTC</title>
+    <meta name="description" content="DESCRIÇÃO CURTA (150 caracteres máx. — aparece no Google e no excerto do feed RSS).">
+    <meta name="author" content="Nuno Pestana">
+    <meta property="og:title" content="TÍTULO DO ARTIGO">
+    <meta property="og:description" content="DESCRIÇÃO CURTA">
+    <meta property="og:image" content="https://www.naturalmed-wellness.com/assets/img/articles/AAAA-MM-slug-capa.jpg">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="AAAA-MM-DDT00:00:00+00:00">
+    <!-- ════════════════════════════════════════════════════ -->
+    <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
+    <link rel="alternate" type="application/rss+xml" title="NaturalMed Articles RSS" href="../../feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <style>
+        /* ── Estilos específicos do artigo ── */
+        .article-hero { background: var(--jade-darkest); padding: 110px 0 0; position: relative; }
+        .article-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(15,110,86,.3) 0%, transparent 70%); }
+        .article-breadcrumb { font-size:12px; color:var(--jade-pale); margin-bottom:1.5rem; position:relative; }
+        .article-breadcrumb a { color:var(--jade-pale); text-decoration:none; }
+        .article-breadcrumb a:hover { color:var(--gold-light); }
+        .article-category { font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-light); font-weight:500; margin-bottom:1rem; position:relative; }
+        .article-title { font-family:var(--font-serif); font-size:clamp(2rem,4.5vw,3rem); font-weight:500; color:var(--white); line-height:1.2; max-width:700px; position:relative; margin-bottom:1.5rem; }
+        .article-meta { display:flex; align-items:center; gap:1.5rem; font-size:13px; color:var(--jade-pale); position:relative; padding-bottom:2.5rem; flex-wrap:wrap; }
+        .article-meta-author { display:flex; align-items:center; gap:8px; }
+        .article-meta-author img { width:36px; height:36px; border-radius:50%; object-fit:cover; border:2px solid var(--jade-light); }
+        .article-cover { width:100%; max-height:480px; object-fit:cover; display:block; }
+        .article-cover-placeholder { width:100%; height:300px; background:linear-gradient(135deg,var(--jade-mist),var(--jade-pale)); display:flex; align-items:center; justify-content:center; }
+
+        /* ── Layout do corpo ── */
+        .article-body-wrap { max-width:720px; margin:0 auto; padding:3rem 1.5rem 5rem; }
+        .article-lead { font-family:var(--font-serif); font-size:1.25rem; color:var(--jade-dark); line-height:1.75; margin-bottom:2rem; font-style:italic; }
+        .article-body h2 { font-family:var(--font-serif); font-size:1.65rem; font-weight:500; color:var(--jade-dark); margin:2.5rem 0 .9rem; }
+        .article-body h3 { font-family:var(--font-serif); font-size:1.25rem; font-weight:500; color:var(--jade-dark); margin:2rem 0 .7rem; }
+        .article-body p { font-size:16px; color:var(--text-mid); line-height:1.85; margin-bottom:1.4rem; }
+        .article-body ul, .article-body ol { padding-left:1.5rem; margin-bottom:1.4rem; }
+        .article-body li { font-size:16px; color:var(--text-mid); line-height:1.8; margin-bottom:.4rem; }
+        .article-body blockquote { border-left:3px solid var(--gold); padding:.8rem 1.25rem; margin:2rem 0; background:var(--gold-mist); border-radius:0 6px 6px 0; }
+        .article-body blockquote p { font-family:var(--font-serif); font-size:1.1rem; color:var(--jade-dark); font-style:italic; margin:0; }
+        .article-body figure { margin:2.5rem 0; }
+        .article-body figure img { width:100%; border-radius:8px; }
+        .article-body figure figcaption { font-size:13px; color:var(--text-muted); text-align:center; margin-top:.6rem; font-style:italic; }
+        .article-divider { border:none; border-top:1px solid var(--cream-dark); margin:3rem 0; }
+        .article-callout { background:var(--jade-mist); border:1px solid var(--jade-light); border-radius:10px; padding:1.5rem 1.75rem; margin:2rem 0; }
+        .article-callout p { color:var(--jade-dark); margin:0; font-size:15px; }
+        .article-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin:2.5rem 0 1rem; }
+        .article-tag-pill { background:var(--jade-mist); color:var(--jade-dark); font-size:12px; font-weight:500; padding:4px 12px; border-radius:20px; border:1px solid var(--jade-light); }
+
+        /* ── Navegação inferior ── */
+        .article-nav-bottom { border-top:1px solid var(--cream-dark); padding-top:2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+        .article-nav-bottom a { color:var(--jade); font-size:14px; font-weight:500; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+        .article-nav-bottom a:hover { color:var(--jade-dark); }
+
+        /* ── Barra de partilha ── */
+        .share-strip { background:var(--cream); border-top:1px solid var(--cream-dark); border-bottom:1px solid var(--cream-dark); padding:1.25rem 1.5rem; display:flex; align-items:center; gap:1rem; font-size:13px; color:var(--text-muted); flex-wrap:wrap; }
+        .share-strip strong { color:var(--jade-dark); }
+        .share-link { color:var(--jade); font-weight:500; text-decoration:none; font-size:13px; }
+        .share-link:hover { color:var(--jade-dark); }
+    </style>
+</head>
+<body>
+
+<nav id="mainNav">
+    <a href="../../pt/index.html" class="nav-logo">
+        <img src="../../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:40px;width:40px;object-fit:contain" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <div id="navMark" class="nav-mark" style="display:none">N</div>
+        <span class="nav-name">NaturalMed</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="../sobre.html">Sobre</a></li>
+        <li><a href="../servicos.html">Serviços</a></li>
+        <li><a href="../condicoes.html">Condições</a></li>
+        <li><a href="../seminarios.html">Seminários</a></li>
+        <li><a href="../artigos.html" class="active">Artigos</a></li>
+        <li><a href="../contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="lang-toggle"><a href="#">EN</a><a href="#" class="active">PT</a></div>
+        <button class="btn-nav" onclick="window.location.href='../contacto.html'">Marcar Consulta</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="article-hero">
+    <div class="container">
+        <p class="article-breadcrumb">
+            <a href="../artigos.html">← Todos os Artigos</a>
+        </p>
+        <!-- ═══ EDITAR: categoria, título, data, tempo de leitura ═══ -->
+        <div class="article-category">Acupunctura · Abril 2026</div>
+        <h1 class="article-title">TÍTULO DO ARTIGO AQUI</h1>
+        <div class="article-meta">
+            <div class="article-meta-author">
+                <img src="../../assets/img/nuno-photo.png" alt="Nuno Pestana" onerror="this.style.display='none'">
+                <span>Nuno Pestana, BSc MTC</span>
+            </div>
+            <span>·</span>
+            <span>Abril 2026</span>   <!-- ═══ EDITAR data ═══ -->
+            <span>·</span>
+            <span>8 min de leitura</span>   <!-- ═══ EDITAR tempo de leitura ═══ -->
+        </div>
+    </div>
+</section>
+
+<!-- IMAGEM DE CAPA — substituir src com a imagem real, ou apagar esta secção -->
+<img class="article-cover"
+     src="../../assets/img/articles/AAAA-MM-slug-capa.jpg"
+     alt="TÍTULO DO ARTIGO"
+     onerror="this.outerHTML='<div class=\'article-cover-placeholder\'></div>'">
+
+<!-- BARRA DE PARTILHA -->
+<div class="share-strip container">
+    <strong>Partilhar este artigo:</strong>
+    <a class="share-link" id="copyLink" href="#" onclick="copyURL(event)">Copiar link</a>
+    <a class="share-link" id="shareEmail" href="#">Enviar por email</a>
+</div>
+
+<!-- CORPO DO ARTIGO -->
+<main class="article-body-wrap">
+
+    <!-- Parágrafo de abertura (intro em itálico) -->
+    <p class="article-lead">
+        PARÁGRAFO DE ABERTURA — Escreva uma introdução de um parágrafo que capte a atenção do leitor. Este texto será também usado como excerto no feed RSS e no email da newsletter. Limite a 2–3 frases.
+    </p>
+
+    <!-- ═══════════════════════════════════════════════════════
+         ESCREVA O SEU ARTIGO ABAIXO.
+         Use os elementos HTML fornecidos como guia.
+         ═══════════════════════════════════════════════════════ -->
+
+    <div class="article-body">
+
+        <h2>Título da secção</h2>
+
+        <p>
+            O texto do corpo vai aqui. Escreva naturalmente — este é um artigo clínico para um público informado.
+            Aponte para 800–1200 palavras por artigo. Use linguagem acessível e evite jargão sempre que possível,
+            ou explique o jargão quando usado.
+        </p>
+
+        <blockquote>
+            <p>
+                Uma citação relevante, aforismo clássico de MTC, ou ponto-chave pode ser destacado aqui.
+            </p>
+        </blockquote>
+
+        <h3>Título da sub-secção</h3>
+
+        <p>Continue o artigo aqui.</p>
+
+        <ul>
+            <li>Ponto um</li>
+            <li>Ponto dois</li>
+            <li>Ponto três</li>
+        </ul>
+
+        <!-- Caixa de destaque opcional -->
+        <div class="article-callout">
+            <p>
+                <strong>Nota clínica:</strong> Use esta caixa para destacar conselhos práticos, precauções,
+                ou uma conclusão-chave que o leitor deve reter.
+            </p>
+        </div>
+
+        <h2>Outro título de secção</h2>
+
+        <p>Mais texto do artigo.</p>
+
+        <!-- Figura/imagem opcional dentro do artigo -->
+        <!--
+        <figure>
+            <img src="../../assets/img/articles/AAAA-MM-imagem-inline.jpg" alt="Descrição">
+            <figcaption>Legenda para esta imagem.</figcaption>
+        </figure>
+        -->
+
+        <hr class="article-divider">
+
+        <h2>Conclusão</h2>
+
+        <p>
+            Feche o artigo com conselhos práticos ou um resumo dos pontos-chave. Inclua um apelo à acção
+            suave — por exemplo, encorajando os leitores a marcar uma consulta se o tema for relevante
+            para a sua saúde.
+        </p>
+
+    </div>
+
+    <!-- Etiquetas -->
+    <div class="article-tags">
+        <!-- ═══ EDITAR: adicionar etiquetas relevantes ═══ -->
+        <span class="article-tag-pill">Acupunctura</span>
+        <span class="article-tag-pill">Qi</span>
+        <span class="article-tag-pill">Dor</span>
+    </div>
+
+    <!-- Navegação inferior -->
+    <div class="article-nav-bottom">
+        <a href="../artigos.html">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Voltar a todos os artigos
+        </a>
+        <a href="../contacto.html">Marcar uma consulta →</a>
+    </div>
+
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="../index.html" class="nav-logo">
+                <img src="../../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:34px;width:34px;object-fit:contain" onerror="this.style.display='none'">
+                <span class="nav-name" style="font-size:19px">NaturalMed</span>
+            </a>
+            <p>Medicina Tradicional Chinesa · Mid-Wales, Reino Unido.</p>
+        </div>
+        <div class="footer-col"><h4>Navegação</h4><ul><li><a href="../sobre.html">Sobre o Nuno</a></li><li><a href="../servicos.html">Serviços</a></li><li><a href="../artigos.html">Artigos</a></li><li><a href="../contacto.html">Contacto</a></li></ul></div>
+        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="tel:+447756339382">+44 7756 339 382</a></li><li><a href="mailto:naturalmed.wellness@gmail.com">naturalmed.wellness@gmail.com</a></li><li><span style="color:var(--jade-pale)">Newtown, Powys SY16 2LN</span></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+        <p>©2026 NaturalMed · Medicina Tradicional Chinesa</p>
+    </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+// Links de partilha
+document.getElementById('copyLink').addEventListener('click', copyURL);
+document.getElementById('shareEmail').href =
+    'mailto:?subject=' + encodeURIComponent(document.title) +
+    '&body=' + encodeURIComponent('Achei que poderias achar isto interessante: ' + window.location.href);
+
+function copyURL(e) {
+    e.preventDefault();
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        const el = document.getElementById('copyLink');
+        el.textContent = '✓ Copiado!';
+        setTimeout(() => el.textContent = 'Copiar link', 2000);
+    });
+}
+</script>
+</body>
+</html>
