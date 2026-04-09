@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy & Cookies · NaturalMed</title>
+    <meta name="description" content="NaturalMed privacy policy and cookie information. GDPR-compliant data practices for the NaturalMed Traditional Chinese Medicine website.">
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+    <link rel="stylesheet" href="../assets/css/cookie-consent.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Page-specific nav CSS (same pattern as conditions.html) */
+        :root{--jade-darkest:#04342C;--jade-dark:#085041;--jade:#0F6E56;--jade-mid:#1D9E75;--jade-light:#5DCAA5;--jade-pale:#9FE1CB;--jade-mist:#E1F5EE;--gold:#BA7517;--gold-light:#EF9F27;--gold-mist:#FAEEDA;--cream:#F8F5F0;--cream-dark:#EDE9E2;--white:#FFFFFF;--text-dark:#1A2820;--text-mid:#2D4A3E;--text-muted:#4A7060;--font-serif:'Cormorant Garamond',Georgia,serif;--font-sans:'Outfit',system-ui,sans-serif;--nav-h:90px;--max-w:1100px;--r:8px;--r-lg:14px;--ease:0.35s cubic-bezier(0.4,0,0.2,1)}
+        img{max-width:100%;display:block}
+        nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(4,52,44,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(93,202,165,.15);transition:background var(--ease),box-shadow var(--ease)}
+        nav.scrolled{background:rgba(4,52,44,.98);box-shadow:0 2px 24px rgba(0,0,0,.25)}
+        .nav-logo{display:flex;align-items:center;gap:10px}
+        .nav-logo-img{height:78px;width:auto;object-fit:contain;transition:transform var(--ease)}
+        .nav-logo:hover .nav-logo-img{transform:scale(1.04)}
+        .nav-mark{width:38px;height:38px;border-radius:50%;background:var(--jade);border:1.5px solid var(--jade-light);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:20px;color:var(--jade-mist)}
+        .nav-name{font-family:var(--font-serif);font-size:22px;font-weight:500;color:var(--jade-mist);letter-spacing:.03em}
+        .nav-links{display:flex;gap:1.75rem;list-style:none}
+        .nav-links a{font-size:13px;color:var(--jade-pale);letter-spacing:.04em;position:relative;padding-bottom:3px;transition:color var(--ease)}
+        .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width var(--ease)}
+        .nav-links a:hover,.nav-links a.active{color:var(--white)}
+        .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+        .nav-right{display:flex;align-items:center;gap:12px}
+        .lang-toggle{display:flex;border:1px solid rgba(93,202,165,.4);border-radius:4px;overflow:hidden}
+        .lang-toggle a{font-size:11px;font-weight:500;padding:4px 10px;letter-spacing:.08em;color:var(--jade-pale);transition:background var(--ease),color var(--ease)}
+        .lang-toggle a.active{background:var(--jade);color:var(--jade-mist)}
+        .btn-nav{background:var(--gold);color:var(--gold-mist);border:none;border-radius:var(--r);padding:9px 18px;font-family:var(--font-sans);font-size:13px;font-weight:500;cursor:pointer;transition:background var(--ease),transform var(--ease)}
+        .btn-nav:hover{background:var(--gold-light);transform:translateY(-1px)}
+
+        /* Mobile nav override */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            nav.nav-open .nav-links { display: flex; }
+            .nav-hamburger { display: flex; }
+            .nav-right .btn-nav { display: none; }
+        }
+
+        /* Privacy page content */
+        .privacy-wrap {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: calc(var(--nav-h) + 3rem) 1.5rem 5rem;
+        }
+        .privacy-wrap h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 500;
+            color: var(--jade-darkest);
+            margin-bottom: 0.5rem;
+        }
+        .privacy-wrap h2 {
+            font-family: var(--font-serif);
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: var(--jade-dark);
+            margin: 2.5rem 0 0.75rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--cream-dark);
+        }
+        .privacy-wrap h3 {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            color: var(--jade-dark);
+            margin: 1.75rem 0 0.5rem;
+        }
+        .privacy-wrap p, .privacy-wrap li {
+            font-size: 15px;
+            color: var(--text-mid);
+            line-height: 1.85;
+        }
+        .privacy-wrap ul { padding-left: 1.4rem; margin: 0.75rem 0 1rem; }
+        .privacy-wrap li { margin-bottom: 0.35rem; }
+        .privacy-wrap a { color: var(--jade); }
+        .privacy-wrap a:hover { color: var(--jade-dark); }
+        .privacy-wrap strong { color: var(--jade-darkest); }
+        .privacy-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 2rem; }
+        .privacy-card {
+            background: var(--jade-mist);
+            border-left: 4px solid var(--jade);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+        }
+        .privacy-card p { margin: 0.3rem 0; font-size: 14px; color: var(--text-mid); }
+        .privacy-card p:first-child { margin-top: 0; }
+        .privacy-card p:last-child  { margin-bottom: 0; }
+        .cookie-pref-box {
+            background: linear-gradient(135deg, rgba(15,110,86,0.07), rgba(186,117,23,0.06));
+            border: 1px solid var(--cream-dark);
+            border-radius: var(--r-lg);
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .cookie-pref-box p { font-size: 13px; color: var(--text-muted); margin-top: 0.9rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 14px; }
+        th { background: var(--cream); color: var(--jade-dark); text-align: left; padding: 10px 12px; border-bottom: 2px solid var(--cream-dark); font-weight: 500; }
+        td { padding: 10px 12px; border-bottom: 1px solid var(--cream-dark); color: var(--text-mid); }
+        code { font-family: monospace; font-size: 13px; background: var(--cream); padding: 1px 5px; border-radius: 3px; }
+        hr { border: none; border-top: 1px solid var(--cream-dark); margin: 3rem 0; }
+    </style>
+</head>
+<body>
+
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+        <img class="nav-logo-img" src="../assets/img/naturalmed-logo.svg" alt="NaturalMed" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <div id="navMark" class="nav-mark" style="display:none">N</div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="conditions.html">Conditions</a></li>
+        <li><a href="seminars.html">Seminars</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="lang-toggle"><a href="#" class="active">EN</a><a href="../pt/">PT</a></div>
+        <button class="btn-nav" onclick="window.location.href='contact.html'">Book Appointment</button>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="privacy-wrap">
+    <h1>Privacy Policy &amp; Cookies</h1>
+    <p class="privacy-meta"><strong>Last updated:</strong> April 2026 &nbsp;·&nbsp; Version 1.0</p>
+
+    <p>NaturalMed (operated by Nuno Pestana) is committed to protecting your privacy in accordance with the UK GDPR and the EU General Data Protection Regulation (GDPR). This policy explains what data we collect, why, and how you can manage your preferences.</p>
+
+    <h2>1. Data Controller</h2>
+    <p>
+        <strong>Nuno Pestana — NaturalMed Wellness</strong><br>
+        30 Shortbridge Street, Newtown, Powys SY16 2LN, United Kingdom<br>
+        Email: <a href="/cdn-cgi/l/email-protection#2b454a5f5e594a47464e4f055c4e4747454e58586b4c464a424705484446"><span class="__cf_email__" data-cfemail="660807121314070a0b03024811030a0a0803151526010b070f0a4805090b">[email&#160;protected]</span></a><br>
+        Phone: <a href="tel:+447756339382">+44 7756 339 382</a>
+    </p>
+
+    <h2>2. What Data We Collect</h2>
+    <p>We collect personal data only when you voluntarily provide it:</p>
+    <ul>
+        <li><strong>Contact form:</strong> First name, last name, email address, phone number (optional), subject, and message.</li>
+        <li><strong>Newsletter subscription:</strong> Email address only.</li>
+        <li><strong>Analytics (with consent):</strong> Anonymised usage data via Google Analytics — pages visited, time on site, browser type, and anonymised IP address.</li>
+    </ul>
+    <p>We do <strong>not</strong> sell, rent, or share your personal data with third parties except as described in this policy or as required by law.</p>
+
+    <h2>3. Legal Basis for Processing</h2>
+    <ul>
+        <li><strong>Contact form / newsletter:</strong> Your explicit request to be contacted (Article 6(1)(b) GDPR — performance of a pre-contractual relationship).</li>
+        <li><strong>Essential cookies:</strong> Legitimate interest to operate the website (Article 6(1)(f) GDPR).</li>
+        <li><strong>Analytics cookies:</strong> Your explicit consent (Article 6(1)(a) GDPR).</li>
+    </ul>
+
+    <h2>4. Cookies</h2>
+    <p>Cookies are small text files stored on your device. We use the minimum number necessary.</p>
+
+    <h3>4.1 Essential Cookies (always active)</h3>
+    <div class="privacy-card">
+        <p><strong>Purpose:</strong> Store your cookie-consent preference so we don't ask again.</p>
+        <p><strong>Legal basis:</strong> Legitimate interest (Article 6(1)(f) GDPR).</p>
+    </div>
+
+    <h3>4.2 Analytics Cookies (only with your consent)</h3>
+    <div class="privacy-card">
+        <p><strong>Provider:</strong> Google Analytics 4</p>
+        <p><strong>Purpose:</strong> Understand how visitors navigate the site so we can improve it.</p>
+        <p><strong>Data collected:</strong> Pages visited, session duration, browser type, anonymised IP.</p>
+        <p><strong>Retention:</strong> 26 months.</p>
+        <p><strong>Legal basis:</strong> Your explicit consent (Article 6(1)(a) GDPR).</p>
+    </div>
+
+    <h3>4.3 Cookie Reference</h3>
+    <table>
+        <thead><tr><th>Cookie</th><th>Type</th><th>Duration</th><th>Purpose</th></tr></thead>
+        <tbody>
+            <tr><td><code>nm_cookie_consent</code></td><td>Essential</td><td>365 days</td><td>Stores your consent preference</td></tr>
+            <tr><td><code>_ga</code></td><td>Analytics</td><td>2 years</td><td>Google Analytics user identifier</td></tr>
+            <tr><td><code>_gid</code></td><td>Analytics</td><td>24 hours</td><td>Google Analytics session identifier</td></tr>
+        </tbody>
+    </table>
+
+    <h3>4.4 Third-party embeds</h3>
+    <p>The Contact page includes a <strong>Google Calendar</strong> embed that shows appointment availability. This embed is served directly by Google and may set its own cookies subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. No patient data is stored or displayed — all calendar events are marked "Busy" only.</p>
+
+    <h2>5. Third-Party Services</h2>
+    <ul>
+        <li><strong>Google Analytics</strong> (analytics, with consent) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+        <li><strong>Google Calendar</strong> (embedded calendar, always shown) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+        <li><strong>Google Fonts</strong> (typography, always loaded) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a></li>
+        <li><strong>Formspree</strong> (contact form submission, if configured) — <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a></li>
+    </ul>
+
+    <h2>6. Your Rights Under UK/EU GDPR</h2>
+    <ul>
+        <li><strong>Right of Access</strong> — Request a copy of your personal data.</li>
+        <li><strong>Right to Rectification</strong> — Correct inaccurate data we hold.</li>
+        <li><strong>Right to Erasure</strong> — Request deletion of your personal data.</li>
+        <li><strong>Right to Restrict Processing</strong> — Limit how we use your data.</li>
+        <li><strong>Right to Data Portability</strong> — Receive your data in a portable format.</li>
+        <li><strong>Right to Object</strong> — Object to processing based on legitimate interest.</li>
+        <li><strong>Right to Withdraw Consent</strong> — Withdraw cookie consent at any time below.</li>
+    </ul>
+    <p>To exercise any of these rights, contact: <a href="/cdn-cgi/l/email-protection#2a444b5e5f584b46474f4e045d4f4646444f59596a4d474b434604494547"><span class="__cf_email__" data-cfemail="c8a6a9bcbdbaa9a4a5adace6bfada4a4a6adbbbb88afa5a9a1a4e6aba7a5">[email&#160;protected]</span></a></p>
+
+    <h2>7. Manage Your Cookie Preferences</h2>
+    <p>You may update your preferences at any time. Your choice is saved for 365 days.</p>
+
+    <div class="cookie-pref-box">
+        <button class="cookie-btn cookie-btn-primary"
+                onclick="cookieConsent.showSettings()"
+                style="padding:13px 32px;font-size:15px;">
+            ⚙️ Open Cookie Settings
+        </button>
+        <p>Current status: <strong id="nm-cookie-status" style="color:var(--jade)">—</strong></p>
+    </div>
+
+    <h2>8. Data Retention</h2>
+    <p>Contact form enquiries and newsletter email addresses are retained only as long as necessary to respond to your request or until you unsubscribe. Analytics data is retained for 26 months in Google Analytics.</p>
+
+    <h2>9. Data Security</h2>
+    <p>This website is hosted on GitHub Pages (HTTPS) and uses industry-standard security measures. No payment data is processed on this site.</p>
+
+    <h2>10. Changes to This Policy</h2>
+    <p>We may update this policy from time to time. The "Last updated" date above will reflect any changes. Material changes that affect your rights will trigger a renewed consent request.</p>
+
+    <h2>11. Supervisory Authority</h2>
+    <p>If you are based in the UK you may contact the <a href="https://ico.org.uk" target="_blank" rel="noopener">Information Commissioner's Office (ICO)</a>. If you are based in the EU you may contact your local data protection authority.</p>
+
+    <hr>
+    <p style="text-align:center;font-size:13px;color:var(--text-muted);">
+        <a href="index.html">← Back to Home</a> &nbsp;·&nbsp;
+        <a href="contact.html">Contact Us</a>
+    </p>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">
+                <img class="nav-logo-img" src="../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:48px" onerror="this.style.display='none'">
+            </a>
+            <p>Traditional Chinese Medicine practice in Mid-Wales, UK.</p>
+        </div>
+        <div class="footer-col"><h4>Navigate</h4><ul><li><a href="about.html">About Nuno</a></li><li><a href="services.html">Services</a></li><li><a href="conditions.html">Conditions</a></li><li><a href="seminars.html">Seminars</a></li><li><a href="articles.html">Articles</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="#" data-cookie-settings>Cookie Settings</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+447756339382">+44 7756 339 382</a></li><li><a href="/cdn-cgi/l/email-protection#8ae4ebfefff8ebe6e7efeea4fdefe6e6e4eff9f9caede7ebe3e6a4e9e5e7"><span class="__cf_email__" data-cfemail="8fe1eefbfafdeee3e2eaeba1f8eae3e3e1eafcfccfe8e2eee6e3a1ece0e2">[email&#160;protected]</span></a></li><li><span style="color:var(--jade-pale)">Newtown, Powys SY16 2LN</span></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+        <p>©2026 NaturalMed · Traditional Chinese Medicine</p>
+        <div class="footer-social"><a href="https://www.facebook.com/NaturalMedAcupuncture" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="https://www.instagram.com/naturalmed_acupuncture" target="_blank" rel="noopener" class="social-link" aria-label="Instagram" style="margin-left:10px"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--jade-pale)" stroke="none"/></svg></a></div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/css/cookie-consent.css" onerror=""></script>
+<script src="../assets/js/cookie-consent.js"></script>
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+// Initialise cookie consent
+const cookieConsent = new CookieConsentManager({
+    analyticsScripts: [
+        // { type: 'gtag', id: 'G-XXXXXXXXXX' }  // add your GA4 ID here when ready
+    ]
+});
+
+// Show current status on the privacy page
+(function updateStatus() {
+    const el = document.getElementById('nm-cookie-status');
+    if (!el) return;
+    const ok = cookieConsent.hasConsent('analytics');
+    el.textContent = ok ? '✅ Analytics enabled' : '❌ Analytics not enabled';
+    el.style.color = ok ? 'var(--jade)' : 'var(--text-muted)';
+})();
+
+// Hamburger menu toggle
+(function() {
+    var nav = document.getElementById('mainNav');
+    var btn = document.getElementById('navHamburger');
+    if (!nav || !btn) return;
+    var dropdown = nav.querySelector('.nav-links');
+
+    function close() {
+        nav.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+    }
+
+    function open() {
+        if (dropdown) dropdown.style.removeProperty('display');
+        nav.classList.add('nav-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+    }
+
+    // pagehide: always set inline display:none before iOS bfcache snapshot
+    // (no width check — window.innerWidth is unreliable during pagehide on iOS)
+    window.addEventListener('pagehide', function() {
+        if (dropdown) dropdown.style.display = 'none';
+    });
+
+    // pageshow: close FIRST (removes nav-open), THEN remove inline style
+    // Order matters: removing inline before nav-open would briefly expose CSS flex
+    window.addEventListener('pageshow', function() {
+        close();
+        if (dropdown) dropdown.style.removeProperty('display');
+    });
+
+    // Initial state
+    close();
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.contains('nav-open') ? close() : open();
+    });
+
+    if (dropdown) {
+        dropdown.addEventListener('click', close);
+    }
+
+    document.addEventListener('click', function(e) {
+        if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
+    });
+})();
+</script>
+</body>
+</html>

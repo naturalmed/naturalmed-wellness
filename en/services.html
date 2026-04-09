@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NaturalMed services — Acupuncture, Herbal Medicine, Tuina Massage, Chinese Dietetics, Online Consultations and Home Visits in Mid-Wales, UK.">
+    <title>Services | NaturalMed</title>
+        <link rel="stylesheet" href="../assets/css/cookie-consent.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .service-block{padding:5.5rem 2rem;scroll-margin-top:var(--nav-h)}
+        .service-block:nth-child(even){background:var(--cream)}.service-block:nth-child(odd){background:var(--white)}
+        .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:var(--max-w);margin:0 auto}
+        .svc-grid.reverse{direction:rtl}.svc-grid.reverse>*{direction:ltr}
+        .svc-visual{border-radius:var(--r-lg);overflow:hidden;position:relative}
+        .svc-img{width:100%;aspect-ratio:5/4;object-fit:cover;display:block;filter:sepia(0.08) saturate(0.95);transition:transform 0.6s ease}
+        .svc-visual:hover .svc-img{transform:scale(1.03)}
+        .svc-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,52,44,0.55),transparent 55%)}
+        .svc-img-badge{position:absolute;bottom:1.25rem;left:1.25rem;background:var(--jade-darkest);border-radius:var(--r);padding:0.6rem 1rem}
+        .svc-img-badge span{font-size:11px;color:var(--jade-pale);letter-spacing:0.08em}
+        .svc-body h2{font-family:var(--font-serif);font-size:clamp(28px,3.5vw,40px);font-weight:500;color:var(--jade-darkest);line-height:1.15;margin-bottom:0.4rem}
+        .svc-subtitle{font-family:var(--font-serif);font-size:17px;font-style:italic;color:var(--gold);margin-bottom:1.5rem}
+        .svc-body p{font-size:15px;color:var(--text-mid);line-height:1.9;margin-bottom:1rem}
+        .svc-note{background:var(--jade-mist);border-left:3px solid var(--jade);border-radius:0 var(--r) var(--r) 0;padding:0.85rem 1.1rem;font-size:14px;color:var(--jade-dark);line-height:1.6;margin:1.25rem 0 1.75rem}
+    
+        @media (max-width: 900px) {
+            .svc-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .svc-grid.reverse { direction: ltr; }
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+</head>
+<body>
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+        <img class="nav-logo-img" src="../assets/img/naturalmed-logo.svg" alt="NaturalMed" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <div id="navMark" class="nav-mark" style="display:none">N</div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="conditions.html">Conditions</a></li>
+        <li><a href="seminars.html">Seminars</a></li>
+        <li><a href="articles.html">Articles</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="lang-toggle"><a href="#" class="active">EN</a><a href="../pt/servicos.html">PT</a></div>
+        <button class="btn-nav" onclick="window.location.href='contact.html'">Book Appointment</button>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+<div class="page-hero">
+    <div class="eyebrow center reveal">What We Offer</div>
+    <h1 class="section-title reveal d1">Our Services</h1>
+    <p class="section-lead reveal d2">A full spectrum of Traditional Chinese Medicine treatments — each tailored individually to your condition, constitution and goals.</p>
+</div>
+
+<div class="service-block" id="acupuncture">
+<div class="svc-grid">
+    <div class="svc-visual reveal"><img class="svc-img" src="../assets/img/naturalmed-needles.jpg" alt="Acupuncture treatment"><div class="svc-img-overlay"></div><div class="svc-img-badge"><span>Core Treatment</span></div></div>
+    <div class="svc-body">
+        <div class="eyebrow reveal">Acupuncture</div>
+        <h2 class="reveal d1">A Millenary Tradition</h2>
+        <div class="svc-subtitle reveal d2">Ancient knowledge, modern results</div>
+        <p class="reveal d2">Have you ever wondered how acupuncture can help ease your suffering and help your body heal naturally? Acupuncture is a great tool to increase your body's innate response to disease — it works by regulating blood circulation in different tissue planes and internal organs, stimulating your central nervous system and encouraging your body to achieve a naturally balanced state.</p>
+        <p class="reveal d3">Acupuncture treatments, when performed properly and by a trained acupuncturist, are pain-free and quite enjoyable. Most patients find sessions deeply relaxing — many fall asleep on the treatment table.</p>
+        <div class="svc-note reveal d3">After an initial assessment, we will prescribe a series of tailor-made treatments that best suit your condition. We draw our knowledge from extensive clinical practice and learning from the best — including direct training at a teaching hospital in Chengdu, China.</div>
+        <p class="reveal d4">We have access to the most modern and up-to-date tools and techniques to help your body through this healing journey. Book an appointment or contact us to find out how acupuncture can help you get your health and vitality back.</p>
+        <div class="reveal d4"><a href="contact.html" class="btn-primary">Book Acupuncture</a></div>
+    </div>
+</div>
+</div>
+
+<div class="service-block" id="herbal">
+<div class="svc-grid reverse">
+    <div class="svc-visual reveal"><img class="svc-img" src="../assets/img/naturalmed-pharmacy.jpg" alt="Chinese Herbal Medicine"><div class="svc-img-overlay"></div><div class="svc-img-badge"><span>Herbal Therapy</span></div></div>
+    <div class="svc-body">
+        <div class="eyebrow reveal">Herbal Medicine</div>
+        <h2 class="reveal d1">A Solution to Modern Day Chemicals</h2>
+        <div class="svc-subtitle reveal d2">Nature's pharmacy, precisely prescribed</div>
+        <p class="reveal d2">NaturalMed provides herbal medicine for its patients, drawing its wisdom from ancient Eastern knowledge of the body and nature. The Chinese pharmacopoeia is one of the most extensive and refined systems of plant-based medicine in the world — developed and refined over thousands of years of clinical observation.</p>
+        <p class="reveal d3">After a thorough initial assessment, herbal formulas are composed specifically for your condition and constitution. They may be prescribed on their own or synergistically with acupuncture treatments — whichever best suits your situation.</p>
+        <div class="svc-note reveal d3">Every formula is bespoke. We do not prescribe generic or off-the-shelf products. Your formula will be adjusted as your condition evolves over the course of treatment.</div>
+        <div class="reveal d4"><a href="contact.html" class="btn-primary">Book a Consultation</a></div>
+    </div>
+</div>
+</div>
+
+<div class="service-block" id="tuina">
+<div class="svc-grid">
+    <div class="svc-visual reveal"><img class="svc-img" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80" alt="Tuina Massage"><div class="svc-img-overlay"></div><div class="svc-img-badge"><span>Manual Therapy</span></div></div>
+    <div class="svc-body">
+        <div class="eyebrow reveal">Tuina Massage</div>
+        <h2 class="reveal d1">Chinese Therapeutic Massage</h2>
+        <div class="svc-subtitle reveal d2">Healing through touch, guided by meridians</div>
+        <p class="reveal d2">Tuina (推拿) is a form of Chinese therapeutic massage with a history of over two thousand years. Unlike Western massage, which focuses primarily on muscle relaxation, Tuina works along the body's meridian system — the same energetic pathways used in acupuncture — to stimulate the flow of Qi and Blood, releasing blockages and restoring balance.</p>
+        <p class="reveal d3">Techniques include rhythmic compression, kneading, rolling and targeted pressure on specific acupoints. Tuina is particularly effective for musculoskeletal pain, joint stiffness, sports injuries and postural problems, and it can also support internal conditions by stimulating organ function through specific reflex zones.</p>
+        <div class="svc-note reveal d3">Tuina is often combined with acupuncture in a single treatment session for enhanced results. It is a deeply therapeutic — not merely relaxing — experience.</div>
+        <div class="reveal d4"><a href="contact.html" class="btn-primary">Book Tuina Massage</a></div>
+    </div>
+</div>
+</div>
+
+<div class="service-block" id="dietetics">
+<div class="svc-grid reverse">
+    <div class="svc-visual reveal"><img class="svc-img" src="../assets/img/naturalmed-dietetics.jpg" alt="Chinese Dietetics"><div class="svc-img-overlay"></div><div class="svc-img-badge"><span>Chinese Dietetics</span></div></div>
+    <div class="svc-body">
+        <div class="eyebrow reveal">Chinese Dietetics</div>
+        <h2 class="reveal d1">Food as Medicine</h2>
+        <div class="svc-subtitle reveal d2">Nourishment rooted in Chinese medical wisdom</div>
+        <p class="reveal d2">Chinese dietary therapy is one of the oldest systems of nutritional medicine in the world. Unlike modern nutritional science, which analyses food in terms of macronutrients and vitamins, Chinese dietetics classifies foods according to their energetic properties — their temperature (warming, cooling, neutral), flavour and their affinity with specific organs and meridians.</p>
+        <p class="reveal d3">Dietary guidance at NaturalMed is always individualised. Based on your TCM diagnosis and constitution, Nuno will identify the foods and preparations that support your healing process — and those that may be hindering it. Simple, practical and grounded in centuries of wisdom.</p>
+        <div class="svc-note reveal d3">Chinese dietary therapy is typically prescribed as a complement to acupuncture or herbal treatment, reinforcing and accelerating clinical results between sessions.</div>
+        <div class="reveal d4"><a href="contact.html" class="btn-primary">Book a Consultation</a></div>
+    </div>
+</div>
+</div>
+
+<div class="service-block" id="online">
+<div class="svc-grid">
+    <div class="svc-visual reveal"><img class="svc-img" src="../assets/img/naturalmed-stationery.jpg" alt="Online Consultation"><div class="svc-img-overlay"></div><div class="svc-img-badge"><span>Remote · UK &amp; Portugal</span></div></div>
+    <div class="svc-body">
+        <div class="eyebrow reveal">Online Consultations</div>
+        <h2 class="reveal d1">TCM Care, Wherever You Are</h2>
+        <div class="svc-subtitle reveal d2">Professional guidance without the commute</div>
+        <p class="reveal d2">Many aspects of Traditional Chinese Medicine are accessible remotely. Online consultations are available for patients throughout the UK and Portugal who cannot attend the clinic in Newtown, or who prefer the convenience of a video appointment for follow-up care.</p>
+        <p class="reveal d3">Online sessions are particularly suited to herbal medicine prescriptions and adjustments, Chinese dietary therapy guidance, follow-up consultations after an initial in-person assessment, and advice for patients with limited mobility or those in remote areas.</p>
+        <div class="svc-note reveal d3">An initial in-person consultation is recommended where possible, as TCM diagnosis relies in part on physical observation (tongue, pulse). However, Nuno can conduct a thorough remote assessment and begin treatment in many cases.</div>
+        <div class="reveal d4"><a href="contact.html" class="btn-primary">Book Online</a></div>
+    </div>
+</div>
+</div>
+
+<div class="service-block" id="homevisits">
+<div class="svc-grid reverse">
+    <div class="svc-visual reveal"><img class="svc-img" src="../assets/img/naturalmed-home-visit.jpg" alt="Home Visit Acupuncture Mid-Wales"><div class="svc-img-overlay"></div><div class="svc-img-badge"><span>Mid-Wales · UK Only</span></div></div>
+    <div class="svc-body">
+        <div class="eyebrow reveal">Home Visits</div>
+        <h2 class="reveal d1">The Clinic Comes to You</h2>
+        <div class="svc-subtitle reveal d2">Treatment in the comfort of your own home</div>
+        <p class="reveal d2">For patients in the Mid-Wales area who prefer to receive treatment at home — whether due to mobility limitations, recovery from injury, or personal preference — NaturalMed offers home visits for acupuncture and Tuina massage.</p>
+        <p class="reveal d3">Nuno brings all the equipment needed for a full treatment session. The clinical quality of treatment is identical to that provided at the clinic — the only difference is the setting. You simply need a comfortable space to lie down and relax whilst we take care of the rest.</p>
+        <div class="svc-note reveal d3">Home visits are available in the Newtown area and surrounding Mid-Wales communities. A travel supplement applies, calculated by mileage from the clinic at 30 Shortbridge Street. Please contact us for availability and to discuss your location.</div>
+        <div class="reveal d4"><a href="contact.html" class="btn-primary">Enquire About Home Visits</a></div>
+    </div>
+</div>
+</div>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand"><a href="index.html" class="nav-logo"><img class="nav-logo-img" src="../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:48px" onerror="this.style.display='none'"></a><p>Traditional Chinese Medicine practice in Mid-Wales, UK. Serving patients since 2015 with authentic, evidence-informed holistic care.</p></div>
+        <div class="footer-col"><h4>Navigate</h4><ul><li><a href="about.html">About Nuno</a></li><li><a href="services.html">Services</a></li><li><a href="conditions.html">Conditions</a></li><li><a href="seminars.html">Seminars</a></li><li><a href="articles.html">Articles</a></li><li><a href="contact.html">Contact</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="#" data-cookie-settings>Cookie Settings</a></li></ul></div>
+        <div class="footer-col"><h4>Treatments</h4><ul><li><a href="#acupuncture">Acupuncture</a></li><li><a href="#herbal">Herbal Medicine</a></li><li><a href="#tuina">Tuina Massage</a></li><li><a href="#dietetics">Chinese Dietetics</a></li><li><a href="#online">Online Consultations</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="tel:+447756339382">+44 7756 339 382</a></li><li><a href="/cdn-cgi/l/email-protection#c8a6a9bcbdbaa9a4a5adace6bfada4a4a6adbbbb88afa5a9a1a4e6aba7a5"><span class="__cf_email__" data-cfemail="a7c9c6d3d2d5c6cbcac2c389d0c2cbcbc9c2d4d4e7c0cac6cecb89c4c8ca">[email&#160;protected]</span></a></li><li><span style="color:var(--jade-pale)">30 Shortbridge Street</span></li><li><span style="color:var(--jade-pale)">Newtown, Powys SY16 2LN</span></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>©2026 NaturalMed · Traditional Chinese Medicine · naturalmed.wellness</p><div class="footer-social"><a href="https://www.facebook.com/NaturalMedAcupuncture" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="https://www.instagram.com/naturalmed_acupuncture" target="_blank" rel="noopener" class="social-link" aria-label="Instagram" style="margin-left:10px"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--jade-pale)" stroke="none"/></svg></a></div></div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+const sections = ['acupuncture','herbal','tuina','dietetics','online','homevisits'];
+const links = document.querySelectorAll('.svc-nav-link');
+const offset = 130;
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= offset) current = id;
+    });
+    links.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+}, { passive: true });
+
+// Hamburger menu toggle
+(function() {
+    var nav = document.getElementById('mainNav');
+    var btn = document.getElementById('navHamburger');
+    if (!nav || !btn) return;
+    var dropdown = nav.querySelector('.nav-links');
+
+    function close() {
+        nav.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+    }
+
+    function open() {
+        if (dropdown) dropdown.style.removeProperty('display');
+        nav.classList.add('nav-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+    }
+
+    // pagehide: always set inline display:none before iOS bfcache snapshot
+    // (no width check — window.innerWidth is unreliable during pagehide on iOS)
+    window.addEventListener('pagehide', function() {
+        if (dropdown) dropdown.style.display = 'none';
+    });
+
+    // pageshow: close FIRST (removes nav-open), THEN remove inline style
+    // Order matters: removing inline before nav-open would briefly expose CSS flex
+    window.addEventListener('pageshow', function() {
+        close();
+        if (dropdown) dropdown.style.removeProperty('display');
+    });
+
+    // Initial state
+    close();
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.contains('nav-open') ? close() : open();
+    });
+
+    if (dropdown) {
+        dropdown.addEventListener('click', close);
+    }
+
+    document.addEventListener('click', function(e) {
+        if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
+    });
+})();
+</script>
+
+<script src="../assets/js/cookie-consent.js"></script>
+</body>
+</html>
