@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NaturalMed — Medicina Tradicional Chinesa em Mid-Wales, Reino Unido. Acupunctura, medicina herbal, Tuina e cuidados holísticos por Nuno Pestana, BSc MTC.">
+    <title>NaturalMed | Medicina Tradicional Chinesa — Mid-Wales, Reino Unido</title>
+        <link rel="stylesheet" href="../assets/css/cookie-consent.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+        .hero-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;will-change:transform}
+        .hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(4,52,44,0.90) 0%,rgba(4,52,44,0.70) 55%,rgba(4,52,44,0.35) 100%)}
+        .hero-content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:calc(var(--nav-h) + 2rem) 2rem 4rem;width:100%}
+        .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.3s forwards}
+        .eyebrow-line{width:28px;height:1px;background:var(--gold)}
+        .hero-eyebrow span{font-size:11px;letter-spacing:0.22em;color:var(--gold);text-transform:uppercase;font-weight:500}
+        .hero-title{font-family:var(--font-serif);font-size:clamp(44px,6vw,72px);font-weight:500;color:var(--jade-mist);line-height:1.08;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.5s forwards}
+        .hero-title .typed-line{display:block;color:var(--jade-pale);font-style:italic;min-height:1.1em}
+        .hero-title .typed-line::after{content:'|';color:var(--gold);animation:blink 0.8s step-end infinite}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+        .hero-sub{font-size:17px;color:var(--jade-pale);line-height:1.75;max-width:520px;margin-bottom:2.5rem;font-weight:300;opacity:0;animation:fadeUp 0.8s ease 0.7s forwards}
+        .hero-cta{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.8s ease 0.9s forwards}
+        .hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:fadeIn 1s ease 1.5s forwards}
+        .hero-scroll span{font-size:10px;letter-spacing:0.16em;color:var(--jade-pale);text-transform:uppercase}
+        .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--jade-light),transparent);animation:scrollPulse 2s ease-in-out infinite}
+        @keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.1)}}
+        .about-section{background:var(--cream)}
+        .about-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:4.5rem;align-items:center}
+        .about-img-wrap{position:relative}
+        .about-img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:top center;border-radius:var(--r-lg)}
+        .about-img-frame{position:absolute;inset:14px -14px -14px 14px;border:2px solid var(--jade-light);border-radius:var(--r-lg);z-index:-1;opacity:0.45}
+        .about-badge{position:absolute;bottom:-1.2rem;right:-1rem;background:var(--jade-darkest);border-radius:var(--r);padding:1rem 1.4rem;text-align:center;box-shadow:0 8px 24px rgba(4,52,44,0.3)}
+        .about-badge-num{font-family:var(--font-serif);font-size:36px;color:var(--jade-pale);font-weight:500;line-height:1}
+        .about-badge-label{font-size:11px;color:var(--jade-light);letter-spacing:0.07em;margin-top:4px}
+        .about-quote{font-family:var(--font-serif);font-size:21px;font-style:italic;color:var(--jade-dark);line-height:1.5;margin-bottom:1.5rem;padding-left:1.25rem;border-left:3px solid var(--gold)}
+        .about-text{font-size:15px;color:var(--text-mid);line-height:1.85;margin-bottom:1.25rem}
+        .cred-list{display:flex;flex-direction:column;gap:8px;margin-bottom:2rem}
+        .cred-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-mid)}
+        .cred-row-dot{width:6px;height:6px;border-radius:50%;background:var(--jade);flex-shrink:0}
+        .services-section{background:var(--white)}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+        .svc-card{background:var(--cream);border:1px solid var(--cream-dark);border-radius:var(--r-lg);padding:1.75rem;position:relative;overflow:hidden;transition:transform var(--ease),box-shadow var(--ease),border-color var(--ease)}
+        .svc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--jade);transform:scaleX(0);transform-origin:left;transition:transform var(--ease)}
+        .svc-card.gold::before{background:var(--gold)}
+        .svc-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(4,52,44,0.1);border-color:transparent}
+        .svc-card:hover::before{transform:scaleX(1)}
+        .svc-icon{width:46px;height:46px;border-radius:50%;background:var(--jade-mist);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;transition:background var(--ease),transform var(--ease)}
+        .svc-card.gold .svc-icon{background:var(--gold-mist)}
+        .svc-card:hover .svc-icon{transform:scale(1.1);background:var(--jade)}
+        .svc-card.gold:hover .svc-icon{background:var(--gold)}
+        .svc-card:hover .svc-icon svg{stroke:#fff}
+        .svc-tag{font-size:10px;letter-spacing:0.14em;color:var(--gold);text-transform:uppercase;font-weight:500;margin-bottom:0.4rem}
+        .svc-title{font-family:var(--font-serif);font-size:22px;font-weight:500;color:var(--jade-darkest);margin-bottom:0.6rem}
+        .svc-desc{font-size:14px;color:var(--text-muted);line-height:1.65}
+        .conditions-section{background:var(--jade-darkest);position:relative;overflow:hidden}
+        .cond-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center 70%;opacity:0.07;will-change:transform}
+        .conditions-section .section-title{color:var(--jade-mist)}
+        .conditions-section .section-lead{color:var(--jade-pale)}
+        .cond-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem}
+        .cond-card{background:rgba(255,255,255,0.05);border:1px solid rgba(93,202,165,0.18);border-left:3px solid var(--jade-light);border-radius:var(--r-lg);padding:1.5rem;transition:background var(--ease),border-left-color var(--ease),transform var(--ease)}
+        .cond-card:hover{background:rgba(255,255,255,0.09);border-left-color:var(--gold);transform:translateX(5px)}
+        .cond-title{font-family:var(--font-serif);font-size:21px;font-weight:500;color:var(--jade-pale);margin-bottom:0.4rem}
+        .cond-desc{font-size:13px;color:var(--jade-light);line-height:1.6}
+        .testimonials-section{background:var(--cream)}
+        .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem}
+        .testi-card{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--r-lg);padding:1.75rem;display:flex;flex-direction:column;gap:1.1rem;transition:transform var(--ease),box-shadow var(--ease)}
+        .testi-card:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(4,52,44,0.08)}
+        .stars{display:flex;gap:3px}
+        .star{width:14px;height:14px;background:var(--gold);clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+        .testi-text{font-family:var(--font-serif);font-size:16px;font-style:italic;color:var(--text-mid);line-height:1.65;flex:1}
+        .testi-author{display:flex;align-items:center;gap:10px;padding-top:1rem;border-top:1px solid var(--cream-dark)}
+        .author-av{width:36px;height:36px;border-radius:50%;background:var(--jade-mist);border:1.5px solid var(--jade-light);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:16px;color:var(--jade);flex-shrink:0}
+        .author-name{font-size:14px;font-weight:500;color:var(--jade-dark)}
+        .author-loc{font-size:12px;color:var(--text-muted)}
+        .seminars-section{background:var(--white)}
+        .sem-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+        .sem-img-wrap{border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;position:relative}
+        .sem-img{width:100%;height:100%;object-fit:cover;filter:sepia(0.15) saturate(0.9);transition:transform 0.6s ease}
+        .sem-img-wrap:hover .sem-img{transform:scale(1.04)}
+        .sem-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,52,44,0.65),transparent 60%)}
+        .sem-img-label{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem}
+        .sem-badge{display:inline-block;background:var(--gold);color:var(--gold-mist);font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:3px;margin-bottom:0.5rem}
+        .sem-img-label h3{font-family:var(--font-serif);font-size:24px;font-weight:500;color:var(--jade-mist)}
+        .audience-tags{display:flex;flex-wrap:wrap;gap:8px;margin:1.4rem 0}
+        .aud-tag{background:var(--jade-mist);color:var(--jade-dark);font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1px solid rgba(93,202,165,0.35)}
+        .waitlist-note{font-size:11px;color:var(--text-muted);margin-top:8px}
+        .cta-section{position:relative;padding:7rem 2rem;overflow:hidden;text-align:center}
+        .cta-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1515023115689-589c33041d3c?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;will-change:transform}
+        .cta-overlay{position:absolute;inset:0;background:rgba(4,52,44,0.84)}
+        .cta-inner{position:relative;z-index:2;max-width:650px;margin:0 auto}
+        .cta-section .section-title{color:var(--jade-mist);margin-bottom:1rem}
+        .cta-lead{font-size:17px;color:var(--jade-pale);line-height:1.75;margin-bottom:2.5rem}
+        .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
+        .cta-contacts{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+        .cta-item{display:flex;align-items:center;gap:8px;color:var(--jade-pale);font-size:14px;transition:color var(--ease)}
+        .cta-item:hover{color:var(--white)}
+    
+        /* ── index.html mobile responsive ── */
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .about-img { aspect-ratio: 3/2; max-height: 360px; }
+            .about-img-frame { display: none; }
+            .about-img-wrap { position: static; display: block; }
+            .about-img-frame { display: none; }
+            .about-badge {
+                position: static !important;
+                display: flex; gap: 10px; align-items: center;
+                margin-top: 1.25rem; padding: 0.75rem 1.25rem;
+                border-radius: var(--r);
+            }
+            .about-badge-num { font-size: 28px; }
+            .services-grid { grid-template-columns: 1fr 1fr; }
+            .cond-grid { grid-template-columns: 1fr; }
+            .testi-grid { grid-template-columns: 1fr; }
+            .sem-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .hero-scroll { display: none; }
+        }
+        @media (max-width: 600px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: clamp(36px, 9vw, 52px); }
+            .hero-sub { font-size: 15px; }
+            .cta-contacts { flex-direction: column; align-items: center; gap: 1rem; }
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32.png">
+</head>
+<body>
+
+<nav id="mainNav">
+    <a href="index.html" class="nav-logo">
+        <img class="nav-logo-img" src="../assets/img/naturalmed-logo.svg" alt="NaturalMed" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <div id="navMark" class="nav-mark" style="display:none">N</div>
+    </a>
+    <ul class="nav-links">
+        <li><a href="#about">Sobre</a></li>
+        <li><a href="servicos.html">Serviços</a></li>
+        <li><a href="condicoes.html">Condições</a></li>
+        <li><a href="#seminars">Seminários</a></li>
+        <li><a href="artigos.html">Artigos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="lang-toggle"><a href="../en/privacy.html">EN</a><a href="#" class="active">PT</a></div>
+        <button class="btn-nav" onclick="window.location.href='contact.html'">Marcar Consulta</button>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <div class="hero-eyebrow"><div class="eyebrow-line"></div><span>Medicina Tradicional Chinesa · Mid-Wales, Reino Unido</span></div>
+        <h1 class="hero-title">Sabedoria ancestral,<br><span class="typed-line" id="typewriter"></span></h1>
+        <!-- CMS:home_hero_sub --><p class="hero-sub">Acupunctura, medicina herbal e cuidados holísticos em Newtown, Powys — enraizados na autêntica tradição médica chinesa da Universidade de Chengdu.</p><!-- /CMS:home_hero_sub -->
+        <div class="hero-cta">
+            <button class="btn-primary pulse" onclick="window.location.href='contact.html'">Marcar Consulta</button>
+            <button class="btn-outline light" onclick="window.location.href='services.html'">Explorar Serviços</button>
+        </div>
+    </div>
+    <div class="hero-scroll"><span>Descer</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="cred-bar reveal">
+    <div class="cred-item"><div class="cred-dot"></div><span>BSc Medicina Tradicional Chinesa</span></div>
+    <div class="cred-item"><div class="cred-dot"></div><span>Universidade de MTC de Chengdu, China</span></div>
+    <div class="cred-item"><div class="cred-dot"></div><span>Membro — ATCM UK</span></div>
+    <div class="cred-item"><div class="cred-dot"></div><span>10+ Anos de Experiência Clínica</span></div>
+    <div class="cred-item"><div class="cred-dot"></div><span>Newtown, Powys SY16 2LN</span></div>
+</div>
+
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-img-wrap reveal">
+                <img class="about-img" src="../assets/img/nuno-photo.png" alt="Nuno Pestana — Traditional Chinese Medicine Practitioner, Mid-Wales">
+                <div class="about-img-frame"></div>
+                <div class="about-badge"><div class="about-badge-num">10+</div><div class="about-badge-label">Anos de prática</div></div>
+            </div>
+            <div>
+                <div class="eyebrow reveal">Sobre o Nuno</div>
+                <h2 class="section-title reveal d1">Praticante de<br>Medicina Chinesa</h2>
+                <blockquote class="about-quote reveal d2">"A minha missão é cuidar de si e proporcionar uma solução alternativa para os seus problemas de saúde."</blockquote>
+                <p class="about-text reveal d3">O Nuno formou-se na <strong>Universidade de Medicina Tradicional Chinesa de Chengdu</strong> — uma das mais antigas universidades de MTC da China — onde estudou, estagiou num hospital e aperfeiçoou as suas competências clínicas em paralelo com o Mandarim. Pratica acupunctura no Reino Unido há mais de uma década, estando atualmente sediado na sua clínica em Newtown, Powys.</p>
+                <p class="about-text reveal d3">Especializa-se em acupunctura e tem obtido resultados significativos no tratamento de condições agudas e crónicas. Para além da prática clínica, o Nuno é um estudioso e investigador da medicina e cultura chinesas.</p>
+                <div class="cred-list reveal d4">
+                    <div class="cred-row"><div class="cred-row-dot"></div><span>BSc Acupunctura e Medicina Chinesa — Universidade de MTC de Chengdu, China (2014)</span></div>
+                    <div class="cred-row"><div class="cred-row-dot"></div><span>Membro, Association of Traditional Chinese Medicine UK (ATCM)</span></div>
+                    <div class="cred-row"><div class="cred-row-dot"></div><span>Estágio clínico em hospital universitário, Chengdu, China</span></div>
+                    <div class="cred-row"><div class="cred-row-dot"></div><span>Fluente em Inglês, Português e Mandarim</span></div>
+                </div>
+                <a href="sobre.html" class="btn-primary reveal d5">Biografia Completa</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services-section" id="services">
+    <div class="container">
+        <div class="text-center">
+            <div class="eyebrow center reveal">O Que Oferecemos</div>
+            <h2 class="section-title reveal d1">Os Nossos Serviços</h2>
+            <p class="section-lead reveal d2">Um espectro completo de tratamentos de Medicina Tradicional Chinesa, adaptados individualmente à sua condição e constituição.</p>
+        </div>
+        <div class="services-grid">
+            <div class="svc-card reveal d1"><div class="svc-icon"><svg width="22" height="22" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 22 22"><line x1="11" y1="1" x2="11" y2="21"/><circle cx="11" cy="6" r="2.5" fill="none"/><path d="M7.5 13 Q11 15.5 14.5 13"/></svg></div><div class="svc-tag">Tratamento Principal</div><h3 class="svc-title">Acupunctura</h3><p class="svc-desc">Agulhas finas em pontos de acupunctura específicos para regular a circulação, estimular o sistema nervoso e restaurar o equilíbrio natural do corpo.</p></div>
+            <div class="svc-card reveal d2"><div class="svc-icon"><svg width="22" height="22" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 22 22"><path d="M11 20 C11 20 3.5 14 3.5 9 A7.5 7.5 0 0 1 18.5 9 C18.5 14 11 20 11 20Z"/><line x1="11" y1="20" x2="11" y2="11"/></svg></div><div class="svc-tag">Terapia Herbal</div><h3 class="svc-title">Medicina Herbal</h3><p class="svc-desc">Fórmulas personalizadas da farmacopeia chinesa, prescritas individualmente — isoladamente ou em sinergia com a acupunctura.</p></div>
+            <div class="svc-card reveal d3"><div class="svc-icon"><svg width="22" height="22" fill="none" stroke="#0F6E56" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 22 22"><path d="M5 17 C5 17 7 10 11 10 C15 10 17 17 17 17"/><circle cx="11" cy="6.5" r="3" fill="none"/></svg></div><div class="svc-tag">Terapia Manual</div><h3 class="svc-title">Massagem Tuina</h3><p class="svc-desc">Massagem terapêutica chinesa ao longo dos meridianos e pontos de acupunctura para aliviar a tensão musculoesquelética e promover a circulação de Qi.</p></div>
+            <div class="svc-card gold reveal d1"><div class="svc-icon"><svg width="22" height="22" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 22 22"><path d="M3 7 Q11 3.5 19 7"/><path d="M3 11 Q11 7.5 19 11"/><path d="M3 15 Q11 11.5 19 15"/></svg></div><div class="svc-tag">Nutrição</div><h3 class="svc-title">Dietética Chinesa</h3><p class="svc-desc">A alimentação como medicina — orientação dietética baseada nos princípios da medicina chinesa, adaptada à sua constituição e objectivos de saúde.</p></div>
+            <div class="svc-card gold reveal d2"><div class="svc-icon"><svg width="22" height="22" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" viewBox="0 0 22 22"><rect x="2" y="4" width="18" height="13" rx="2" fill="none"/><line x1="7" y1="21" x2="15" y2="21"/><line x1="11" y1="17" x2="11" y2="21"/></svg></div><div class="svc-tag">Remoto</div><h3 class="svc-title">Consultas Online</h3><p class="svc-desc">Consultas por vídeo para prescrições herbais, orientação dietética e acompanhamento — disponíveis em qualquer parte do Reino Unido e de Portugal.</p></div>
+            <div class="svc-card gold reveal d3"><div class="svc-icon"><svg width="22" height="22" fill="none" stroke="#BA7517" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 22 22"><path d="M2 10 L11 2 L20 10 V20 H15 V14 H7 V20 H2 Z"/></svg></div><div class="svc-tag">Apenas UK</div><h3 class="svc-title">Visitas Domiciliárias</h3><p class="svc-desc">Tratamento domiciliário na área de Mid-Wales. Levamos tudo o que é necessário — relaxe enquanto levamos a clínica até si. Custos de deslocação aplicáveis.</p></div>
+        </div>
+        <div style="text-align:center;margin-top:2.5rem" class="reveal"><a href="servicos.html" class="btn-outline">Ver Todos os Serviços</a></div>
+    </div>
+</section>
+
+<section class="conditions-section" id="conditions">
+    <div class="cond-bg" id="condBg"></div>
+    <div class="container" style="position:relative;z-index:2">
+        <div class="eyebrow reveal" style="color:var(--gold)">Podemos Ajudá-lo?</div>
+        <h2 class="section-title reveal d1">Condições que Tratamos</h2>
+        <p class="section-lead reveal d2">A Medicina Tradicional Chinesa trata uma vasta gama de condições agudas e crónicas — tratando a causa raiz, não apenas os sintomas.</p>
+        <div class="cond-grid">
+            <div class="cond-card reveal d1"><h3 class="cond-title">Dor e Lesões Desportivas</h3><p class="cond-desc">Dor nas costas, dor cervical, artrite, inflamação articular, reabilitação desportiva e recuperação pós-lesão.</p></div>
+            <div class="cond-card reveal d2"><h3 class="cond-title">Saúde Feminina e Fertilidade</h3><p class="cond-desc">Irregularidades menstruais, SOP, endometriose, apoio à FIV, tratamento de fertilidade e sintomas da menopausa.</p></div>
+            <div class="cond-card reveal d3"><h3 class="cond-title">Saúde Digestiva</h3><p class="cond-desc">Síndrome do intestino irritável, distensão abdominal, gastrite, refluxo ácido, obstipação e queixas digestivas crónicas.</p></div>
+            <div class="cond-card reveal d4"><h3 class="cond-title">Sono e Bem-estar Mental</h3><p class="cond-desc">Insónia, ansiedade, stress crónico, burnout e desequilíbrio emocional — restaurando a calma a partir de dentro.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials-section" id="testimonials">
+    <div class="container">
+        <div class="text-center">
+            <div class="eyebrow center reveal">Experiências dos Pacientes</div>
+            <h2 class="section-title reveal d1">O Que Dizem os Nossos Pacientes</h2>
+        </div>
+        <div class="testi-grid">
+            <div class="testi-card reveal d1"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testi-text">"Had my first consultation today and it was fantastic. Nuno put me at ease and explained everything fully. I have never felt so relaxed. Having this has given me a reason to hope."</p><div class="testi-author"><div class="author-av">L</div><div><div class="author-name">Lisa S.</div><div class="author-loc">Paciente, Mid-Wales</div></div></div></div>
+            <div class="testi-card reveal d2"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testi-text">"I have had several treatments with Nuno and really couldn't recommend him higher! My back issues are almost non-existent and I feel so much better in my energy and mentality."</p><div class="testi-author"><div class="author-av">R</div><div><div class="author-name">Roxanne W.</div><div class="author-loc">Paciente, Mid-Wales</div></div></div></div>
+            <div class="testi-card reveal d3"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testi-text">"My experience of Nuno is of extreme excellence and professionalism, a perfect gentleman. He has helped my problems tremendously. As a very satisfied patient I hold him in great esteem."</p><div class="testi-author"><div class="author-av">D</div><div><div class="author-name">Dorothy L.</div><div class="author-loc">Paciente, Mid-Wales</div></div></div></div>
+            <div class="testi-card reveal d1"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testi-text">"I found Nuno very professional and am very pleased with what he's done for me. He is the best — very polite and talks you through everything. I would recommend him to anybody."</p><div class="testi-author"><div class="author-av">M</div><div><div class="author-name">Michael L.</div><div class="author-loc">Paciente, Mid-Wales</div></div></div></div>
+            <div class="testi-card reveal d2"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testi-text">"I went to him in agony with backache on a Friday and had the best night's sleep for weeks! On Monday I felt so much better immediately. Nuno is very professional and approachable."</p><div class="testi-author"><div class="author-av">J</div><div><div class="author-name">Joan E.</div><div class="author-loc">Paciente, Mid-Wales</div></div></div></div>
+            <div class="testi-card reveal d3"><div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div><p class="testi-text">"After seeing both my parents treated by Nuno with amazing results, I also started treatments. His approach is incredibly informative, professional, and he is kind and patient."</p><div class="testi-author"><div class="author-av">H</div><div><div class="author-name">Hele M.</div><div class="author-loc">Paciente, Mid-Wales</div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<section class="seminars-section" id="seminars">
+    <div class="container">
+        <div class="sem-grid">
+            <div class="sem-img-wrap reveal">
+                <img class="sem-img" src="../assets/img/naturalmed-seminars.jpg" alt="TCM Seminars and Workshops in Portugal">
+                <div class="sem-img-overlay"></div>
+                <div class="sem-img-label"><span class="sem-badge">Em breve em Portugal</span><h3>Seminários e Workshops</h3></div>
+            </div>
+            <div>
+                <div class="eyebrow reveal">Portugal</div>
+                <h2 class="section-title reveal d1">Seminários<br>e Workshops de MTC</h2>
+                <p class="section-lead reveal d2">O Nuno está a planear uma série de seminários e workshops de Medicina Tradicional Chinesa em Portugal — abertos ao público em geral, profissionais de saúde e estudantes de MTC.</p>
+                <div class="audience-tags reveal d3"><span class="aud-tag">Público Geral</span><span class="aud-tag">Profissionais de Saúde</span><span class="aud-tag">Estudantes de MTC</span></div>
+                <p style="font-size:14px;color:var(--text-muted);line-height:1.7" class="reveal d3">Datas e locais a anunciar. Registe o seu interesse e entraremos em contacto assim que as inscrições abrirem.</p>
+                <div class="reveal d4" style="margin-top:1.5rem">
+                    <button class="btn-primary" onclick="window.location.href='contact.html'">Tenho Interesse!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-bg" id="ctaBg"></div>
+    <div class="cta-overlay"></div>
+    <div class="cta-inner">
+        <div class="eyebrow center reveal" style="color:var(--gold)">Pronto para Começar?</div>
+        <h2 class="section-title reveal d1">Inicie o Seu Percurso de Cura</h2>
+        <!-- CMS:home_cta_lead --><p class="cta-lead reveal d2">Pronto para dar o primeiro passo em direcção a uma melhor saúde? Marque uma consulta com o Nuno e descubra como a Medicina Tradicional Chinesa o pode ajudar.</p><!-- /CMS:home_cta_lead -->
+        <div class="cta-btns reveal d3">
+            <button class="btn-primary pulse" onclick="window.location.href='contact.html'">Marcar Consulta</button>
+            <button class="btn-outline light" onclick="window.location.href='tel:+447756339382'">Ligar Agora</button>
+        </div>
+        <div class="cta-contacts reveal d4">
+            <div class="cta-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>30 Shortbridge St, Newtown, Powys SY16 2LN</span></div>
+            <a href="tel:+447756339382" class="cta-item"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+44 7756 339 382</span></a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">
+                <img class="nav-logo-img" src="../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:48px" onerror="this.style.display='none'">
+            </a>
+            <p>Clínica de Medicina Tradicional Chinesa em Mid-Wales, Reino Unido. Ao serviço dos pacientes desde 2015 com cuidados holísticos autênticos e informados pela evidência.</p>
+        </div>
+        <div class="footer-col"><h4>Navegação</h4><ul><li><a href="sobre.html">Sobre o Nuno</a></li><li><a href="servicos.html">Serviços</a></li><li><a href="condicoes.html">Condições</a></li><li><a href="seminarios.html">Seminários</a></li><li><a href="artigos.html">Artigos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="privacidade.html">Política de Privacidade</a></li><li><a href="#" data-cookie-settings>Definições de Cookies</a></li></ul></div>
+        <div class="footer-col"><h4>Tratamentos</h4><ul><li><a href="servicos.html#acupuncture">Acupunctura</a></li><li><a href="servicos.html#herbal">Medicina Herbal</a></li><li><a href="servicos.html#tuina">Massagem Tuina</a></li><li><a href="servicos.html#dietetics">Dietética Chinesa</a></li><li><a href="servicos.html#online">Consultas Online</a></li></ul></div>
+        <div class="footer-col"><h4>Contacto</h4><ul><li><a href="tel:+447756339382">+44 7756 339 382</a></li><li><a href="/cdn-cgi/l/email-protection#afc1cedbdaddcec3c2cacb81d8cac3c3c1cadcdcefc8c2cec6c381ccc0c2"><span class="__cf_email__" data-cfemail="0f616e7b7a7d6e63626a6b21786a6363616a7c7c4f68626e6663216c6062">[email&#160;protected]</span></a></li><li><span style="color:var(--jade-pale)">30 Shortbridge Street</span></li><li><span style="color:var(--jade-pale)">Newtown, Powys SY16 2LN</span></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+        <p>©2026 NaturalMed · Medicina Tradicional Chinesa · naturalmed.wellness</p>
+        <div class="footer-social"><a href="https://www.facebook.com/NaturalMedAcupuncture" target="_blank" rel="noopener" class="social-link" aria-label="Facebook"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a><a href="https://www.instagram.com/naturalmed_acupuncture" target="_blank" rel="noopener" class="social-link" aria-label="Instagram" style="margin-left:10px"><svg width="14" height="14" fill="none" stroke="var(--jade-pale)" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="var(--jade-pale)" stroke="none"/></svg></a></div>
+    </div>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+const heroBg = document.getElementById('heroBg');
+const condBg = document.getElementById('condBg');
+const ctaBg  = document.getElementById('ctaBg');
+function parallax() {
+    const y = window.scrollY;
+    if (heroBg) heroBg.style.transform = `translateY(${y * 0.35}px)`;
+    if (condBg) { const r = condBg.parentElement.parentElement.getBoundingClientRect(); condBg.style.transform = `translateY(${-r.top * 0.18}px)`; }
+    if (ctaBg)  { const r = ctaBg.parentElement.getBoundingClientRect(); ctaBg.style.transform = `translateY(${-r.top * 0.22}px)`; }
+}
+window.addEventListener('scroll', parallax, { passive: true });
+const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+const phrases = ['cura moderna.', 'equilíbrio natural.', 'o seu bem-estar.'];
+let pi = 0, ci = 0, del = false;
+const tw = document.getElementById('typewriter');
+function type() {
+    const p = phrases[pi];
+    if (!del) { tw.textContent = p.slice(0, ++ci); if (ci === p.length) { del = true; setTimeout(type, 2400); return; } }
+    else { tw.textContent = p.slice(0, --ci); if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; } }
+    setTimeout(type, del ? 52 : 88);
+}
+setTimeout(type, 1300);
+
+// Hamburger menu toggle
+(function() {
+    var nav = document.getElementById('mainNav');
+    var btn = document.getElementById('navHamburger');
+    if (!nav || !btn) return;
+    var dropdown = nav.querySelector('.nav-links');
+
+    function close() {
+        nav.classList.remove('nav-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+    }
+
+    function open() {
+        if (dropdown) dropdown.style.removeProperty('display');
+        nav.classList.add('nav-open');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Close menu');
+    }
+
+    // pagehide: always set inline display:none before iOS bfcache snapshot
+    // (no width check — window.innerWidth is unreliable during pagehide on iOS)
+    window.addEventListener('pagehide', function() {
+        if (dropdown) dropdown.style.display = 'none';
+    });
+
+    // pageshow: close FIRST (removes nav-open), THEN remove inline style
+    // Order matters: removing inline before nav-open would briefly expose CSS flex
+    window.addEventListener('pageshow', function() {
+        close();
+        if (dropdown) dropdown.style.removeProperty('display');
+    });
+
+    // Initial state
+    close();
+
+    btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        nav.classList.contains('nav-open') ? close() : open();
+    });
+
+    if (dropdown) {
+        dropdown.addEventListener('click', close);
+    }
+
+    document.addEventListener('click', function(e) {
+        if (nav.classList.contains('nav-open') && !nav.contains(e.target)) { close(); }
+    });
+})();
+</script>
+
+<script src="../assets/js/cookie-consent.js"></script>
+</body>
+</html>
