@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 350" width="400" height="350">
+  <defs>
+    <style>
+      .skin { fill: #F5DEB3; stroke: #C4A882; stroke-width: 1.5; }
+      .ear { fill: #E8CFA0; stroke: #B8956A; stroke-width: 1.8; }
+      .ear-inner { fill: #DABB8A; stroke: #B8956A; stroke-width: 1; }
+      .hair { fill: #3A2A1A; stroke: none; }
+      .label { font-family: 'Georgia', serif; fill: #04342C; }
+      .sublabel { font-family: 'Outfit', system-ui, sans-serif; fill: #4A7060; }
+      .point-dot { fill: #BA7517; stroke: #fff; stroke-width: 2; }
+      .point-ring { fill: none; stroke: #BA7517; stroke-width: 1.5; opacity: 0.5; }
+      .arrow { stroke: #BA7517; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .guide-line { stroke: #5DCAA5; stroke-width: 1; stroke-dasharray: 4 3; fill: none; }
+      .bone-label { font-family: 'Outfit', system-ui, sans-serif; fill: #085041; font-size: 10px; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#BA7517"/>
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="350" fill="#F8F5F0" rx="8"/>
+  
+  <!-- Title -->
+  <text x="200" y="28" text-anchor="middle" class="label" font-size="16" font-weight="500">Anmian point — "Peaceful sleep"</text>
+  
+  <!-- Head profile (simplified side view) -->
+  <!-- Skull/head outline -->
+  <path d="M 100,180 
+           C 100,120 130,65 185,55 
+           C 240,45 280,70 295,110 
+           C 310,150 305,195 295,230
+           C 285,260 260,285 230,295
+           C 200,305 170,300 150,280
+           C 130,260 115,240 105,215
+           Z" class="skin"/>
+  
+  <!-- Hair -->
+  <path d="M 100,185 
+           C 100,120 130,65 185,55 
+           C 240,45 280,70 295,110 
+           C 310,150 305,180 300,190
+           C 280,170 250,155 220,150
+           C 190,145 160,155 140,170
+           C 120,180 105,185 100,185
+           Z" class="hair"/>
+  
+  <!-- Ear -->
+  <path d="M 230,155 
+           C 245,145 265,148 272,165 
+           C 278,180 275,200 268,215 
+           C 262,228 252,235 243,232 
+           C 237,230 235,222 238,215
+           C 240,208 242,200 240,192
+           C 238,184 234,178 232,170
+           C 230,162 230,155 230,155
+           Z" class="ear"/>
+  
+  <!-- Ear inner details -->
+  <path d="M 240,162 C 250,158 260,162 263,172 C 266,182 262,195 255,202 C 250,207 245,205 244,200" class="ear-inner" fill="none"/>
+  <path d="M 245,168 C 252,167 256,172 256,178 C 256,184 252,190 248,192" class="ear-inner" fill="none"/>
+  
+  <!-- Earlobe -->
+  <ellipse cx="240" cy="232" rx="8" ry="10" fill="#E8CFA0" stroke="#B8956A" stroke-width="1.5"/>
+  
+  <!-- Mastoid process area (bone bump behind ear) -->
+  <path d="M 220,225 C 215,220 212,230 215,240 C 218,248 225,250 228,245" 
+        fill="none" stroke="#B8956A" stroke-width="1" stroke-dasharray="3 2"/>
+  
+  <!-- ANMIAN POINT - the key element -->
+  <!-- Point location: behind earlobe, in hollow between ear and skull base -->
+  <circle cx="215" cy="228" r="7" class="point-dot"/>
+  <circle cx="215" cy="228" r="12" class="point-ring">
+    <animate attributeName="r" values="12;16;12" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Arrow from label to point -->
+  <path d="M 320,210 C 290,210 260,215 228,225" class="arrow"/>
+  
+  <!-- Label box -->
+  <rect x="300" y="190" width="90" height="36" rx="6" fill="#04342C"/>
+  <text x="345" y="206" text-anchor="middle" fill="#FAEEDA" font-family="Georgia, serif" font-size="13" font-weight="500">Anmian</text>
+  <text x="345" y="220" text-anchor="middle" fill="#9FE1CB" font-family="'Outfit', sans-serif" font-size="9">Peaceful sleep</text>
+  
+  <!-- Anatomical reference labels -->
+  <!-- Behind earlobe -->
+  <line x1="240" y1="242" x2="300" y2="270" class="guide-line"/>
+  <text x="302" y="274" class="bone-label" font-size="9">Earlobe</text>
+  
+  <!-- Mastoid process -->
+  <line x1="210" y1="245" x2="160" y2="280" class="guide-line"/>
+  <text x="100" y="284" class="bone-label" font-size="9">Mastoid process</text>
+  
+  <!-- Skull base -->
+  <line x1="195" y1="250" x2="160" y2="300" class="guide-line"/>
+  <text x="100" y="304" class="bone-label" font-size="9">Base of skull</text>
+
+  <!-- Instructions at bottom -->
+  <rect x="20" y="315" width="360" height="28" rx="4" fill="#E1F5EE"/>
+  <text x="200" y="333" text-anchor="middle" class="sublabel" font-size="10">Gently massage both sides in small circles for 2–3 minutes</text>
+</svg>
