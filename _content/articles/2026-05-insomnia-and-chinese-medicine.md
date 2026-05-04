@@ -29,15 +29,15 @@ Each of these patterns requires a different treatment strategy. This is why two 
 
 ## Three things you can do tonight
 
-\*\*1. Warm your feet before bed.\*\* Soak your feet in warm water for 15 minutes before sleeping. In Chinese medicine, this draws the Qi downward and away from the head, calming the Shen. Add a few slices of fresh ginger if your feet tend to feel cold.
+**1. Warm your feet before bed.** Soak your feet in warm water for 15 minutes before sleeping. In Chinese medicine, this draws the Qi downward and away from the head, calming the Shen. Add a few slices of fresh ginger if your feet tend to feel cold.
 
-\*\*2. Press the Anmian point.\*\* Find the soft spot just behind your earlobe, in the hollow between the ear and the base of the skull. Gently massage both sides with your fingertips in small circles for 2–3 minutes while breathing slowly. Anmian literally means "peaceful sleep."
+**2. Press the Anmian point.** Find the soft spot just behind your earlobe, in the hollow between the ear and the base of the skull. Gently massage both sides with your fingertips in small circles for 2–3 minutes while breathing slowly. Anmian literally means "peaceful sleep."
 
 ![Diagram showing the location of the Anmian acupressure point behind the ear](https://www.naturalmed-wellness.com/assets/img/anmian-point-diagram.png "Anmian point - 'Peaceful sleep'")
 
 The Anmian point is located in the soft hollow behind the earlobe, between the ear and the base of the skull.
 
-\*\*3. Avoid screens and heavy meals after 9pm.\*\* The Stomach meridian is most active between 7–9am. Eating late forces the body to digest when it should be winding down, generating heat that rises and disturbs the Heart. Blue light from screens has a similar agitating effect on the Shen.
+**3. Avoid screens and heavy meals after 9pm.** The Stomach meridian is most active between 7–9am. Eating late forces the body to digest when it should be winding down, generating heat that rises and disturbs the Heart. Blue light from screens has a similar agitating effect on the Shen.
 
 ## What treatment looks like
 
