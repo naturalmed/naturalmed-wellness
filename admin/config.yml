@@ -16,11 +16,11 @@ site_url: https://www.naturalmed-wellness.com
 
 collections:
 
-  # ── 1. ARTICLES ────────────────────────────────────────────
+  # ── 1. ARTICLES (EN) ───────────────────────────────────────
   - name: articles
-    label: "📰 Articles"
+    label: "📰 Articles (EN)"
     label_singular: "Article"
-    description: "Monthly TCM articles. Saving an article triggers an automatic build that updates the listing page and RSS feed."
+    description: "Monthly TCM articles in English. Saving triggers an automatic build that updates the listing page and RSS feed."
     folder: _content/articles
     create: true
     slug: "{{year}}-{{month}}-{{fields.slug}}"
@@ -51,7 +51,42 @@ collections:
           buttons: [bold, italic, link, heading-two, heading-three, quote,
                     bulleted-list, numbered-list] }
 
-  # ── 2. SEMINARS ────────────────────────────────────────────
+  # ── 2. ARTIGOS (PT) ────────────────────────────────────────
+  - name: articles-pt
+    label: "📰 Artigos (PT)"
+    label_singular: "Artigo"
+    description: "Artigos mensais de MTC em português. Ao guardar, o sistema actualiza automaticamente a página de listagem."
+    folder: _content/articles-pt
+    create: true
+    slug: "{{year}}-{{month}}-{{fields.slug}}"
+    preview_path: "pt/artigos/{{year}}-{{month}}-{{fields.slug}}.html"
+    media_folder: "/assets/img/articles"
+    public_folder: "/assets/img/articles"
+    fields:
+      - { label: "Título",   name: title,  widget: string }
+      - { label: "Slug (caminho URL)",  name: slug,  widget: string,
+          hint: "Apenas letras minúsculas, números e hífens. Ex: acupunctura-e-dor",
+          pattern: ['^[a-z0-9-]+$', "Apenas letras minúsculas, números e hífens"] }
+      - { label: "Data de Publicação",  name: date,  widget: datetime,
+          date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Categoria"
+        name: category
+        widget: select
+        options: [Acupunctura, "Medicina por Plantas", "Dietética Chinesa",
+                  "Teoria do Qi", "Massagem Tuina", "Saúde da Mulher",
+                  "Bem-estar Mental", "Saúde Sazonal"]
+      - { label: "Tempo de leitura (minutos)", name: reading_time, widget: number,
+          default: 8, value_type: int, min: 1, max: 30 }
+      - { label: "Resumo (para newsletter)", name: excerpt, widget: text,
+          hint: "2–3 frases apresentadas na newsletter. Máx. 250 caracteres.",
+          pattern: ['^.{1,250}$', "Máximo 250 caracteres"] }
+      - { label: "Imagem de capa", name: cover, widget: image, required: false,
+          media_folder: "/assets/img/articles", public_folder: "/assets/img/articles" }
+      - { label: "Corpo do artigo", name: body, widget: markdown,
+          buttons: [bold, italic, link, heading-two, heading-three, quote,
+                    bulleted-list, numbered-list] }
+
+  # ── 3. SEMINARS ────────────────────────────────────────────
   - name: seminars
     label: "📅 Seminars"
     description: "Content for the Seminars & Workshops page."
@@ -83,7 +118,7 @@ collections:
                 options: [Announced, "Registration Open", "Sold Out", Completed, TBC]
                 default: TBC
 
-  # ── 3. PAGE TEXT ───────────────────────────────────────────
+  # ── 4. PAGE TEXT ───────────────────────────────────────────
   - name: pages
     label: "📄 Page Text"
     description: "Edit key text blocks without touching HTML."
