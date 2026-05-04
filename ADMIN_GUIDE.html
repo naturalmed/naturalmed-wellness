@@ -308,7 +308,8 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
 <nav class="toc">
   <a href="#cms">Sveltia CMS</a>
-  <a href="#articles">Articles</a>
+  <a href="#articles">Articles EN</a>
+  <a href="#artigos">Artigos PT</a>
   <a href="#seminars">Seminars</a>
   <a href="#pagetext">Page Text</a>
   <a href="#newsletter">Newsletter</a>
@@ -362,7 +363,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
         <div class="step-num">4</div>
         <div class="step-body">
           <strong>You are in!</strong>
-          <p>You will see three collections on the left: Articles, Seminars, and Page Text.</p>
+          <p>You will see four collections on the left: <strong>Articles (EN)</strong>, <strong>Artigos (PT)</strong>, Seminars, and Page Text.</p>
         </div>
       </div>
     </div>
@@ -378,58 +379,88 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 2: ARTICLES ── -->
+  <!-- ── SECTION 2: ARTICLES EN ── -->
   <section class="section" id="articles">
     <div class="section-header">
       <div class="section-num">2</div>
-      <h2>Writing Articles</h2>
+      <h2>Writing Articles — English (EN)</h2>
     </div>
 
-    <p>Articles are the main content of your website. Each article you publish automatically appears on the Articles page, in the RSS feed, and generates a newsletter ready to send.</p>
+    <p>The website is bilingual. English articles and Portuguese articles are managed separately in the CMS, build into separate folders, and have their own listing pages. The newsletter is generated only for English articles.</p>
+
+    <div class="callout callout-info">
+      <div class="callout-icon">🗺️</div>
+      <div class="callout-body">
+        <strong>How the two languages are organised</strong>
+        <ul>
+          <li><strong>Articles (EN)</strong> → saved to <span class="cmd">_content/articles/</span> → published at <span class="cmd">en/articles/YYYY-MM-slug.html</span> → listed at <span class="cmd">en/articles.html</span></li>
+          <li><strong>Artigos (PT)</strong> → saved to <span class="cmd">_content/articles-pt/</span> → published at <span class="cmd">pt/artigos/YYYY-MM-slug.html</span> → listed at <span class="cmd">pt/artigos.html</span></li>
+          <li>Newsletter is generated only for EN articles (see <a href="#newsletter" style="color:inherit">Section 5</a>).</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">What happens when you save an EN article</h3>
 
     <div class="flow">
       <div class="flow-item">
         <div class="flow-dot">✍️</div>
         <div class="flow-line"></div>
         <div class="flow-body">
-          <strong>Write article in CMS</strong>
-          <p>Fill in all the fields and click Save</p>
+          <strong>Write article in CMS → click "Articles (EN)" → New</strong>
+          <p>Fill in all the fields in English and click Save</p>
         </div>
       </div>
       <div class="flow-item">
         <div class="flow-dot">⚙️</div>
         <div class="flow-line"></div>
         <div class="flow-body">
-          <strong>Website rebuilds automatically (~1 minute)</strong>
-          <p>No action needed from you</p>
+          <strong>GitHub Action triggers automatically (~1 minute)</strong>
+          <p>The build script reads <span class="cmd">_content/articles/</span> and processes every .md file</p>
         </div>
       </div>
       <div class="flow-item">
         <div class="flow-dot">🌐</div>
         <div class="flow-line"></div>
         <div class="flow-body">
-          <strong>Article appears live on the website</strong>
-          <p>en/articles.html is updated with the new card</p>
+          <strong>Article page is created</strong>
+          <p>Published at <span class="cmd">en/articles/YYYY-MM-slug.html</span></p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">📋</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Listing page is rebuilt</strong>
+          <p><span class="cmd">en/articles.html</span> is updated with the new card at the top</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">📡</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>RSS feed is updated</strong>
+          <p><span class="cmd">feed.xml</span> is updated with the new item</p>
         </div>
       </div>
       <div class="flow-item">
         <div class="flow-dot">📧</div>
         <div class="flow-line"></div>
         <div class="flow-body">
-          <strong>Newsletter is ready to send</strong>
-          <p>Available at naturalmed-wellness.com/newsletter/[slug].html</p>
+          <strong>Newsletter is generated and published</strong>
+          <p>Available at <span class="cmd">naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</span></p>
         </div>
       </div>
     </div>
 
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">How to create a new article</h3>
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">How to create a new English article</h3>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <strong>Click "Articles" in the left menu</strong>
-          <p>You will see a list of all existing articles (or "no entries yet" if this is the first).</p>
+          <strong>Click "📰 Articles (EN)" in the left menu</strong>
+          <p>You will see a list of all existing English articles (or "no entries yet" if this is the first).</p>
         </div>
       </div>
       <div class="step">
@@ -442,7 +473,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Fill in all the fields</strong>
+          <strong>Fill in all the fields in English</strong>
           <p>See the field guide below for what to write in each field.</p>
         </div>
       </div>
@@ -450,23 +481,23 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
         <div class="step-num">4</div>
         <div class="step-body">
           <strong>Click "Save" (top right)</strong>
-          <p>The article is saved and the website starts rebuilding. Wait ~1 minute.</p>
+          <p>The article is saved and the website starts rebuilding. Wait ~1 minute. The newsletter is also generated automatically.</p>
         </div>
       </div>
     </div>
 
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Article fields guide</h3>
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">English article fields guide</h3>
 
     <table class="field-table">
       <thead><tr><th>Field</th><th>What to write</th></tr></thead>
       <tbody>
         <tr>
           <td>Title <span class="required">required</span></td>
-          <td>The full title of your article, e.g. "Acupuncture and Chronic Pain: A TCM Perspective"</td>
+          <td>The full title in English, e.g. "Acupuncture and Chronic Pain: A TCM Perspective"</td>
         </tr>
         <tr>
           <td>Slug <span class="required">required</span></td>
-          <td>A short URL-friendly version of the title using only lowercase letters, numbers and hyphens. E.g. <span class="cmd">acupuncture-and-chronic-pain</span>. No spaces, no accents.</td>
+          <td>A short URL-friendly version of the title using only lowercase letters, numbers and hyphens. E.g. <span class="cmd">acupuncture-and-chronic-pain</span>. No spaces, no accents, no punctuation.</td>
         </tr>
         <tr>
           <td>Date <span class="required">required</span></td>
@@ -482,15 +513,15 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
         </tr>
         <tr>
           <td>Excerpt <span class="required">required</span></td>
-          <td>2–3 sentences summarising the article. This appears in the newsletter email and on the articles listing page. Maximum 250 characters.</td>
+          <td>2–3 sentences summarising the article in English. This appears in the newsletter email and on the articles listing page. Maximum 250 characters.</td>
         </tr>
         <tr>
           <td>Cover image</td>
-          <td>Optional. Click to upload a photo (JPG or PNG, ideally 1200×630 pixels). Can be left empty — a placeholder will be used.</td>
+          <td>Optional. Click to upload a photo (JPG or PNG, ideally 1200×630 pixels). The same image can be used for both the EN and PT versions of the same article.</td>
         </tr>
         <tr>
           <td>Body <span class="required">required</span></td>
-          <td>The full article text. Use the toolbar buttons for headings, bold, italic, bullet points and links.</td>
+          <td>The full article text in English. Use the toolbar buttons for headings, bold, italic, bullet points and links.</td>
         </tr>
       </tbody>
     </table>
@@ -511,10 +542,157 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 3: SEMINARS ── -->
+  <!-- ── SECTION 2b: ARTIGOS PT ── -->
+  <section class="section" id="artigos">
+    <div class="section-header">
+      <div class="section-num" style="background:var(--gold)">2b</div>
+      <h2>Escrever Artigos — Português (PT)</h2>
+    </div>
+
+    <p>Os artigos em português funcionam exactamente da mesma forma que os artigos em inglês, mas usam uma colecção separada no CMS e publicam numa pasta diferente do website. <strong>Não é gerada newsletter automática para artigos PT</strong> — a newsletter é apenas em inglês.</p>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>Artigos EN e PT são independentes</strong>
+        <p>Não há ligação automática entre o artigo EN e o artigo PT. Se escrever um artigo nos dois idiomas, terá de o criar duas vezes — uma em "Articles (EN)" e outra em "Artigos (PT)". Pode usar o mesmo slug e a mesma imagem de capa.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">O que acontece ao guardar um artigo PT</h3>
+
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-dot">✍️</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Escrever o artigo no CMS → clicar "Artigos (PT)" → Novo</strong>
+          <p>Preencher todos os campos em português e clicar Guardar</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">⚙️</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>GitHub Action dispara automaticamente (~1 minuto)</strong>
+          <p>O script de build lê <span class="cmd">_content/articles-pt/</span> e processa todos os ficheiros .md</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">🌐</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Página do artigo é criada</strong>
+          <p>Publicada em <span class="cmd">pt/artigos/YYYY-MM-slug.html</span></p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot">📋</div>
+        <div class="flow-line"></div>
+        <div class="flow-body">
+          <strong>Página de listagem é reconstruída</strong>
+          <p><span class="cmd">pt/artigos.html</span> é actualizada com o novo card no topo</p>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-dot" style="background:var(--cream-dark);color:var(--text-muted);font-size:13px">N/A</div>
+        <div class="flow-body">
+          <strong style="color:var(--text-muted)">Newsletter — não gerada para artigos PT</strong>
+          <p>Não é criado nenhum ficheiro de newsletter para artigos em português.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Como criar um novo artigo em português</h3>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Clicar em "📰 Artigos (PT)" no menu da esquerda</strong>
+          <p>Verá a lista de artigos PT existentes (ou "sem entradas" se for o primeiro).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Clicar "Novo" (canto superior direito)</strong>
+          <p>Abre um formulário em branco com todos os campos a preencher.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Preencher todos os campos em português</strong>
+          <p>Consultar o guia de campos abaixo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Clicar "Guardar" (canto superior direito)</strong>
+          <p>O artigo é guardado e o website começa a reconstruir. Aguardar ~1 minuto.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Guia de campos do artigo PT</h3>
+
+    <table class="field-table">
+      <thead><tr><th>Campo</th><th>O que escrever</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Título <span class="required">obrigatório</span></td>
+          <td>O título completo em português, ex. "Acupunctura e Dor Crónica: Uma Perspectiva de MTC"</td>
+        </tr>
+        <tr>
+          <td>Slug <span class="required">obrigatório</span></td>
+          <td>Versão curta do título para o URL, usando apenas letras minúsculas, números e hífens. Ex. <span class="cmd">acupunctura-e-dor-cronica</span>. Sem espaços, sem acentos.</td>
+        </tr>
+        <tr>
+          <td>Data <span class="required">obrigatório</span></td>
+          <td>A data de publicação. Clicar no ícone de calendário e seleccionar a data.</td>
+        </tr>
+        <tr>
+          <td>Categoria <span class="required">obrigatório</span></td>
+          <td>Seleccionar uma: Acupunctura, Medicina por Plantas, Dietética Chinesa, Teoria do Qi, Massagem Tuina, Saúde da Mulher, Bem-estar Mental, ou Saúde Sazonal.</td>
+        </tr>
+        <tr>
+          <td>Tempo de leitura</td>
+          <td>Minutos estimados de leitura. Guia rápido: contar os parágrafos e dividir por 3. Por omissão: 8 minutos.</td>
+        </tr>
+        <tr>
+          <td>Resumo <span class="required">obrigatório</span></td>
+          <td>2–3 frases que resumem o artigo em português. Aparece na página de listagem <span class="cmd">pt/artigos.html</span>. Máximo 250 caracteres.</td>
+        </tr>
+        <tr>
+          <td>Imagem de capa</td>
+          <td>Opcional. Pode usar a mesma imagem do artigo EN correspondente, se existir. JPG ou PNG, idealmente 1200×630 px.</td>
+        </tr>
+        <tr>
+          <td>Corpo do artigo <span class="required">obrigatório</span></td>
+          <td>O texto completo do artigo em português. Usar os botões da barra de ferramentas para títulos, negrito, itálico, listas e ligações.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Dica: verificar o artigo publicado</strong>
+        <p>Após o build (~1 minuto), o artigo PT estará disponível em:<br>
+        <span class="cmd">https://www.naturalmed-wellness.com/pt/artigos/YYYY-MM-slug.html</span><br>
+        E a listagem em: <span class="cmd">https://www.naturalmed-wellness.com/pt/artigos.html</span></p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ── SECTION 4: SEMINARS ── -->
   <section class="section" id="seminars">
     <div class="section-header">
-      <div class="section-num">3</div>
+      <div class="section-num">4</div>
       <h2>Managing Seminars</h2>
     </div>
 
@@ -568,10 +746,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 4: PAGE TEXT ── -->
+  <!-- ── SECTION 5: PAGE TEXT ── -->
   <section class="section" id="pagetext">
     <div class="section-header">
-      <div class="section-num">4</div>
+      <div class="section-num">5</div>
       <h2>Editing Page Text</h2>
     </div>
 
@@ -622,10 +800,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 5: NEWSLETTER ── -->
+  <!-- ── SECTION 6: NEWSLETTER ── -->
   <section class="section" id="newsletter">
     <div class="section-header">
-      <div class="section-num">5</div>
+      <div class="section-num">6</div>
       <h2>The Newsletter</h2>
     </div>
 
@@ -646,10 +824,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 6: CONTACTS ── -->
+  <!-- ── SECTION 7: CONTACTS ── -->
   <section class="section" id="contacts">
     <div class="section-header">
-      <div class="section-num">6</div>
+      <div class="section-num">7</div>
       <h2>Managing Subscriber Contacts</h2>
     </div>
 
@@ -709,10 +887,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 7: SENDING ── -->
+  <!-- ── SECTION 8: SENDING ── -->
   <section class="section" id="sending">
     <div class="section-header">
-      <div class="section-num">7</div>
+      <div class="section-num">8</div>
       <h2>Sending the Newsletter</h2>
     </div>
 
@@ -795,10 +973,10 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
   <hr class="divider">
 
-  <!-- ── SECTION 8: FAQ ── -->
+  <!-- ── SECTION 9: FAQ ── -->
   <section class="section" id="faq">
     <div class="section-header">
-      <div class="section-num">8</div>
+      <div class="section-num">9</div>
       <h2>Frequently Asked Questions</h2>
     </div>
 
@@ -811,7 +989,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
         <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">I want to edit an article I already published.</p>
-        <p style="font-size:14px;color:var(--text-muted)">In the CMS, click "Articles" and click the article you want to edit. Make your changes and click "Save". The website updates automatically.</p>
+        <p style="font-size:14px;color:var(--text-muted)">In the CMS, click <strong>"📰 Articles (EN)"</strong> for English articles or <strong>"📰 Artigos (PT)"</strong> for Portuguese articles. Click the article you want to edit, make your changes, and click "Save". The website updates automatically in ~1 minute.</p>
       </div>
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
@@ -821,7 +999,17 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
         <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">How do I find the newsletter URL for an article?</p>
-        <p style="font-size:14px;color:var(--text-muted)">The pattern is always: <a href="https://www.naturalmed-wellness.com/newsletter/YYYY-MM-slug.html" target="_blank" style="color:inherit" class="url">https://www.naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</a> where YYYY-MM is the year and month of the article and slug is what you entered in the Slug field.</p>
+        <p style="font-size:14px;color:var(--text-muted)">The pattern is always: <a href="https://www.naturalmed-wellness.com/newsletter/YYYY-MM-slug.html" target="_blank" style="color:inherit" class="url">https://www.naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</a> where YYYY-MM is the year and month of the article and slug is what you entered in the Slug field. <strong>Note: newsletters are only generated for English (EN) articles.</strong> Portuguese articles do not generate a newsletter.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">I published a Portuguese article but it is not appearing on pt/artigos.html.</p>
+        <p style="font-size:14px;color:var(--text-muted)">Wait 1–2 minutes and refresh the page. The build runs automatically after every save. If it still does not appear, check the GitHub Actions log at <a href="https://github.com/naturalmed/naturalmed-wellness/actions" target="_blank" style="color:inherit" class="url">github.com/naturalmed/naturalmed-wellness/actions</a>. Also confirm the article has a Title and a Slug — articles without these fields are skipped.</p>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
+        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">Can I publish the same article in both English and Portuguese?</p>
+        <p style="font-size:14px;color:var(--text-muted)">Yes. Write the English version in <strong>"📰 Articles (EN)"</strong> and the Portuguese version separately in <strong>"📰 Artigos (PT)"</strong>. They are independent — use the same slug and the same cover image if you wish. The EN version will generate a newsletter; the PT version will not.</p>
       </div>
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
@@ -849,16 +1037,28 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
       <thead><tr><th>Task</th><th>Where to go</th></tr></thead>
       <tbody>
         <tr>
-          <td style="color:var(--jade-pale)">Write an article</td>
-          <td style="color:var(--jade-light)">naturalmed-wellness.com/admin/</td>
+          <td style="color:var(--jade-pale)">Write an EN article</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/admin/ → 📰 Articles (EN)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Write a PT article</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/admin/ → 📰 Artigos (PT)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">EN article listing</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/en/articles.html</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">PT article listing</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/pt/artigos.html</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Find newsletter (EN only)</td>
+          <td style="color:var(--jade-light)">naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</td>
         </tr>
         <tr>
           <td style="color:var(--jade-pale)">Check build status</td>
           <td style="color:var(--jade-light)">github.com/naturalmed/naturalmed-wellness/actions</td>
-        </tr>
-        <tr>
-          <td style="color:var(--jade-pale)">Find newsletter</td>
-          <td style="color:var(--jade-light)">naturalmed-wellness.com/newsletter/YYYY-MM-slug.html</td>
         </tr>
         <tr>
           <td style="color:var(--jade-pale)">Manage subscribers</td>
