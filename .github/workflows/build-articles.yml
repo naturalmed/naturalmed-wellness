@@ -7,6 +7,7 @@ on:
       - '_content/articles-pt/**'
       - '_content/seminars.yml'
       - '_content/pages/**'
+      - 'tools/**'
   workflow_dispatch:
 
 jobs:
