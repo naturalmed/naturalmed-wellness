@@ -22,7 +22,7 @@ There are four main patterns a TCM practitioner looks for:
 
 **Kidney deficiency.** The Kidneys in TCM govern the bones and the deepest structures of the body. In older patients, or those who are chronically fatigued, a depletion of Kidney essence can lead to a chronic, deep aching in the neck and spine that is slow to respond to purely local treatment.
 
-![Diagram showing the location of the Anmian acupressure point behind the ear](https://www.naturalmed-wellness.com/assets/img/anmian-point-diagram.png "Anmian point - 'Peaceful sleep'")
+![Discover how TCM understands its causes and what acupuncture, Tuina and simple lifestyle changes can do to help.](/assets/img/articles/naturalmed-tuina.jpg "Acupuncture, Tuina and simple lifestyle changes can help.")
 
 ### **What Treatment Looks Like**
 
