@@ -26,7 +26,9 @@ There are four main patterns a TCM practitioner looks for:
 
 ### **What Treatment Looks Like**
 
-Once the pattern is identified, treatment is tailored accordingly. **Acupuncture** is the primary tool: fine needles placed at specific points along the affected meridians release muscular tension, restore the circulation of Qi and Blood, and prompt the body's own pain-relieving response. Many patients notice an immediate softening of the muscles during the session itself.
+Once the pattern is identified, treatment is tailored accordingly. 
+
+**Acupuncture** is the primary tool: fine needles placed at specific points along the affected meridians release muscular tension, restore the circulation of Qi and Blood, and prompt the body's own pain-relieving response. Many patients notice an immediate softening of the muscles during the session itself.
 
 **Tuina** — Chinese therapeutic massage — is often combined with acupuncture. Targeted manual techniques along the neck, upper back and shoulder girdle help to break up localised stagnation and restore movement to joints that have become restricted over time.
 
