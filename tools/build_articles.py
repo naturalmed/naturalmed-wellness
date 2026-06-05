@@ -148,7 +148,7 @@ ARTICLE_TEMPLATE_EN = '''\
 <body>
 <nav id="mainNav">
     <a href="../../en/index.html" class="nav-logo">
-        <img src="../../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:40px;width:40px;object-fit:contain" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <img src="../../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:40px;width:40px;object-fit:contain" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
         <div id="navMark" class="nav-mark" style="display:none">N</div>
         <span class="nav-name">NaturalMed</span>
     </a>
@@ -202,7 +202,7 @@ ARTICLE_TEMPLATE_EN = '''\
     <div class="footer-grid">
         <div class="footer-brand">
             <a href="../index.html" class="nav-logo">
-                <img src="../../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:34px;width:34px;object-fit:contain" onerror="this.style.display='none'">
+                <img src="../../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:34px;width:34px;object-fit:contain" onerror="this.style.display='none'">
                 <span class="nav-name" style="font-size:19px">NaturalMed</span>
             </a>
             <p>Traditional Chinese Medicine · Mid-Wales, UK.</p>
@@ -287,7 +287,7 @@ ARTICLE_TEMPLATE_PT = '''\
 <body>
 <nav id="mainNav">
     <a href="../../pt/index.html" class="nav-logo">
-        <img src="../../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:40px;width:40px;object-fit:contain" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
+        <img src="../../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:40px;width:40px;object-fit:contain" onerror="this.style.display='none';document.getElementById('navMark').style.display='flex'">
         <div id="navMark" class="nav-mark" style="display:none">N</div>
         <span class="nav-name">NaturalMed</span>
     </a>
@@ -341,7 +341,7 @@ ARTICLE_TEMPLATE_PT = '''\
     <div class="footer-grid">
         <div class="footer-brand">
             <a href="../index.html" class="nav-logo">
-                <img src="../../assets/img/naturalmed-logo.png" alt="NaturalMed" style="height:34px;width:34px;object-fit:contain" onerror="this.style.display='none'">
+                <img src="../../assets/img/naturalmed-logo.svg" alt="NaturalMed" style="height:34px;width:34px;object-fit:contain" onerror="this.style.display='none'">
                 <span class="nav-name" style="font-size:19px">NaturalMed</span>
             </a>
             <p>Medicina Tradicional Chinesa · Mid-Wales, Reino Unido.</p>
@@ -663,9 +663,7 @@ NEWSLETTER_TMPL = '''\
   .wrapper{{background:#F8F5F0;padding:32px 16px}}
   .email-card{{max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(4,52,44,0.10)}}
   .header{{background:#04342C;padding:28px 40px;text-align:center}}
-  .header img{{height:48px;width:48px;border-radius:50%;border:2px solid rgba(93,202,165,0.4)}}
-  .header-name{{font-family:Georgia,serif;font-size:22px;font-weight:normal;color:#E1F5EE;margin:10px 0 2px;letter-spacing:0.03em}}
-  .header-tagline{{font-size:12px;color:#9FE1CB;letter-spacing:0.12em;text-transform:uppercase;margin:0}}
+  .header img{{height:140px;width:auto;max-width:100%;display:block;margin:0 auto}}
   .eyebrow{{background:#085041;padding:10px 40px;text-align:center;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#EF9F27;font-family:Georgia,serif}}
   .body{{padding:40px}}
   .article-label{{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#BA7517;margin:0 0 12px;font-family:Georgia,serif}}
@@ -700,9 +698,7 @@ NEWSLETTER_TMPL = '''\
   </div>
   <div class="email-card">
     <div class="header">
-      <img src="https://www.naturalmed-wellness.com/assets/img/naturalmed-logo.png" alt="NaturalMed" onerror="this.style.display='none'">
-      <p class="header-name">NaturalMed</p>
-      <p class="header-tagline">Traditional Chinese Medicine · Mid-Wales, UK</p>
+      <img src="https://www.naturalmed-wellness.com/assets/img/naturalmed-logo-newsletter.png" alt="NaturalMed" onerror="this.style.display='none'">
     </div>
     <div class="eyebrow">Monthly Article · {month_label}</div>
     <div class="body">
