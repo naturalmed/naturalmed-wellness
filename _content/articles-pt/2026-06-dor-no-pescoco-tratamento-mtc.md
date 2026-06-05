@@ -24,14 +24,18 @@ Existem quatro padrões principais que um profissional de MTC procura:
 
 ![Descubra como a Medicina Tradicional Chinesa (MTC) entende as causas da doença e o que a acupuntura, o Tuina e mudanças simples no estilo de vida podem fazer para ajudar.](/assets/img/articles/naturalmed-tuina.jpg "Acupuntura, Tuina e mudanças simples no estilo de vida podem ajudar.")
 
-O ponto Anmian localiza‑se na cavidade macia atrás do lóbulo da orelha, entre a orelha e a base do crânio.
+### Como funciona o tratamento
 
-**3. Evite ecrãs e refeições pesadas depois das 21h.** O meridiano do Estômago está mais activo entre as 7h e as 9h da manhã. Comer tarde obriga o corpo a digerir quando deveria estar a desacelerar, gerando calor que sobe e perturba o Coração. A luz azul dos ecrãs tem um efeito semelhante de agitação sobre o Shen.
+Uma vez identificado o padrão, o tratamento é personalizado de acordo. 
 
-## Como é normalmente o tratamento
+**A Acupuntura** é a principal ferramenta: agulhas finas colocadas em pontos específicos ao longo dos meridianos afetados liberam a tensão muscular, restauram a circulação de Qi e Sangue e estimulam a resposta analgésica natural do corpo. Muitos pacientes notam um relaxamento muscular imediato durante a própria sessão.
 
-A acupunctura para a insónia envolve geralmente pontos nos meridianos do Coração, Baço e Rim, combinados com pontos calmantes na cabeça e nas orelhas. Muitos pacientes relatam melhorias no sono nas primeiras duas ou três sessões, embora padrões constitucionais mais profundos possam necessitar de seis a oito tratamentos para mudanças duradouras.
+**A Tuina** — massagem terapêutica chinesa — é frequentemente combinada com a acupuntura. Técnicas manuais direcionadas ao longo do pescoço, parte superior das costas e cintura escapular ajudam a desfazer a estagnação localizada e a restaurar a mobilidade das articulações que se tornaram restritas com o tempo.
 
-A fitoterapia chinesa é frequentemente utilizada em conjunto com a acupunctura — fórmulas clássicas como _Suan Zao Ren Tang_ (Decocção de Jujuba Ácida) ou _Tian Wang Bu Xin Dan_ (Pílula Especial do Imperador Celestial) são usadas há séculos para nutrir o Sangue do Coração e acalmar o Shen.
+Além do tratamento na clínica, pequenos ajustes no estilo de vida fazem uma diferença significativa. Manter o pescoço aquecido (especialmente em clima frio ou ventoso), ajustar a altura da tela para que o olhar fique nivelado em vez de para baixo, fazer pequenas pausas para se movimentar a cada 45 minutos e exercícios simples de rotação do pescoço pela manhã podem complementar o trabalho realizado na sala de tratamento.
 
-Se a insónia se tornou uma parte regular da sua vida, pode valer a pena explorar o que o seu corpo está a tentar dizer‑lhe. Uma consulta de diagnóstico pode identificar o padrão subjacente e definir um plano de tratamento claro — sem depender de comprimidos para dormir.
+### Uma condição que responde bem à Medicina Tradicional Chinesa (MTC)
+
+A dor no pescoço é uma das áreas em que a MTC consistentemente produz resultados expressivos, principalmente quando a dor é recorrente ou não respondeu completamente às abordagens convencionais. Em vez de mascarar o desconforto, o objetivo é resolver o padrão subjacente — para que a dor se torne menos frequente, menos intensa e, eventualmente, deixe de fazer parte da vida diária.
+
+Se você convive com dor no pescoço, vale a pena descobrir se a MTC pode oferecer uma solução mais duradoura.
