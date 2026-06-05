@@ -33,7 +33,7 @@ Cada um destes padrões exige uma estratégia terapêutica diferente. É por iss
 
 **2. Pressione o ponto Anmian.** Encontre a zona macia logo atrás do lóbulo da orelha, na cavidade entre a orelha e a base do crânio. Massaje suavemente ambos os lados com a ponta dos dedos em pequenos círculos durante 2–3 minutos enquanto respira lentamente. Anmian significa literalmente “sono tranquilo”.
 
-![Diagrama com a localização do ponto de acupressão Anmian atrás da orelha](/assets/img/articles/naturalmed-tuina.jpg "Descubra como a MTC entende suas causas e o que a acupuntura, o Tuina e mudanças simples no estilo de vida podem fazer para ajudar.")
+![Descubra como a Medicina Tradicional Chinesa (MTC) entende as causas da doença e o que a acupuntura, o Tuina e mudanças simples no estilo de vida podem fazer para ajudar.](/assets/img/articles/naturalmed-tuina.jpg "Descubra como a MTC entende suas causas e o que a acupuntura, o Tuina e mudanças simples no estilo de vida podem fazer para ajudar.")
 
 O ponto Anmian localiza‑se na cavidade macia atrás do lóbulo da orelha, entre a orelha e a base do crânio.
 
