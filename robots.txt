@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /newsletter/
+Disallow: /tools/
+
+Sitemap: https://www.naturalmed-wellness.com/sitemap.xml
