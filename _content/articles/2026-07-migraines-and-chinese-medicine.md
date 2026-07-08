@@ -5,7 +5,7 @@ date: 2026-07-08
 category: Acupuncture
 reading_time: 8
 excerpt: A migraine is not simply a bad headache. It is a debilitating neurological event that can last for hours or days, disrupting work, relationships, and quality of life. Conventional medicine offers relief — but for many people, the attacks keep coming.
-cover: https://www.naturalmed-wellness.com/assets/img/migraine-acupuncture-points.png
+cover: /assets/img/articles/naturalmed-tuina.jpg
 ---
 
 ## How Chinese medicine understands migraines
