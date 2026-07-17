@@ -833,6 +833,205 @@ def build_latest(articles_en):
     print(f'\u2713 Built /latest and /latest/ -> {newest[0]}.html')
 
 
+# -- Social kit (/social/) -----------------------------------
+
+SOCIAL_DIR = ROOT / 'social'
+SOCIAL_IMG_DIR = ROOT / 'assets' / 'img' / 'social'
+
+DEFAULT_HASHTAGS = (
+    '#acupuncture #traditionalchinesemedicine #TCM #chinesemedicine '
+    '#newtownpowys #midwales #wales #naturalhealth #holistichealth #acupuncturist'
+)
+
+CATEGORY_HASHTAGS = {
+    'Digestive Health': '#digestivehealth #guthealth #bloating',
+    'Headaches & Neurology': '#migraine #headacherelief',
+    'Acupuncture': '#acupunctureworks #painrelief',
+    'Sleep': '#insomnia #sleepbetter',
+}
+
+
+def _social_crop(cover, slug_full, focus='center'):
+    """Gera os recortes 4:5 e 1:1 a partir da capa. Devolve dict de nomes."""
+    try:
+        from PIL import Image
+    except ImportError:
+        print('  social: Pillow não instalado - recortes ignorados')
+        return {}
+    if not cover:
+        print('  social: artigo sem capa - recortes ignorados')
+        return {}
+
+    src = ROOT / cover.lstrip('/')
+    if not src.exists():
+        print(f'  social: capa não encontrada ({src}) - recortes ignorados')
+        return {}
+
+    SOCIAL_IMG_DIR.mkdir(parents=True, exist_ok=True)
+    im = Image.open(src).convert('RGB')
+    w, h = im.size
+    out = {}
+
+    for label, (rw, rh), (ow, oh) in (
+        ('4x5', (4, 5), (1080, 1350)),
+        ('1x1', (1, 1), (1080, 1080)),
+    ):
+        target_ratio = rw / rh
+        if w / h > target_ratio:          # fonte mais larga -> corta na largura
+            new_w = int(h * target_ratio)
+            new_h = h
+        else:                              # fonte mais alta -> corta na altura
+            new_w = w
+            new_h = int(w / target_ratio)
+        if focus == 'left':
+            cx = new_w // 2
+        elif focus == 'right':
+            cx = w - new_w // 2
+        else:
+            cx = w // 2
+        x0 = max(0, min(w - new_w, cx - new_w // 2))
+        y0 = max(0, (h - new_h) // 2)
+        crop = im.crop((x0, y0, x0 + new_w, y0 + new_h)).resize((ow, oh), Image.LANCZOS)
+        name = f'{slug_full}-{label}.jpg'
+        crop.save(SOCIAL_IMG_DIR / name, quality=90)
+        out[label] = name
+        print(f'  social: recorte {label} -> assets/img/social/{name}')
+
+    return out
+
+
+def _social_captions(meta, url):
+    """Monta as legendas de Facebook e Instagram."""
+    excerpt = (meta.get('excerpt') or '').strip()
+    custom = (meta.get('social_caption') or '').strip()
+    body = custom or excerpt
+
+    tags = (meta.get('hashtags') or '').strip()
+    if not tags:
+        extra = CATEGORY_HASHTAGS.get(meta.get('category', ''), '')
+        tags = (extra + ' ' + DEFAULT_HASHTAGS).strip()
+
+    fb = f'{body}\n\nRead the full article:\n{url}'
+    ig = (f'{body}\n\n\U0001F4D6 Full article \u2014 link in bio\n'
+          f'\U0001F4CD NaturalMed, Newtown, Powys\n\n{tags}')
+    return fb, ig
+
+
+SOCIAL_TMPL = """<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>NaturalMed - Kit para redes sociais</title>
+<style>
+  body{{margin:0;background:#F8F5F0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2D4A3E}}
+  .wrap{{max-width:640px;margin:0 auto;padding:24px 16px 64px}}
+  h1{{font-family:Georgia,serif;font-weight:normal;color:#04342C;font-size:24px;margin:0 0 4px}}
+  .sub{{font-size:13px;color:#4A7060;margin:0 0 24px}}
+  .card{{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 2px 12px rgba(4,52,44,.08)}}
+  h2{{font-family:Georgia,serif;font-weight:normal;color:#04342C;font-size:18px;margin:0 0 12px}}
+  .step{{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#BA7517;margin:0 0 8px}}
+  img.prev{{width:100%;max-width:260px;border-radius:8px;display:block;margin:0 auto 12px}}
+  .btn{{display:inline-block;background:#BA7517;color:#FAEEDA;text-decoration:none;padding:10px 18px;
+        border-radius:8px;font-size:14px;border:none;cursor:pointer;margin:4px 4px 0 0}}
+  .btn.alt{{background:#085041}}
+  pre{{white-space:pre-wrap;word-wrap:break-word;background:#F1EEE8;border-radius:8px;padding:14px;
+       font-size:13px;line-height:1.6;font-family:inherit;margin:0 0 10px}}
+  .hint{{font-size:12px;color:#4A7060;line-height:1.6;margin:8px 0 0}}
+  .ok{{background:#085041 !important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kit para redes sociais</h1>
+  <p class="sub">{title} &#183; {month_label}</p>
+
+  <div class="card">
+    <p class="step">Passo 1 &#183; Imagem</p>
+    <h2>Descarregar a imagem</h2>
+    {img_block}
+    <p class="hint">Toca e mantém premido na imagem para a guardar no telemóvel, ou usa o botão.</p>
+  </div>
+
+  <div class="card">
+    <p class="step">Passo 2 &#183; Texto</p>
+    <h2>Legenda para Facebook e Instagram</h2>
+    <pre id="capIG">{ig}</pre>
+    <button class="btn" onclick="cp('capIG', this)">Copiar texto</button>
+    <p class="hint">Esta legenda serve para as duas redes. No Facebook o link não aparece
+    aqui porque o Instagram não o aceita &#8212; usa o botao abaixo se quiseres o link.</p>
+  </div>
+
+  <div class="card">
+    <p class="step">Alternativa</p>
+    <h2>Só para o Facebook (com link)</h2>
+    <pre id="capFB">{fb}</pre>
+    <button class="btn alt" onclick="cp('capFB', this)">Copiar texto</button>
+  </div>
+
+  <div class="card">
+    <p class="step">Passo 3</p>
+    <h2>Publicar</h2>
+    <p class="hint">Abre a app <strong>Meta Business Suite</strong> &#8594; Criar publicação &#8594;
+    escolhe as duas contas &#8594; carrega a imagem &#8594; cola o texto &#8594; Publicar.</p>
+    <p class="hint">O link da bio do Instagram (naturalmed-wellness.com/latest) aponta
+    sempre para este artigo, sozinho. Não precisas de o mudar.</p>
+    <p style="margin-top:12px"><a class="btn alt" href="{url}">Ver o artigo</a></p>
+  </div>
+</div>
+<script>
+function cp(id, btn) {{
+  var t = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(function() {{
+    var old = btn.innerText;
+    btn.innerText = '\u2713 Copiado';
+    btn.classList.add('ok');
+    setTimeout(function() {{ btn.innerText = old; btn.classList.remove('ok'); }}, 1800);
+  }});
+}}
+</script>
+</body>
+</html>
+"""
+
+
+def build_social(articles_en):
+    """Gera /social/index.html com o kit do artigo EN mais recente."""
+    if not articles_en:
+        return
+    slug_full, meta, pub_date = max(articles_en, key=lambda a: a[2])
+    url = f'{BASE_URL}/en/articles/{slug_full}.html'
+
+    crops = _social_crop(meta.get('cover', ''), slug_full,
+                         meta.get('crop_focus', 'center'))
+    fb, ig = _social_captions(meta, url)
+
+    if crops:
+        img_block = (
+            f'<img class="prev" src="{BASE_URL}/assets/img/social/{crops["4x5"]}" alt="">'
+            f'<div style="text-align:center">'
+            f'<a class="btn" href="{BASE_URL}/assets/img/social/{crops["4x5"]}" download>Descarregar 4:5</a>'
+            f'<a class="btn alt" href="{BASE_URL}/assets/img/social/{crops["1x1"]}" download>Descarregar 1:1</a>'
+            f'</div>'
+        )
+    else:
+        img_block = '<p class="hint">Sem imagem gerada para este artigo.</p>'
+
+    page = SOCIAL_TMPL.format(
+        title=meta.get('title', ''),
+        month_label=month_label(pub_date, 'en'),
+        img_block=img_block,
+        fb=fb.replace('\n', chr(10)),
+        ig=ig.replace('\n', chr(10)),
+        url=url,
+    )
+    SOCIAL_DIR.mkdir(exist_ok=True)
+    (SOCIAL_DIR / 'index.html').write_text(page, encoding='utf-8')
+    (ROOT / 'social.html').write_text(page, encoding='utf-8')
+    print(f'\u2713 Built /social/ -> {slug_full}')
+
+
 # ── Main ──────────────────────────────────────────────────────
 
 def main():
@@ -879,6 +1078,8 @@ def main():
 
     # -- 9. Build /latest redirect ----------------------------
     build_latest(articles_en)
+    # -- 10. Build social kit --------------------------------
+    build_social(articles_en)
 
 
 if __name__ == '__main__':

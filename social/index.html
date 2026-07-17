@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>NaturalMed - Kit para redes sociais</title>
+<style>
+  body{margin:0;background:#F8F5F0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#2D4A3E}
+  .wrap{max-width:640px;margin:0 auto;padding:24px 16px 64px}
+  h1{font-family:Georgia,serif;font-weight:normal;color:#04342C;font-size:24px;margin:0 0 4px}
+  .sub{font-size:13px;color:#4A7060;margin:0 0 24px}
+  .card{background:#fff;border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 2px 12px rgba(4,52,44,.08)}
+  h2{font-family:Georgia,serif;font-weight:normal;color:#04342C;font-size:18px;margin:0 0 12px}
+  .step{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#BA7517;margin:0 0 8px}
+  img.prev{width:100%;max-width:260px;border-radius:8px;display:block;margin:0 auto 12px}
+  .btn{display:inline-block;background:#BA7517;color:#FAEEDA;text-decoration:none;padding:10px 18px;
+        border-radius:8px;font-size:14px;border:none;cursor:pointer;margin:4px 4px 0 0}
+  .btn.alt{background:#085041}
+  pre{white-space:pre-wrap;word-wrap:break-word;background:#F1EEE8;border-radius:8px;padding:14px;
+       font-size:13px;line-height:1.6;font-family:inherit;margin:0 0 10px}
+  .hint{font-size:12px;color:#4A7060;line-height:1.6;margin:8px 0 0}
+  .ok{background:#085041 !important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Kit para redes sociais</h1>
+  <p class="sub">Migraines and Chinese Medicine — Beyond the Painkiller &#183; July 2026</p>
+
+  <div class="card">
+    <p class="step">Passo 1 &#183; Imagem</p>
+    <h2>Descarregar a imagem</h2>
+    <img class="prev" src="https://www.naturalmed-wellness.com/assets/img/social/2026-07-migraines-and-chinese-medicine-4x5.jpg" alt=""><div style="text-align:center"><a class="btn" href="https://www.naturalmed-wellness.com/assets/img/social/2026-07-migraines-and-chinese-medicine-4x5.jpg" download>Descarregar 4:5</a><a class="btn alt" href="https://www.naturalmed-wellness.com/assets/img/social/2026-07-migraines-and-chinese-medicine-1x1.jpg" download>Descarregar 1:1</a></div>
+    <p class="hint">Toca e mantém premido na imagem para a guardar no telemóvel, ou usa o botão.</p>
+  </div>
+
+  <div class="card">
+    <p class="step">Passo 2 &#183; Texto</p>
+    <h2>Legenda para Facebook e Instagram</h2>
+    <pre id="capIG">A migraine is not simply a bad headache. It is a debilitating neurological event that can last for hours or days, disrupting work, relationships, and quality of life. Conventional medicine offers relief — but for many people, the attacks keep coming.
+
+📖 Full article — link in bio
+📍 NaturalMed, Newtown, Powys
+
+#acupunctureworks #painrelief #acupuncture #traditionalchinesemedicine #TCM #chinesemedicine #newtownpowys #midwales #wales #naturalhealth #holistichealth #acupuncturist</pre>
+    <button class="btn" onclick="cp('capIG', this)">Copiar texto</button>
+    <p class="hint">Esta legenda serve para as duas redes. No Facebook o link não aparece
+    aqui porque o Instagram não o aceita &#8212; usa o botao abaixo se quiseres o link.</p>
+  </div>
+
+  <div class="card">
+    <p class="step">Alternativa</p>
+    <h2>Só para o Facebook (com link)</h2>
+    <pre id="capFB">A migraine is not simply a bad headache. It is a debilitating neurological event that can last for hours or days, disrupting work, relationships, and quality of life. Conventional medicine offers relief — but for many people, the attacks keep coming.
+
+Read the full article:
+https://www.naturalmed-wellness.com/en/articles/2026-07-migraines-and-chinese-medicine.html</pre>
+    <button class="btn alt" onclick="cp('capFB', this)">Copiar texto</button>
+  </div>
+
+  <div class="card">
+    <p class="step">Passo 3</p>
+    <h2>Publicar</h2>
+    <p class="hint">Abre a app <strong>Meta Business Suite</strong> &#8594; Criar publicação &#8594;
+    escolhe as duas contas &#8594; carrega a imagem &#8594; cola o texto &#8594; Publicar.</p>
+    <p class="hint">O link da bio do Instagram (naturalmed-wellness.com/latest) aponta
+    sempre para este artigo, sozinho. Não precisas de o mudar.</p>
+    <p style="margin-top:12px"><a class="btn alt" href="https://www.naturalmed-wellness.com/en/articles/2026-07-migraines-and-chinese-medicine.html">Ver o artigo</a></p>
+  </div>
+</div>
+<script>
+function cp(id, btn) {
+  var t = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(function() {
+    var old = btn.innerText;
+    btn.innerText = '✓ Copiado';
+    btn.classList.add('ok');
+    setTimeout(function() { btn.innerText = old; btn.classList.remove('ok'); }, 1800);
+  });
+}
+</script>
+</body>
+</html>

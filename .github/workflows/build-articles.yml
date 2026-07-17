@@ -28,7 +28,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install markdown pyyaml
+        run: pip install markdown pyyaml pillow
 
       - name: Ensure output directories exist
         run: |
@@ -43,6 +43,8 @@ jobs:
           git config user.name  "NaturalMed CMS Bot"
           git config user.email "naturalmed.wellness@gmail.com"
           git add -A en/articles/ en/articles.html feed.xml \
+                     latest/ latest.html social/ social.html \
+                     assets/img/social/ \
                      pt/artigos/ pt/artigos.html \
                      en/seminars.html en/index.html en/about.html \
                      en/conditions.html newsletter/
