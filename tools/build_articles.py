@@ -823,10 +823,14 @@ def build_latest(articles_en):
         return
     newest = max(articles_en, key=lambda a: a[2])
     url = f'{BASE_URL}/en/articles/{newest[0]}.html'
+    page = LATEST_TMPL.format(url=url)
+    # pasta -> responde a /latest/
     out_dir = ROOT / 'latest'
     out_dir.mkdir(exist_ok=True)
-    (out_dir / 'index.html').write_text(LATEST_TMPL.format(url=url), encoding='utf-8')
-    print(f'\u2713 Built /latest/ -> {newest[0]}.html')
+    (out_dir / 'index.html').write_text(page, encoding='utf-8')
+    # ficheiro na raiz -> responde a /latest (sem barra final)
+    (ROOT / 'latest.html').write_text(page, encoding='utf-8')
+    print(f'\u2713 Built /latest and /latest/ -> {newest[0]}.html')
 
 
 # ── Main ──────────────────────────────────────────────────────
