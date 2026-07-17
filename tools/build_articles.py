@@ -83,6 +83,14 @@ def md_to_html(text):
         html += f'<p>{para}</p>\n'
     return html
 
+def absolutise(url):
+    """Turn a site-root path into a full URL. Leaves full URLs untouched."""
+    if not url:
+        return ''
+    if url.startswith('http://') or url.startswith('https://'):
+        return url
+    return BASE_URL + '/' + url.lstrip('/')
+
 def parse_date(date_str):
     """Parse YYYY-MM-DD into a datetime object."""
     try:
@@ -111,6 +119,8 @@ ARTICLE_TEMPLATE_EN = '''\
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{excerpt_escaped}">
     <meta property="og:image" content="{cover_abs}">
+    <meta property="og:url" content="{page_url}">
+    <meta property="og:site_name" content="NaturalMed">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="{date_iso}">
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
@@ -251,6 +261,8 @@ ARTICLE_TEMPLATE_PT = '''\
     <meta property="og:title" content="{title}">
     <meta property="og:description" content="{excerpt_escaped}">
     <meta property="og:image" content="{cover_abs}">
+    <meta property="og:url" content="{page_url}">
+    <meta property="og:site_name" content="NaturalMed">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="{date_iso}">
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
@@ -485,7 +497,9 @@ def build_articles(content_dir, output_dir, template, lang='en'):
         body_html = md_to_html(body_md)
         excerpt   = meta.get('excerpt', '')
         cover     = meta.get('cover', '')
-        cover_abs = cover or f'{BASE_URL}/assets/img/articles/{slug_full}-cover.jpg'
+        cover_abs = absolutise(cover) or f'{BASE_URL}/assets/img/articles/{slug_full}-cover.jpg'
+        sub_dir   = 'pt/artigos' if lang == 'pt' else 'en/articles'
+        page_url  = f'{BASE_URL}/{sub_dir}/{slug_full}.html'
         cover_img = (f'<img class="article-cover" src="{cover}" alt="{meta.get("title","")}">'
                      if cover else '')
         ml = month_label(pub_date, lang)
@@ -500,6 +514,7 @@ def build_articles(content_dir, output_dir, template, lang='en'):
             reading_time    = meta.get('reading_time', '8'),
             date_iso        = pub_date.strftime('%Y-%m-%dT00:00:00+00:00'),
             cover_abs       = cover_abs,
+            page_url        = page_url,
             cover_img       = cover_img,
             body_html       = body_html,
         )
@@ -748,8 +763,9 @@ def build_newsletter(articles_en):
         out_path    = NEWSLETTER_DIR / f'{slug_full}.html'
         article_url = f'{BASE_URL}/en/articles/{slug_full}.html'
         cover       = meta.get('cover', '')
-        cover_html  = (f'<img class="cover-img" src="{cover}" alt="{meta.get("title","")}">'
-                       if cover else '')
+        cover_url   = absolutise(cover)
+        cover_html  = (f'<img class="cover-img" src="{cover_url}" alt="{meta.get("title","")}">'
+                       if cover_url else '')
         subject = f'New article from NaturalMed: {meta.get("title","")}'
         html = NEWSLETTER_TMPL.format(
             subject     = subject,
