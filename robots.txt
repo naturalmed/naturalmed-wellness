@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /latest
+Disallow: /latest/
+Disallow: /social
+Disallow: /social/
 Disallow: /admin/
 Disallow: /newsletter/
 Disallow: /tools/
