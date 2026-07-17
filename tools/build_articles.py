@@ -797,6 +797,38 @@ def build_newsletter(articles_en):
 
     print(f'✓ Built {built} newsletter(s) in /newsletter/')
 
+# -- /latest redirect (for Instagram bio) ---------------------
+
+LATEST_TMPL = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url={url}">
+<link rel="canonical" href="{url}">
+<title>NaturalMed - latest article</title>
+</head>
+<body>
+<p>Redirecting to the latest article. <a href="{url}">Continue &rarr;</a></p>
+<script>window.location.replace("{url}");</script>
+</body>
+</html>
+"""
+
+
+def build_latest(articles_en):
+    """Write /latest/index.html redirecting to the newest EN article."""
+    if not articles_en:
+        print('  latest: sem artigos EN - ignorado')
+        return
+    newest = max(articles_en, key=lambda a: a[2])
+    url = f'{BASE_URL}/en/articles/{newest[0]}.html'
+    out_dir = ROOT / 'latest'
+    out_dir.mkdir(exist_ok=True)
+    (out_dir / 'index.html').write_text(LATEST_TMPL.format(url=url), encoding='utf-8')
+    print(f'\u2713 Built /latest/ -> {newest[0]}.html')
+
+
 # ── Main ──────────────────────────────────────────────────────
 
 def main():
@@ -840,6 +872,9 @@ def main():
     # ── 8. Build newsletters ──────────────────────────────────
     NEWSLETTER_DIR.mkdir(exist_ok=True)
     build_newsletter(articles_en)
+
+    # -- 9. Build /latest redirect ----------------------------
+    build_latest(articles_en)
 
 
 if __name__ == '__main__':
