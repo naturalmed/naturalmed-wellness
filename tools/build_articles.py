@@ -960,7 +960,7 @@ SOCIAL_TMPL = """<!DOCTYPE html>
     <pre id="capIG">{ig}</pre>
     <button class="btn" onclick="cp('capIG', this)">Copiar texto</button>
     <p class="hint">Esta legenda serve para as duas redes. No Facebook o link não aparece
-    aqui porque o Instagram não o aceita &#8212; usa o botao abaixo se quiseres o link.</p>
+    aqui porque o Instagram não o aceita &#8212; usa o botão abaixo se quiseres o link.</p>
   </div>
 
   <div class="card">
