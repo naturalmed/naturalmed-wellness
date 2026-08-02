@@ -831,56 +831,58 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
       <h2>Managing Subscriber Contacts</h2>
     </div>
 
-    <p>Your subscribers are stored as a Google Contacts label called <strong>"Newsletter NaturalMed"</strong>. To add a new subscriber:</p>
+    <p>Since August 2026, subscribers are no longer managed by hand in Google Contacts. There are two ways someone joins the mailing list, and both are automatic:</p>
+
+    <ul>
+      <li><strong>Website sign-up form</strong> — visitors subscribe directly on the Articles page. This is captured instantly in Clinic Manager, no manual step needed.</li>
+      <li><strong>Existing patients</strong> — every active patient with an email address is included automatically, unless they have asked to be opted out.</li>
+    </ul>
 
     <div class="callout callout-tip">
-      <div class="callout-icon">📖</div>
+      <div class="callout-icon">📇</div>
       <div class="callout-body">
-        <strong>Google Contacts address</strong>
-        <p><a href="https://contacts.google.com" target="_blank" style="color:inherit" class="url">https://contacts.google.com</a> — sign in with naturalmed.wellness@gmail.com</p>
+        <strong>Google Contacts is now just a mirror</strong>
+        <p>The "Newsletter NaturalMed" label in Google Contacts is no longer the master list — it is a copy, refreshed from Clinic Manager before each send. The master list lives in Clinic Manager (Reports → Newsletter Recipients).</p>
       </div>
     </div>
+
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Before sending each newsletter: refresh the Gmail group</h3>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <strong>Open contacts.google.com</strong>
-          <p>Make sure you are signed in as naturalmed.wellness@gmail.com.</p>
+          <strong>Export the current list from Clinic Manager</strong>
+          <p>Go to <span class="cmd">clinic.naturalmed-wellness.com → Reports</span>, find the "Newsletter Recipients" card, and click "Download Newsletter CSV". This file already excludes patients who opted out, and includes website sign-ups — no manual filtering needed.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <strong>Click the "+" button (bottom right) → "Create a contact"</strong>
-          <p>Enter the subscriber's first name, last name, and email address. Click Save.</p>
+          <strong>Clear the old "Newsletter NaturalMed" label in Google Contacts first</strong>
+          <p>Go to contacts.google.com, open "Newsletter NaturalMed" in the left menu, select all, and remove the label from everyone. This step matters: importing a new file only <em>adds</em> contacts, it never removes anyone — so the old label must be cleared first, otherwise people who opted out would still receive the email.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Open the new contact → click the three dots ⋮ → "Label as"</strong>
-          <p>Select "Newsletter NaturalMed". The contact is now in your mailing group.</p>
+          <strong>Import the CSV and apply the "Newsletter NaturalMed" label</strong>
+          <p>In Google Contacts, click "Import" (left menu), choose the CSV file you downloaded, and when prompted apply the "Newsletter NaturalMed" label to the imported contacts.</p>
         </div>
       </div>
     </div>
 
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">To remove a subscriber</h3>
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">If a patient asks to opt out</h3>
+    <p>Do this in Clinic Manager, not in Google Contacts: open the patient's record and click "Opt Out of Newsletter". They will be excluded automatically the next time you export the list — nothing to do in Google Contacts.</p>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <strong>In Google Contacts, click "Newsletter NaturalMed" in the left menu</strong>
-          <p>All your subscribers are listed.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <strong>Click the three dots ⋮ next to the contact → "Remove from label"</strong>
-          <p>The contact stays in your general contacts but is removed from the newsletter group.</p>
-        </div>
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">If a website subscriber (not a patient) asks to opt out</h3>
+    <p>They can unsubscribe themselves at any time using the link included at the bottom of the newsletter email — always keep this link in the email you send. If they contact you directly instead, ask your developer to remove them from Clinic Manager.</p>
+
+    <div class="callout callout-warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body">
+        <strong>Do not add subscribers by hand in Google Contacts anymore</strong>
+        <p>Anyone added directly in Google Contacts (bypassing the website form or Clinic Manager) will be lost the next time you refresh the group, since the refresh replaces the whole label. If someone wants to join and cannot use the website form themselves, ask your developer to add them in Clinic Manager instead.</p>
       </div>
     </div>
   </section>
@@ -1014,7 +1016,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
         <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">A subscriber asked to be removed from the newsletter. What do I do?</p>
-        <p style="font-size:14px;color:var(--text-muted)">Go to contacts.google.com, find the person, click the three dots ⋮ and choose "Remove from label" → Newsletter NaturalMed. They will not receive future newsletters.</p>
+        <p style="font-size:14px;color:var(--text-muted)">If they are a patient, open their record in Clinic Manager and click "Opt Out of Newsletter" — they will be excluded automatically next time you export the list. If they signed up through the website (not a patient), they can use the unsubscribe link at the bottom of the newsletter email, or ask your developer to remove them. You no longer need to edit Google Contacts by hand for this.</p>
       </div>
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
@@ -1062,7 +1064,11 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
         </tr>
         <tr>
           <td style="color:var(--jade-pale)">Manage subscribers</td>
-          <td style="color:var(--jade-light)">contacts.google.com</td>
+          <td style="color:var(--jade-light)">clinic.naturalmed-wellness.com → Reports → Newsletter Recipients</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-pale)">Patient opt-out</td>
+          <td style="color:var(--jade-light)">Clinic Manager → patient record → "Opt Out of Newsletter"</td>
         </tr>
         <tr>
           <td style="color:var(--jade-pale)">Send newsletter</td>
