@@ -194,6 +194,7 @@
         <p>Cada novo artigo torna-se a base da nossa newsletter mensal.<br>Introduza o seu email e abriremos o formulário de contacto pré-preenchido para si.</p>
         <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)">
             <input type="email" name="email" id="nlEmail" placeholder="your@email.com" required autocomplete="email">
+            <input type="text" name="website" id="nlWebsite" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
             <button type="submit">Subscrever</button>
         </form>
         <p style="font-size:13px;color:var(--jade-pale);margin-top:1.25rem;line-height:1.7;opacity:.85">
@@ -232,9 +233,36 @@ document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 function handleNewsletter(e) {
     e.preventDefault();
     const email = document.getElementById('nlEmail').value.trim();
+    const honeypot = document.getElementById('nlWebsite').value;
     if (!email) return;
-    // Redirect to contact.html with email pre-filled via URL parameter
-    window.location.href = 'contact.html?email=' + encodeURIComponent(email) + '&subject=newsletter';
+
+    const fallback = function() {
+        // Recurso: se o pedido falhar (rede, endpoint em baixo), mantém o
+        // comportamento antigo para nunca perder o pedido de subscrição.
+        window.location.href = 'contacto.html?email=' + encodeURIComponent(email) + '&subject=newsletter';
+    };
+
+    const body = new URLSearchParams();
+    body.set('email', email);
+    body.set('website', honeypot);
+
+    fetch('https://clinic.naturalmed-wellness.com/newsletter/subscribe/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.status === 'ok') {
+            const form = document.getElementById('newsletterForm');
+            if (form) {
+                form.innerHTML = '<p style="color:var(--jade-pale);font-weight:600;">Obrigado — está subscrito à nossa newsletter!</p>';
+            }
+        } else {
+            fallback();
+        }
+    })
+    .catch(fallback);
 }
 
 // Hamburger menu toggle
