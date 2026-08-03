@@ -5,7 +5,7 @@ date: 2026-08-04
 category: Chinese Dietetics
 reading_time: 8
 excerpt: 'Bloating, heartburn, sluggishness and irregular bowels are often accepted as normal. Traditional Chinese Medicine sees digestion as the foundation of health: when it is strong, the body thrives; when it weakens, illness can follow.'
-cover: /assets/img/digestion-tcm.jpg
+cover: https://www.naturalmed-wellness.com/assets/img/digestion-tcm.jpg
 ---
 
 Bloating after meals, sluggishness, heartburn, irregular bowels, feeling tired the moment you sit down to eat — poor digestion is so common that many people assume it is simply normal. Traditional Chinese Medicine takes a different view. For over two thousand years it has placed the digestive system at the very centre of health, teaching that when digestion is strong, the whole body is nourished — and when it falters, problems appear far beyond the gut.
