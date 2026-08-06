@@ -743,7 +743,7 @@ NEWSLETTER_TMPL = '''\
          <a href="mailto:naturalmed.wellness@gmail.com">naturalmed.wellness@gmail.com</a></p>
       <p style="margin-top:8px;font-size:10px;color:#5DCAA5">
         You are receiving this because you subscribed at naturalmed-wellness.com.
-        To unsubscribe reply with "unsubscribe" in the subject line.</p>
+        To unsubscribe, <a href="https://www.naturalmed-wellness.com/en/unsubscribe.html" style="color:#5DCAA5">click here</a>.</p>
     </div>
   </div>
 </div>

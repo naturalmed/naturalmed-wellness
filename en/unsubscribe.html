@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Unsubscribe | NaturalMed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+  <style>
+    :root {
+      --jade-darkest: #04342C; --jade-dark: #085041; --jade: #0F6E56;
+      --jade-light: #5DCAA5; --jade-pale: #9FE1CB; --jade-mist: #E1F5EE;
+      --cream: #F8F5F0; --text-dark: #1A2820; --text-mid: #2D4A3E; --text-muted: #4A7060;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      background: var(--cream); color: var(--text-dark);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: #fff; border-radius: 14px; padding: 2.75rem;
+      max-width: 440px; width: 100%; text-align: center;
+      box-shadow: 0 8px 40px rgba(4,52,44,.08);
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600; font-size: 1.6rem; color: var(--jade-darkest); margin-bottom: .75rem;
+    }
+    p { color: var(--text-muted); font-size: .95rem; line-height: 1.65; }
+    form { margin-top: 1.5rem; }
+    input[type="email"] {
+      width: 100%; padding: .75rem .9rem; border: 1.5px solid #E5E0D8;
+      border-radius: 8px; font-size: .95rem; font-family: inherit;
+      margin-bottom: 1rem; background: var(--cream); outline: none;
+    }
+    input[type="email"]:focus { border-color: var(--jade); background: #fff; }
+    button {
+      background: var(--jade); color: var(--jade-mist); border: none;
+      border-radius: 8px; padding: .8rem 1.4rem; font-size: .95rem;
+      font-family: inherit; font-weight: 500; cursor: pointer; width: 100%;
+      transition: background .2s;
+    }
+    button:hover { background: var(--jade-dark); }
+    button:disabled { opacity: .6; cursor: default; }
+    a { color: var(--jade); }
+    #result { margin-top: 1rem; font-size: .9rem; color: var(--jade-dark); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Unsubscribe from the newsletter</h1>
+    <p>Enter the email address you'd like to unsubscribe from the NaturalMed monthly newsletter.</p>
+    <form id="unsubForm">
+      <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
+      <button type="submit" id="submitBtn">Unsubscribe</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    document.getElementById('unsubForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('email').value.trim();
+      var btn = document.getElementById('submitBtn');
+      var result = document.getElementById('result');
+      if (!email) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Please wait…';
+
+      var body = new URLSearchParams();
+      body.set('email', email);
+
+      fetch('https://clinic.naturalmed-wellness.com/newsletter/unsubscribe-api/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      })
+        .then(function (r) { return r.json(); })
+        .then(function () {
+          document.getElementById('unsubForm').style.display = 'none';
+          result.innerHTML = 'If <strong>' + email.replace(/</g, '&lt;') +
+            '</strong> was subscribed, it has now been removed. ' +
+            'If this was a mistake, you can subscribe again at any time from our ' +
+            '<a href="articles.html">articles page</a>.';
+        })
+        .catch(function () {
+          btn.disabled = false;
+          btn.textContent = 'Unsubscribe';
+          result.textContent = 'Something went wrong. Please try again, or email us at naturalmed.wellness@gmail.com.';
+        });
+    });
+  </script>
+</body>
+</html>
