@@ -344,9 +344,13 @@ const condBg = document.getElementById('condBg');
 const ctaBg  = document.getElementById('ctaBg');
 function parallax() {
     const y = window.scrollY;
+    // Ler tudo ANTES de escrever nada -- evita "layout thrashing" (o browser
+    // deixa de ser forçado a recalcular o layout a meio da função).
+    const condRect = condBg ? condBg.parentElement.parentElement.getBoundingClientRect() : null;
+    const ctaRect  = ctaBg  ? ctaBg.parentElement.getBoundingClientRect() : null;
     if (heroBg) heroBg.style.transform = `translateY(${y * 0.35}px)`;
-    if (condBg) { const r = condBg.parentElement.parentElement.getBoundingClientRect(); condBg.style.transform = `translateY(${-r.top * 0.18}px)`; }
-    if (ctaBg)  { const r = ctaBg.parentElement.getBoundingClientRect(); ctaBg.style.transform = `translateY(${-r.top * 0.22}px)`; }
+    if (condBg && condRect) condBg.style.transform = `translateY(${-condRect.top * 0.18}px)`;
+    if (ctaBg && ctaRect)   ctaBg.style.transform = `translateY(${-ctaRect.top * 0.22}px)`;
 }
 window.addEventListener('scroll', parallax, { passive: true });
 const ro = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
