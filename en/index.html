@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-        .hero-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center;will-change:transform}
+        .hero-bg{position:absolute;inset:-80px 0;width:100%;height:calc(100% + 160px);object-fit:cover;object-position:center;will-change:transform}
         .hero-overlay{position:absolute;inset:0;background:linear-gradient(110deg,rgba(4,52,44,0.90) 0%,rgba(4,52,44,0.70) 55%,rgba(4,52,44,0.35) 100%)}
         .hero-content{position:relative;z-index:2;max-width:var(--max-w);margin:0 auto;padding:calc(var(--nav-h) + 2rem) 2rem 4rem;width:100%}
         .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s ease 0.3s forwards}
@@ -57,7 +57,7 @@
         .svc-title{font-family:var(--font-serif);font-size:22px;font-weight:500;color:var(--jade-darkest);margin-bottom:0.6rem}
         .svc-desc{font-size:14px;color:var(--text-muted);line-height:1.65}
         .conditions-section{background:var(--jade-darkest);position:relative;overflow:hidden}
-        .cond-bg{position:absolute;inset:-80px 0;background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80');background-size:cover;background-position:center 70%;opacity:0.07;will-change:transform}
+        .cond-bg{position:absolute;inset:-80px 0;background-image:url('../assets/img/naturalmed-hero-desktop.jpg');background-size:cover;background-position:center 70%;opacity:0.07;will-change:transform}
         .conditions-section .section-title{color:var(--jade-mist)}
         .conditions-section .section-lead{color:var(--jade-pale)}
         .cond-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2.5rem}
@@ -140,6 +140,9 @@
       gtag('js', new Date());
       gtag('config', 'G-5175TWZGHK');
     </script>
+    <link rel="preload" as="image" fetchpriority="high"
+          imagesrcset="../assets/img/naturalmed-hero-mobile.webp 800w, ../assets/img/naturalmed-hero-tablet.webp 1200w, ../assets/img/naturalmed-hero-desktop.webp 1600w"
+          imagesizes="100vw">
 </head>
 <body>
 
@@ -166,7 +169,16 @@
 </nav>
 
 <section class="hero">
-    <div class="hero-bg" id="heroBg"></div>
+    <picture>
+        <source type="image/webp" srcset="../assets/img/naturalmed-hero-mobile.webp 800w, ../assets/img/naturalmed-hero-tablet.webp 1200w, ../assets/img/naturalmed-hero-desktop.webp 1600w" sizes="100vw">
+        <img class="hero-bg" id="heroBg"
+             src="../assets/img/naturalmed-hero-desktop.jpg"
+             srcset="../assets/img/naturalmed-hero-mobile.jpg 800w, ../assets/img/naturalmed-hero-tablet.jpg 1200w, ../assets/img/naturalmed-hero-desktop.jpg 1600w"
+             sizes="100vw"
+             width="1600" height="1067"
+             alt=""
+             fetchpriority="high" loading="eager" decoding="async">
+    </picture>
     <div class="hero-overlay"></div>
     <div class="hero-content">
         <div class="hero-eyebrow"><div class="eyebrow-line"></div><span>Traditional Chinese Medicine · Mid-Wales, UK</span></div>
