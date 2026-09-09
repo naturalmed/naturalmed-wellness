@@ -12,7 +12,7 @@
     <copyright>© 2026 NaturalMed. All rights reserved.</copyright>
     <managingEditor>naturalmed.wellness@gmail.com (Nuno Pestana)</managingEditor>
     <webMaster>naturalmed.wellness@gmail.com</webMaster>
-    <lastBuildDate>Thu, 06 Aug 2026 10:54:37 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Sep 2026 09:05:56 +0000</lastBuildDate>
     <atom:link href="https://www.naturalmed-wellness.com/feed.xml" rel="self" type="application/rss+xml"/>
     <image>
       <url>https://www.naturalmed-wellness.com/assets/img/naturalmed-logo.png</url>
@@ -22,6 +22,16 @@
     <ttl>1440</ttl>
 
     <!-- Articles are added here by tools/add-article.py — do not edit manually -->
+    <item>
+      <title><![CDATA[Low Energy and Chinese Medicine — Finding Your Vitality Again]]></title>
+      <link>https://www.naturalmed-wellness.com/en/articles/2026-09-low-energy-and-chinese-medicine.html</link>
+      <guid isPermaLink="true">https://www.naturalmed-wellness.com/en/articles/2026-09-low-energy-and-chinese-medicine.html</guid>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate>
+      <dc:creator>Nuno Pestana</dc:creator>
+      <category>Chinese Dietetics</category>
+      <description><![CDATA[Waking up tired and needing coffee to power through the day is often dismissed as normal. However, Chinese medicine views persistent fatigue as a real signal that your body's energy production requires attention.]]></description>
+      <content:encoded><![CDATA[<p>Waking up tired and needing coffee to power through the day is often dismissed as normal. However, Chinese medicine views persistent fatigue as a real signal that your body's energy production requires attention.</p><p><a href="https://www.naturalmed-wellness.com/en/articles/2026-09-low-energy-and-chinese-medicine.html">Read the full article →</a></p>]]></content:encoded>
+    </item>
     <item>
       <title><![CDATA[Poor Digestion and Chinese Medicine - Where Good Health Begins]]></title>
       <link>https://www.naturalmed-wellness.com/en/articles/2026-08-poor-digestion-and-chinese-medicine.html</link>
