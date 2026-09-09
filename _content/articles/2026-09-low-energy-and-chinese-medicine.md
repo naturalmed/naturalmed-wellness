@@ -52,7 +52,7 @@ Herbal medicine plays a significant role here. Classical formulas such as _Bu Z
 
 ## Three things to try this week
 
-\*\*1. Support Qihai and Guanyuan, the body's energy reservoirs.\*\*These two points sit on the midline of the lower abdomen — Qihai roughly two finger-widths below the navel, Guanyuan roughly four finger-widths below. Apply gentle warmth (a hot water bottle wrapped in a towel works well) for 10–15 minutes each evening.
+**1. Support Qihai and Guanyuan, the body's energy reservoirs.** These two points sit on the midline of the lower abdomen — Qihai roughly two finger-widths below the navel, Guanyuan roughly four finger-widths below. Apply gentle warmth (a hot water bottle wrapped in a towel works well) for 10–15 minutes each evening.
 
 **2. Eat warm, regular meals — especially breakfast.** Skipping breakfast or relying on cold smoothies and salads first thing asks the Spleen to work harder than it needs to. A simple warm breakfast — porridge, eggs, or a light soup — gives digestion an easier start to the day and, over time, supports more stable energy.
 
