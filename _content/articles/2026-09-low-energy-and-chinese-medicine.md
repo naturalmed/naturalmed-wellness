@@ -52,7 +52,7 @@ Herbal medicine plays a significant role here. Classical formulas such as _Bu Z
 
 ## Three things to try this week
 
-**1. Support Qihai and Guanyuan, the body's energy reservoirs.**These two points sit on the midline of the lower abdomen — Qihai roughly two finger-widths below the navel, Guanyuan roughly four finger-widths below. Apply gentle warmth (a hot water bottle wrapped in a towel works well) for 10–15 minutes each evening.
+\*\*1. Support Qihai and Guanyuan, the body's energy reservoirs.\*\*These two points sit on the midline of the lower abdomen — Qihai roughly two finger-widths below the navel, Guanyuan roughly four finger-widths below. Apply gentle warmth (a hot water bottle wrapped in a towel works well) for 10–15 minutes each evening.
 
 **2. Eat warm, regular meals — especially breakfast.** Skipping breakfast or relying on cold smoothies and salads first thing asks the Spleen to work harder than it needs to. A simple warm breakfast — porridge, eggs, or a light soup — gives digestion an easier start to the day and, over time, supports more stable energy.
 
@@ -65,9 +65,3 @@ Three practical suggestions highlighted in the article for supporting energy dur
 ## When to seek treatment
 
 If low energy has become your normal state for more than a few weeks — particularly if it is affecting your work, relationships, or mood — it is worth addressing properly rather than pushing through it. That said, persistent fatigue can occasionally signal something that needs medical assessment first: unexplained weight loss, fever, shortness of breath, or fatigue that comes on suddenly and severely should always be checked with your GP before anything else. Chinese medicine works well alongside conventional care, as part of a considered plan to restore energy for the long term, not just get through the week.
-
-[Book a consultation →](https://www.naturalmed-wellness.com/en/contact.html)
-
-***
-
-**Nuno Pestana, BSc TCM** — Traditional Chinese Medicine practitioner at NaturalMed in Newtown, Powys. Trained at Chengdu University of TCM, registered member of ATCM UK. [Read more about Nuno →](https://www.naturalmed-wellness.com/en/about.html)
