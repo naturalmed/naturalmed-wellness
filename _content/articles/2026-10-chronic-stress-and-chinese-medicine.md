@@ -8,10 +8,6 @@ excerpt: Your mind is always racing and your body tense. Rest doesn't feel restf
 cover: /assets/img/articles/naturalmed-tuina.jpg
 ---
 
-MENTAL WELLBEING
-
-# Chronic Stress and Chinese Medicine — When the Body Never Switches Off
-
 Your mind is always one step ahead — planning, worrying, replaying. Your shoulders are permanently tense and even rest doesn't feel restful. Chronic stress is not just "in your head" — Chinese medicine sees it as a pattern the whole body falls into, and one it can help unwind.
 
 ## How Chinese medicine understands chronic stress
