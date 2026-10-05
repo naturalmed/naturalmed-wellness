@@ -47,6 +47,6 @@ jobs:
                      assets/img/social/ \
                      pt/artigos/ pt/artigos.html \
                      en/seminars.html en/index.html en/about.html \
-                     en/conditions.html newsletter/
+                     en/conditions.html newsletter/ sitemap.xml
           git diff --staged --quiet || git commit -m "🤖 Build: update site and newsletter from CMS"
           git push

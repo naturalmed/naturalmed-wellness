@@ -1069,6 +1069,46 @@ def build_social(articles_en):
 
 # ── Main ──────────────────────────────────────────────────────
 
+SITEMAP_XML = ROOT / 'sitemap.xml'
+
+
+def update_sitemap(articles_en, articles_pt):
+    """
+    Adds to sitemap.xml any article page that is not in it yet.
+
+    It only ADDS: static pages and older entries are never touched or
+    removed. Each new URL goes just before the language's contact page, so
+    the file keeps its EN / PT grouping (if that line is not found, the URL
+    goes before </urlset>). lastmod is the article's publication date.
+    """
+    if not SITEMAP_XML.exists():
+        print('! sitemap.xml not found -- skipped')
+        return
+
+    text = SITEMAP_XML.read_text(encoding='utf-8')
+    added = 0
+    groups = (
+        (articles_en, 'en/articles', 'en/contact.html'),
+        (articles_pt, 'pt/artigos', 'pt/contacto.html'),
+    )
+    for articles, folder, anchor_page in groups:
+        anchor = f'  <url><loc>{BASE_URL}/{anchor_page}</loc>'
+        for slug_full, meta, pub_date in sorted(articles, key=lambda a: a[2]):
+            loc = f'{BASE_URL}/{folder}/{slug_full}.html'
+            if loc in text:
+                continue
+            line = f'  <url><loc>{loc}</loc><lastmod>{pub_date.strftime("%Y-%m-%d")}</lastmod></url>\n'
+            if text.count(anchor) == 1:
+                text = text.replace(anchor, line + anchor, 1)
+            else:
+                text = text.replace('</urlset>', line + '</urlset>', 1)
+            added += 1
+
+    if added:
+        SITEMAP_XML.write_text(text, encoding='utf-8')
+    print(f'✓ sitemap.xml: {added} new URL(s) added')
+
+
 def main():
     import yaml
     import re as _re
@@ -1117,6 +1157,8 @@ def main():
     build_latest(articles_en)
     # -- 10. Build social kit --------------------------------
     build_social(articles_en)
+    # -- 11. Keep sitemap.xml in step with the articles ------
+    update_sitemap(articles_en, articles_pt)
 
 
 if __name__ == '__main__':
