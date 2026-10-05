@@ -12,8 +12,6 @@ MENTAL WELLBEING
 
 # Chronic Stress and Chinese Medicine — When the Body Never Switches Off
 
-![Chronic Stress and Chinese Medicine — When the Body Never Switches Off](https://www.naturalmed-wellness.com/assets/img/naturalmed-tuina.jpg)
-
 Your mind is always one step ahead — planning, worrying, replaying. Your shoulders are permanently tense and even rest doesn't feel restful. Chronic stress is not just "in your head" — Chinese medicine sees it as a pattern the whole body falls into, and one it can help unwind.
 
 ## How Chinese medicine understands chronic stress
