@@ -8,10 +8,6 @@ excerpt: A sua mente não pára, o corpo fica tenso e o descanso não alivia. O 
 cover: /assets/img/articles/naturalmed-tuina.jpg
 ---
 
-BEM-ESTAR MENTAL
-
-# Stress Crónico e Medicina Chinesa — Quando o Corpo Nunca Desliga
-
 A sua mente está sempre um passo à frente — a planear, a preocupar-se, a repetir. Os ombros estão permanentemente tensos e até descansar não parece descanso verdadeiro. O stress crónico não está só "na sua cabeça" — a medicina chinesa vê-o como um padrão que envolve o corpo inteiro, e um padrão que pode ajudar a desfazer.
 
 ## Como a medicina chinesa entende o stress crónico
