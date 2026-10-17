@@ -158,8 +158,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 .step-body { flex: 1; }
 .step-body strong { color: var(--jade-darkest); display: block; margin-bottom: 2px; }
 .step-body p { font-size: 14px; color: var(--text-muted); margin: 0; }
-.step-body p + p { margin-top: .75rem; }
-.step-body p strong { display: inline; margin: 0; font-weight: 600; }
 
 /* ── CALLOUT BOXES ───────────────────────────────────── */
 .callout {
@@ -833,7 +831,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
       <h2>Managing Subscriber Contacts</h2>
     </div>
 
-    <p>There are two ways someone joins the mailing list, and both are automatic in Clinic Manager:</p>
+    <p>Since August 2026, subscribers are no longer managed by hand in Google Contacts. There are two ways someone joins the mailing list, and both are automatic:</p>
 
     <ul>
       <li><strong>Website sign-up form</strong> — visitors subscribe directly on the Articles page. This is captured instantly in Clinic Manager, no manual step needed.</li>
@@ -843,210 +841,48 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
     <div class="callout callout-tip">
       <div class="callout-icon">📇</div>
       <div class="callout-body">
-        <strong>Google Contacts is a separate list that can drift out of sync</strong>
-        <p>The "Newsletter NaturalMed" group in Google Contacts is what you actually send to (via Bcc), but the master list of who <em>should</em> be there lives in Clinic Manager. The two can drift apart over time — a patient's email changes, someone new signs up, someone asks to be removed. The check below compares the two and tells you exactly what to fix, without ever wiping the Gmail group.</p>
+        <strong>Google Contacts is now just a mirror</strong>
+        <p>The "Newsletter NaturalMed" label in Google Contacts is no longer the master list — it is a copy, refreshed from Clinic Manager before each send. The master list lives in Clinic Manager (Reports → Newsletter Recipients).</p>
       </div>
     </div>
 
-    <div class="callout callout-tip">
-      <div class="callout-icon">👥</div>
-      <div class="callout-body">
-        <strong>Who does what</strong>
-        <p><span style="font-weight:600">The administrator</span> (the developer, who has access to Django Admin and to the server) checks the Gmail group, fixes it, sends the newsletter and marks bounced emails. <span style="font-weight:600">Clinic staff without Admin access</span> work in the normal Clinic Manager screens: they correct patient records, ask patients for the right email, use the "Opt Out of Newsletter" button on a record, and decide about people who are not in the system. Everything marked "(administrator)" below is not available to clinic staff.</p>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Before sending each newsletter: verify the Gmail group (administrator)</h3>
-
-    <p>Since October 2026, this is a one-click check from Clinic Manager instead of a manual export/clear/re-import — and it never deletes anything from Google Contacts on its own, it only tells you what to change.</p>
+    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">Before sending each newsletter: refresh the Gmail group</h3>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div class="step-body">
-          <strong>Open Newsletter Subscribers in the Admin</strong>
-          <p>Go to <span class="cmd">clinic.naturalmed-wellness.com/admin/</span>, log in, and under <strong>NEWSLETTER</strong> click <strong>Newsletter Subscribers</strong>.</p>
+          <strong>Export the current list from Clinic Manager</strong>
+          <p>Go to <span class="cmd">clinic.naturalmed-wellness.com → Reports</span>, find the "Newsletter Recipients" card, and click "Download Newsletter CSV". This file already excludes patients who opted out, and includes website sign-ups — no manual filtering needed.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
-          <strong>Click "Verificar Newsletter (CSV)"</strong>
-          <p>This button sits next to "Add Newsletter Subscriber", above the list. It compares Clinic Manager's eligible recipients against the real members of the "Newsletter NaturalMed" group in Google Contacts, live, and downloads a CSV report straight to your <span class="cmd">~/Downloads</span> folder — no Google Contacts export needed on your side.</p>
+          <strong>Clear the old "Newsletter NaturalMed" label in Google Contacts first</strong>
+          <p>Go to contacts.google.com, open "Newsletter NaturalMed" in the left menu, select all, and remove the label from everyone. This step matters: importing a new file only <em>adds</em> contacts, it never removes anyone — so the old label must be cleared first, otherwise people who opted out would still receive the email.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-body">
-          <strong>Open the CSV and follow each row's instruction</strong>
-          <p>Every row has an action in the first column and a "Nota" column that explains the reason and your options. The rows that matter most come first:</p>
-          <p><span class="cmd">REMOVER DO GRUPO</span> — this person asked to leave (they used the unsubscribe link in a newsletter, or opted out with you) or their email bounced (the address does not exist), but is still in the Gmail group, so they would still be sent the newsletter. In <span class="url">contacts.google.com</span>, open the <strong>Newsletter NaturalMed</strong> group and take this contact out of it (you do not need to delete the contact). <strong>Do this before sending.</strong> Never register people who asked to leave again in Newsletter Subscribers. If the reason is a bounced email, the Nota says so: ask the patient for the right address (see "After sending each newsletter" below).</p>
-          <p><span class="cmd">CORRIGIR EMAIL</span> — the email stored on the patient's record is not a valid address (for example just a first name), or it bounced after an earlier newsletter and is already out of the group. Confirm the right address with the patient and correct it on their record in Clinic Manager. The bounce marker clears itself when you change the email; run the check again and they will show up as "ADICIONAR AO GRUPO".</p>
-          <p><span class="cmd">ADICIONAR AO GRUPO</span> — this person should be receiving the newsletter but isn't in the Gmail group yet. Go to <span class="url">contacts.google.com</span>, open the <strong>Newsletter NaturalMed</strong> group, add a new contact with this email, and apply the group label to it.</p>
-          <p><span class="cmd">REVER NO GRUPO</span> — this email is in the Gmail group but has no active record in Clinic Manager: either there is no record at all, or it belongs to an inactive patient. This is <em>not</em> an opt-out. It may be a legitimate subscriber from before this system existed, so decide case by case. To keep them, go to <strong>Admin → Newsletter → Newsletter Subscribers → Add</strong>, enter the email and type <span class="cmd">legacy</span> in the Source field (or reactivate the patient record); they then stop appearing in the report. To drop them, take them out of the Gmail group.</p>
+          <strong>Import the CSV and apply the "Newsletter NaturalMed" label</strong>
+          <p>In Google Contacts, click "Import" (left menu), choose the CSV file you downloaded, and when prompted apply the "Newsletter NaturalMed" label to the imported contacts.</p>
         </div>
       </div>
     </div>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">⌨️</div>
-      <div class="callout-body">
-        <strong>Terminal alternative (for the developer)</strong>
-        <p>The same check can be run from the server, which prints the identical comparison straight to the terminal instead of a CSV:</p>
-        <p><span class="cmd">docker exec naturalmed-web-1 python manage.py check_newsletter_consent --group "Newsletter NaturalMed"</span></p>
-      </div>
-    </div>
-
-    <div class="callout callout-warn">
-      <div class="callout-icon">🔑</div>
-      <div class="callout-body">
-        <strong>If the button shows an error instead of downloading a file</strong>
-        <p>A red message at the top of the page (for example "Nao foi possivel verificar o grupo do Gmail") means Clinic Manager could not reach Google Contacts — almost always because the Google authorisation needs renewing. There is nothing to fix on your side: tell your developer, who can renew it in about ten minutes (see "For the developer" below). Until it is renewed you can still send the newsletter to the existing group; the check only helps keep that group up to date.</p>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">After sending each newsletter: bounced emails</h3>
-
-    <p>Any mailing list has a few wrong addresses: a typo made years ago, or an account that no longer exists. Shortly after you send, the Gmail inbox of <span class="cmd">naturalmed.wellness@gmail.com</span> receives automatic messages from "Mail Delivery Subsystem" for each address that failed.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <strong>Tell the two kinds of message apart</strong>
-          <p>"Address not found" is <strong>permanent</strong>: the address does not exist or has a typo. These are the ones to act on. "Inbox full" or "temporary problem" is <strong>temporary</strong>: ignore it, the address may be perfectly fine.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <strong>The administrator marks them</strong>
-          <p>In Gmail, open the newsletter's conversation, press <strong>Expand all</strong>, and copy the text (or just note the "Address not found" addresses). The administrator marks those patients in Clinic Manager with one command, which takes about a minute (see "For the developer" below).</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <strong>Clinic staff fix the addresses as patients answer</strong>
-          <p>After the marking, those patients appear in <strong>Reports → Patient Email Problems</strong>, with a warning on their record (see the next subsection). Ask each patient for the correct email and change it on their record: the marker clears itself and they become recipients again. In the meantime the administrator's next group check lists them under <span class="cmd">REMOVER DO GRUPO</span> while the address is still in the Gmail group (to be taken out), and under <span class="cmd">CORRIGIR EMAIL</span> afterwards.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">📮</div>
-      <div class="callout-body">
-        <strong>Why not just delete them from Google Contacts?</strong>
-        <p>Because Clinic Manager would still treat the address as a valid recipient and ask you, every month, to add it back. The marker is how it learns the address is dead, and it goes away on its own as soon as the email on the record is changed. You can see which address bounced, and when, on the patient's page (yellow warning at the top), in Reports → Patient Email Problems, and in Django Admin (patient record, section "Administrative").</p>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">For clinic staff: patients with email problems</h3>
-
-    <p>An email problem means the address on a patient's record either <strong>bounced</strong> (it does not exist) or is <strong>not a valid address</strong> at all (for example just a first name). You do not need Django Admin to see or fix these. There are three places to look:</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <strong>On the patient page</strong>
-          <p>A yellow warning at the top says what happened (for a bounce: the date and the address that does not exist), and a red tag "Email bounced" or "Invalid email" sits next to the action buttons.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <strong>In Reports</strong>
-          <p>Open <span class="cmd">Reports</span> and click <span class="cmd">Open list</span> on the card <span class="cmd">Patient Email Problems</span>. The list shows active patients with the name (a link to the record), the email on record, the problem, the bounce date and the phone number. <span class="cmd">Download CSV</span> saves the same list.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <strong>In the Patient Explorer</strong>
-          <p>Add the filter <span class="cmd">Email Problem (bounced or invalid)</span> and choose "yes". A saved Smart List with that filter can be reopened at any time and recalculates itself live. The Explorer can also include inactive patients; the Reports list shows only active ones.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">☎️</div>
-      <div class="callout-body">
-        <strong>What to do</strong>
-        <p>Phone the patient (the number is in the list), ask for the correct email and confirm it letter by letter. Open the record, click Edit and change the email. The flag disappears by itself, and the patient is a newsletter recipient again from the administrator's next group check. If a patient asks to stop receiving the newsletter instead, use the "Opt Out of Newsletter" button on their record.</p>
-      </div>
-    </div>
-
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">For the developer: how the check works and how to renew the Google authorisation</h3>
-
-    <p>The check is read-only: Clinic Manager only has permission to <em>read</em> Google Contacts, so it can never change the Gmail group. The code lives in the <span class="cmd">naturalmed/clinicmanager</span> repository: <span class="cmd">apps/newsletter/services.py</span> (eligibility rule and Google calls), <span class="cmd">apps/newsletter/admin.py</span> (the button) and the <span class="cmd">check_newsletter_consent</span> management command (terminal version).</p>
-
-    <p style="margin-top:1rem">The Google credentials are two files, <span class="cmd">token.json</span> and <span class="cmd">client_secret.json</span>, kept on the server in <span class="cmd">/opt/naturalmed/protected_media/newsletter_sync/</span> (seen as <span class="cmd">/app/protected_media/newsletter_sync/</span> inside the container). They are deliberately not in Git. The Google Cloud project is <span class="cmd">naturalmed-auto-consultations</span>, and the app "NaturalMed Clinic Manager" was set to <strong>In production</strong> on 5 October 2026, without verification (do not submit it for review). While an external app stays in "Testing", Google expires its tokens after 7 days; in production a token lasts until it is revoked or goes about six months unused, so the monthly check keeps it alive. The authorisation script <span class="cmd">authorize.py</span> and the <span class="cmd">client_secret_*.json</span> file live only in <span class="cmd">~/naturalmed-newsletter-auth</span> on the developer's Mac.</p>
-
-    <p style="margin-top:1rem">If the check fails with an authorisation error (for example <span class="cmd">invalid_grant</span>), renew the token:</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <strong>Generate a new token on the Mac</strong>
-          <p><span class="cmd">cd ~/naturalmed-newsletter-auth &amp;&amp; source venv/bin/activate &amp;&amp; rm -f token.json &amp;&amp; python3 authorize.py</span></p>
-          <p>Sign in as <span class="cmd">naturalmed.wellness@gmail.com</span>. On "Google hasn't verified this app" choose <strong>Advanced → Go to NaturalMed Clinic Manager (unsafe)</strong>, then allow access to contacts.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <strong>Copy it to the server</strong>
-          <p><span class="cmd">scp ~/naturalmed-newsletter-auth/token.json root@159.69.220.0:/opt/naturalmed/protected_media/newsletter_sync/token.json</span></p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <strong>Fix permissions and test</strong>
-          <p>On the server run <span class="cmd">chmod 600 /opt/naturalmed/protected_media/newsletter_sync/token.json</span>, then the terminal check shown above. No container restart is needed, because the folder is a mounted volume.</p>
-        </div>
-      </div>
-    </div>
-
-    <p style="margin-top:1rem"><strong>Marking bounces.</strong> Paste the bounce messages copied from Gmail into a text file and run, on the server: <span class="cmd">docker exec -i naturalmed-web-1 python manage.py mark_bounced_emails --from-text - &lt; bounces.txt</span>. It only picks up the permanent "Address not found" messages and, by default, only simulates: add <span class="cmd">--apply</span> to write. Addresses can also be typed in directly, and <span class="cmd">--clear</span> removes a marker. The marker exists only for patients (a website sign-up that bounces has none yet). The rule "bounced or invalid" is defined in one place, <span class="cmd">apps/patients/email_health.py</span>, and drives the group check, the warning on the patient page, the Reports list and the Explorer filter. Fields: <span class="cmd">email_bounced_at</span> and <span class="cmd">email_bounced_address</span> on Patient, migration 0017.</p>
-
-    <p style="margin-top:1rem">The Clinic Manager chat assistant also knows this procedure (its instructions are the "PHASE 9" section of the system prompt, edited under Admin → Chat Assistant → Chat Configurations; a copy is kept in the repository as <span class="cmd">docs/CHAT_SYSTEM_PROMPT.txt</span>).</p>
 
     <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">If a patient asks to opt out</h3>
-    <p>Start in Clinic Manager: open the patient's record and click "Opt Out of Newsletter". They are then excluded from the eligible list automatically. They are <strong>not</strong> removed from the Gmail group automatically, though — the next time you run the newsletter check they will appear under "REMOVER DO GRUPO", and you then remove them from the "Newsletter NaturalMed" group in Google Contacts. Until you do, they would still receive the newsletter.</p>
+    <p>Do this in Clinic Manager, not in Google Contacts: open the patient's record and click "Opt Out of Newsletter". They will be excluded automatically the next time you export the list — nothing to do in Google Contacts.</p>
 
     <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">If a website subscriber (not a patient) asks to opt out</h3>
-    <p>They can unsubscribe themselves at any time using the link included at the bottom of the newsletter email — always keep this link in the email you send. If they contact you directly instead, ask your developer to remove them from Clinic Manager (requests that arrive by email are covered in the next section). Either way, once they have left they appear under "REMOVER DO GRUPO" the next time you run the newsletter check, and you then take them out of the Gmail group.</p>
-
-    <h3 style="font-family:var(--serif);font-size:1.2rem;color:var(--jade-dark);margin:2rem 0 1rem">If someone asks to leave by email (a reply to the newsletter, or an "Unsubscribe" message)</h3>
-    <p>The unsubscribe link at the bottom of the newsletter is the only way Clinic Manager finds out by itself. Someone who simply <strong>replies</strong> ("stop emailing me", "unsubscribe", "please remove me") writes to the clinic's Gmail inbox, and <strong>nothing in Clinic Manager sees that message</strong>. If nobody reads it and acts on it, the person keeps receiving the newsletter. Several requests sent this way between May and July 2026 went unnoticed, so there are now two safety nets:</p>
-    <ul>
-      <li><strong>Gmail label "Pedido de saida", with a star.</strong> A filter in the clinic's Gmail puts this label and a star on replies to the newsletter and on messages with "unsubscribe" in the subject. After each newsletter, open the label and read every starred conversation (in a long conversation, read the latest message).</li>
-      <li><strong>Daily automatic check.</strong> Every morning (about 7am) a small script in the clinic's Google account looks for new requests and, only when it finds one, emails the administrator and the clinic inbox with the subject "[NaturalMed] N possiveis pedidos de saida da newsletter", with a link to the conversation. Every <strong>Monday</strong> it also sends "[NaturalMed] Verificacao semanal: sem pedidos de saida novos" if there is nothing new. <strong>If the Monday message does not arrive, tell the developer: the check has stopped.</strong></li>
-    </ul>
-    <p>When a request is real, do these three things the same day:</p>
-    <ul>
-      <li><strong>1.</strong> In Clinic Manager, search for the person by email. If there is an active record, click "Opt Out of Newsletter" once (it is a switch: clicking twice undoes it).</li>
-      <li><strong>2.</strong> In Google Contacts (the clinic's account), remove the contact from the "Newsletter NaturalMed" label. <strong>Always do this, even if there is no record in Clinic Manager</strong>: the check cannot see people who exist only in the Gmail group.</li>
-      <li><strong>3.</strong> In Gmail, remove the star from the conversation, to mark it as dealt with.</li>
-    </ul>
-    <p>Two things to know. The automatic check looks for typical wording (in English and Portuguese): it can miss a request written in other words, and it can flag messages that are not requests (an automatic reply, or a thank-you that quotes the footer), so <strong>always read the message before acting</strong>. And "Opt Out of Newsletter" only stops the newsletter: if the person also does not want appointment reminders or invoices by email, that is a decision for the practitioner (the email on the record would have to be removed).</p>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">🛠️</div>
-      <div class="callout-body">
-        <strong>For the developer: where the daily check lives</strong>
-        <p>An Apps Script project called "Pedidos de saida (permanente)" in the clinic's Google account (source: pedidos_saida_permanente.gs). It reads Gmail (read-only), sends email only to the two addresses fixed in CONFIG.AVISAR, and runs from a daily time trigger at about 7am. Permissions it holds: view email, send email as the clinic, run when not present. To run it by hand: open the project, choose verificarDiariamente and click Run. The list of requests already reported is kept in the script properties. The Gmail filter "Pedido de saida" is a second, independent net.</p>
-      </div>
-    </div>
+    <p>They can unsubscribe themselves at any time using the link included at the bottom of the newsletter email — always keep this link in the email you send. If they contact you directly instead, ask your developer to remove them from Clinic Manager.</p>
 
     <div class="callout callout-warn">
       <div class="callout-icon">⚠️</div>
       <div class="callout-body">
-        <strong>Add new subscribers in Clinic Manager (or the website form) first, not only in Google Contacts</strong>
-        <p>If someone wants to join and cannot use the website form themselves, ask your developer to add them in Clinic Manager rather than only in Google Contacts. That way they are part of the real, tracked recipient list — not just a name sitting in the Gmail group with no record of why they're there. (Unlike the old process, the monthly check no longer wipes the group, so a contact added only in Gmail will simply keep showing up under "REVER NO GRUPO" every month instead of being lost — but it's still better recorded properly in Clinic Manager.)</p>
+        <strong>Do not add subscribers by hand in Google Contacts anymore</strong>
+        <p>Anyone added directly in Google Contacts (bypassing the website form or Clinic Manager) will be lost the next time you refresh the group, since the refresh replaces the whole label. If someone wants to join and cannot use the website form themselves, ask your developer to add them in Clinic Manager instead.</p>
       </div>
     </div>
   </section>
@@ -1061,14 +897,6 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
     </div>
 
     <p>Once your article is published and the website has rebuilt (~1 minute), follow these steps to send the newsletter to all your subscribers.</p>
-
-    <div class="callout callout-tip">
-      <div class="callout-icon">✅</div>
-      <div class="callout-body">
-        <strong>Before you start: verify the Gmail group</strong>
-        <p>Run the "Verificar Newsletter (CSV)" check described in section 7 and fix any differences first, so that the right people receive this month's newsletter.</p>
-      </div>
-    </div>
 
     <div class="steps">
       <div class="step">
@@ -1188,27 +1016,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
         <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">A subscriber asked to be removed from the newsletter. What do I do?</p>
-        <p style="font-size:14px;color:var(--text-muted)">If they are a patient, open their record in Clinic Manager and click "Opt Out of Newsletter" — they will be excluded automatically from the eligible list, and will show up under "REMOVER DO GRUPO" the next time you run the newsletter check, as a reminder to take them out of the Gmail group too. If they signed up through the website (not a patient), they can use the unsubscribe link at the bottom of the newsletter email, or ask your developer to remove them. If they asked by email, follow "If someone asks to leave by email" in section 7.</p>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
-        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">The Newsletter Subscribers page lists only a handful of people, but the Gmail group has over 150. Is something wrong?</p>
-        <p style="font-size:14px;color:var(--text-muted)">No. That page lists only people who signed up through the website form. Patients are included in the newsletter automatically from their records and do not appear there. The "Verificar Newsletter (CSV)" button compares everyone — patients and website sign-ups together — with the Gmail group.</p>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
-        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">I clicked "Verificar Newsletter (CSV)" and got an error message, with no file.</p>
-        <p style="font-size:14px;color:var(--text-muted)">Clinic Manager could not reach Google Contacts, usually because the Google authorisation needs renewing. Tell your developer (see section 7). In the meantime you can still send the newsletter to the existing group.</p>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
-        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">Can the assistant inside Clinic Manager explain the newsletter check?</p>
-        <p style="font-size:14px;color:var(--text-muted)">Yes. Ask it, for example, "How do I check that the Gmail newsletter group is up to date?" or "How do I add someone to the Gmail group?". It gives the same steps as section 7.</p>
-      </div>
-
-      <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
-        <p style="font-weight:600;color:var(--jade-darkest);margin-bottom:.5rem">A patient says they never receive the newsletter. Why?</p>
-        <p style="font-size:14px;color:var(--text-muted)">Open their record. If the email bounced or is not valid, a yellow warning at the top and a red tag next to the buttons say so (the same patients are listed in Reports → Patient Email Problems). The other usual reasons are: they opted out, the record is inactive, or the address was never added to the Gmail group. The administrator's newsletter check lists most of these cases.</p>
+        <p style="font-size:14px;color:var(--text-muted)">If they are a patient, open their record in Clinic Manager and click "Opt Out of Newsletter" — they will be excluded automatically next time you export the list. If they signed up through the website (not a patient), they can use the unsubscribe link at the bottom of the newsletter email, or ask your developer to remove them. You no longer need to edit Google Contacts by hand for this.</p>
       </div>
 
       <div style="background:var(--white);border:1px solid var(--cream-dark);border-radius:10px;padding:1.25rem 1.5rem">
@@ -1255,28 +1063,12 @@ body { font-family: var(--sans); background: var(--cream); color: var(--text-dar
           <td style="color:var(--jade-light)">github.com/naturalmed/naturalmed-wellness/actions</td>
         </tr>
         <tr>
-          <td style="color:var(--jade-pale)">Verify newsletter recipients vs. Gmail group</td>
-          <td style="color:var(--jade-light)">clinic.naturalmed-wellness.com/admin/ → Newsletter → Newsletter Subscribers → "Verificar Newsletter (CSV)"</td>
-        </tr>
-        <tr>
-          <td style="color:var(--jade-pale)">Patients with email problems (clinic staff)</td>
-          <td style="color:var(--jade-light)">Warning on the patient page · Reports → Patient Email Problems · Patient Explorer → filter "Email Problem"</td>
-        </tr>
-        <tr>
-          <td style="color:var(--jade-pale)">After each newsletter: bounced emails</td>
-          <td style="color:var(--jade-light)">Gmail inbox → "Address not found" messages → send the text to the developer → run the newsletter check again (see section 7)</td>
-        </tr>
-        <tr>
-          <td style="color:var(--jade-pale)">Renew Google authorisation (developer)</td>
-          <td style="color:var(--jade-light)">Mac: ~/naturalmed-newsletter-auth → python3 authorize.py → scp token.json to the server (see section 7)</td>
+          <td style="color:var(--jade-pale)">Manage subscribers</td>
+          <td style="color:var(--jade-light)">clinic.naturalmed-wellness.com → Reports → Newsletter Recipients</td>
         </tr>
         <tr>
           <td style="color:var(--jade-pale)">Patient opt-out</td>
           <td style="color:var(--jade-light)">Clinic Manager → patient record → "Opt Out of Newsletter"</td>
-        </tr>
-        <tr>
-          <td style="color:var(--jade-pale)">Opt-out request by email</td>
-          <td style="color:var(--jade-light)">Gmail label "Pedido de saida" → Clinic Manager: "Opt Out of Newsletter" (if there is a record) → Google Contacts: remove from "Newsletter NaturalMed" → remove the star</td>
         </tr>
         <tr>
           <td style="color:var(--jade-pale)">Send newsletter</td>
