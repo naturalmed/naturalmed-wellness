@@ -897,6 +897,12 @@ def _social_crop(cover, slug_full, focus='center'):
         print('  social: artigo sem capa - recortes ignorados')
         return {}
 
+    # Capa indicada como endereco completo do proprio site (ex.: colado no CMS em vez
+    # de escolhida no seletor de imagens): converte para o caminho no repositorio.
+    m = re.match(r'^https?://(?:www\.)?naturalmed-wellness\.com(/[^?#]*)', cover.strip(), re.I)
+    if m:
+        cover = m.group(1)
+
     src = ROOT / cover.lstrip('/')
     if not src.exists():
         print(f'  social: capa não encontrada ({src}) - recortes ignorados')
