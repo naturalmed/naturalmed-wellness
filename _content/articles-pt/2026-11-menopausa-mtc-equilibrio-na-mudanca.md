@@ -1,10 +1,10 @@
 ---
 title: Menopausa e Medicina Chinesa — Encontrar o Equilíbrio na Mudança
-slug: menopausa-tem-equilibrio-na-mudanca
+slug: menopausa-mtc-equilibrio-na-mudanca
 date: 2026-11-06
 category: Saúde da Mulher
 reading_time: 8
-excerpt: As ondas de calor, insônia e alterações de humor da menopausa são naturais, mas difíceis. Há mais de 2 mil anos, a medicina chinesa oferece apoio e compreensão para essa fase.
+excerpt: Os afrontamentos, as insónias e as alterações de humor da menopausa são naturais, mas difíceis de viver. Há mais de dois mil anos que a medicina chinesa oferece apoio e compreensão para esta fase.
 cover: https://www.naturalmed-wellness.com/assets/img/naturalmed-pharmacy.jpg
 ---
 

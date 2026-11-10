@@ -1,6 +1,6 @@
 ---
 title: Menopause and Chinese Medicine — Finding Balance Through the Change
-slug: menopause-tcm-finding-balance-trough-change
+slug: menopause-tcm-finding-balance-through-change
 date: 2026-11-06
 category: Women's Health
 reading_time: 8
