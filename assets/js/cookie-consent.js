@@ -122,6 +122,13 @@ class CookieConsentManager {
         this.hideBanner();
     }
 
+    // The privacy page depends on the page language, not on the folder depth: a relative
+    // "privacy.html" broke on /pt/, /en/articles/ and /pt/artigos/ (404 in Search Console).
+    privacyUrl() {
+        const path = (window.location && window.location.pathname) || '/';
+        return /^\/pt(\/|$)/.test(path) ? '/pt/privacidade.html' : '/en/privacy.html';
+    }
+
     showBanner() {
         this.hideBanner();
         const banner = document.createElement('div');
@@ -132,7 +139,7 @@ class CookieConsentManager {
                 <div class="cookie-consent-text">
                     <h3>🍪 Cookie Preferences</h3>
                     <p>We use essential cookies to make this site work. With your permission we may also use analytics cookies to help us improve it.
-                    Read our <a href="privacy.html">Privacy Policy</a> for full details.</p>
+                    Read our <a href="${this.privacyUrl()}">Privacy Policy</a> for full details.</p>
                 </div>
                 <div class="cookie-consent-buttons">
                     <button class="cookie-btn cookie-btn-settings" onclick="cookieConsent.showSettings()">⚙️ Customise</button>
@@ -196,7 +203,7 @@ class CookieConsentManager {
                     </div>
                 </div>
                 <div class="cookie-settings-footer">
-                    <a href="privacy.html">📄 Privacy Policy</a>
+                    <a href="${this.privacyUrl()}">📄 Privacy Policy</a>
                     <button class="cookie-btn cookie-btn-secondary" onclick="cookieConsent.hideSettings()">Cancel</button>
                     <button class="cookie-btn cookie-btn-primary"   onclick="cookieConsent.saveFromSettings()">Save Preferences</button>
                 </div>
