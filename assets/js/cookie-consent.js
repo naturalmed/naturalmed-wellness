@@ -10,8 +10,54 @@
  * before any analytics or other third-party scripts.
  */
 
+// Texts of the banner and settings panel, by page language (PT for /pt/..., EN elsewhere).
+const NM_COOKIE_TEXTS = {
+    en: {
+        bannerTitle: '🍪 Cookie Preferences',
+        bannerText: 'We use essential cookies to make this site work. With your permission we may also use analytics cookies to help us improve it.',
+        bannerPolicy: 'Read our {link} for full details.',
+        policy: 'Privacy Policy',
+        customise: '⚙️ Customise',
+        essentialOnly: 'Essential Only',
+        acceptAll: 'Accept All',
+        panelTitle: 'Cookie Preferences',
+        panelIntro: 'Manage which cookies NaturalMed may store on your device. Essential cookies cannot be disabled as the site needs them to function.',
+        essentialName: 'Essential',
+        essentialDesc: 'Required for the website to function. Includes your cookie-consent preference. Cannot be disabled.',
+        analyticsName: 'Analytics',
+        analyticsDesc: 'Help us understand how visitors use the site so we can improve it. All data is anonymised.',
+        alwaysActive: 'Always Active',
+        cancel: 'Cancel',
+        save: 'Save Preferences'
+    },
+    pt: {
+        bannerTitle: '🍪 Preferências de Cookies',
+        bannerText: 'Usamos cookies essenciais para que este site funcione. Com a sua autorização, podemos também usar cookies de análise para nos ajudar a melhorá-lo.',
+        bannerPolicy: 'Leia a nossa {link} para mais pormenores.',
+        policy: 'Política de Privacidade',
+        customise: '⚙️ Personalizar',
+        essentialOnly: 'Só Essenciais',
+        acceptAll: 'Aceitar Todos',
+        panelTitle: 'Preferências de Cookies',
+        panelIntro: 'Escolha que cookies a NaturalMed pode guardar no seu dispositivo. Os cookies essenciais não podem ser desativados, porque o site precisa deles para funcionar.',
+        essentialName: 'Essenciais',
+        essentialDesc: 'Necessários para o funcionamento do site. Incluem a sua preferência de cookies. Não podem ser desativados.',
+        analyticsName: 'Análise',
+        analyticsDesc: 'Ajudam-nos a perceber como os visitantes usam o site, para o podermos melhorar. Todos os dados são anonimizados.',
+        alwaysActive: 'Sempre Ativos',
+        cancel: 'Cancelar',
+        save: 'Guardar Preferências'
+    }
+};
+
+function nmCookieLang() {
+    const path = (window.location && window.location.pathname) || '/';
+    return /^\/pt(\/|$)/.test(path) ? 'pt' : 'en';
+}
+
 class CookieConsentManager {
     constructor(config = {}) {
+        this.t = NM_COOKIE_TEXTS[nmCookieLang()];
         this.config = {
             cookieName: 'nm_cookie_consent',
             cookieExpiry: 365,       // days
@@ -19,14 +65,14 @@ class CookieConsentManager {
             onConsentChange: config.onConsentChange || null,
             categories: {
                 essential: {
-                    name: 'Essential',
-                    description: 'Required for the website to function. Includes your cookie-consent preference. Cannot be disabled.',
+                    name: this.t.essentialName,
+                    description: this.t.essentialDesc,
                     required: true,
                     enabled: true
                 },
                 analytics: {
-                    name: 'Analytics',
-                    description: 'Help us understand how visitors use the site so we can improve it. All data is anonymised.',
+                    name: this.t.analyticsName,
+                    description: this.t.analyticsDesc,
                     required: false,
                     enabled: false,
                     // Google Analytics only ever loads through this consent gate (never from the
@@ -132,7 +178,7 @@ class CookieConsentManager {
     // "privacy.html" broke on /pt/, /en/articles/ and /pt/artigos/ (404 in Search Console).
     privacyUrl() {
         const path = (window.location && window.location.pathname) || '/';
-        return /^\/pt(\/|$)/.test(path) ? '/pt/privacidade.html' : '/en/privacy.html';
+        return nmCookieLang() === 'pt' ? '/pt/privacidade.html' : '/en/privacy.html';
     }
 
     showBanner() {
@@ -143,14 +189,14 @@ class CookieConsentManager {
         banner.innerHTML = `
             <div class="cookie-consent-content">
                 <div class="cookie-consent-text">
-                    <h3>🍪 Cookie Preferences</h3>
-                    <p>We use essential cookies to make this site work. With your permission we may also use analytics cookies to help us improve it.
-                    Read our <a href="${this.privacyUrl()}">Privacy Policy</a> for full details.</p>
+                    <h3>${this.t.bannerTitle}</h3>
+                    <p>${this.t.bannerText}
+                    ${this.t.bannerPolicy.replace('{link}', `<a href="${this.privacyUrl()}">${this.t.policy}</a>`)}</p>
                 </div>
                 <div class="cookie-consent-buttons">
-                    <button class="cookie-btn cookie-btn-settings" onclick="cookieConsent.showSettings()">⚙️ Customise</button>
-                    <button class="cookie-btn cookie-btn-reject"   onclick="cookieConsent.rejectNonEssential()">Essential Only</button>
-                    <button class="cookie-btn cookie-btn-accept"   onclick="cookieConsent.acceptAll()">Accept All</button>
+                    <button class="cookie-btn cookie-btn-settings" onclick="cookieConsent.showSettings()">${this.t.customise}</button>
+                    <button class="cookie-btn cookie-btn-reject"   onclick="cookieConsent.rejectNonEssential()">${this.t.essentialOnly}</button>
+                    <button class="cookie-btn cookie-btn-accept"   onclick="cookieConsent.acceptAll()">${this.t.acceptAll}</button>
                 </div>
             </div>`;
         document.body.appendChild(banner);
@@ -172,13 +218,12 @@ class CookieConsentManager {
             <div class="cookie-settings-overlay" onclick="cookieConsent.hideSettings()"></div>
             <div class="cookie-settings-content">
                 <div class="cookie-settings-header">
-                    <h2>Cookie Preferences</h2>
+                    <h2>${this.t.panelTitle}</h2>
                     <button class="cookie-settings-close" onclick="cookieConsent.hideSettings()">✕</button>
                 </div>
                 <div class="cookie-settings-body">
                     <p class="cookie-settings-intro">
-                        Manage which cookies NaturalMed may store on your device.
-                        Essential cookies cannot be disabled as the site needs them to function.
+                        ${this.t.panelIntro}
                     </p>
                     <div class="cookie-category">
                         <div class="cookie-category-header">
@@ -192,7 +237,7 @@ class CookieConsentManager {
                             </label>
                         </div>
                         <div class="cookie-category-info">
-                            <span class="cookie-badge cookie-badge-required">Always Active</span>
+                            <span class="cookie-badge cookie-badge-required">${this.t.alwaysActive}</span>
                         </div>
                     </div>
                     <div class="cookie-category">
@@ -209,9 +254,9 @@ class CookieConsentManager {
                     </div>
                 </div>
                 <div class="cookie-settings-footer">
-                    <a href="${this.privacyUrl()}">📄 Privacy Policy</a>
-                    <button class="cookie-btn cookie-btn-secondary" onclick="cookieConsent.hideSettings()">Cancel</button>
-                    <button class="cookie-btn cookie-btn-primary"   onclick="cookieConsent.saveFromSettings()">Save Preferences</button>
+                    <a href="${this.privacyUrl()}">📄 ${this.t.policy}</a>
+                    <button class="cookie-btn cookie-btn-secondary" onclick="cookieConsent.hideSettings()">${this.t.cancel}</button>
+                    <button class="cookie-btn cookie-btn-primary"   onclick="cookieConsent.saveFromSettings()">${this.t.save}</button>
                 </div>
             </div>`;
         document.body.appendChild(panel);
