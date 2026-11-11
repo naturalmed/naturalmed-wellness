@@ -123,6 +123,7 @@ ARTICLE_TEMPLATE_EN = '''\
     <meta property="og:site_name" content="NaturalMed">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="{date_iso}">
+    {seo_links}
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
     <link rel="alternate" type="application/rss+xml" title="NaturalMed Articles RSS" href="../../feed.xml">
@@ -265,6 +266,7 @@ ARTICLE_TEMPLATE_PT = '''\
     <meta property="og:site_name" content="NaturalMed">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="{date_iso}">
+    {seo_links}
     <link rel="icon" type="image/x-icon" href="../../assets/img/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicon-32.png">
     <link rel="stylesheet" href="../../assets/css/cookie-consent.css">
@@ -507,6 +509,22 @@ def make_lang_toggle(lang, month_key, other_lang_map):
     pt_href = f'../../pt/artigos/{other_slug}.html' if other_slug else '#'
     return f'<div class="lang-toggle"><a href="#" class="active">EN</a><a href="{pt_href}">PT</a></div>'
 
+def make_seo_links(lang, slug_full, month_key, other_lang_map):
+    """canonical + hreflang for an article page. The EN and PT articles of the same
+    month are translations of each other (same pairing as the EN/PT toggle);
+    x-default points to the English version."""
+    own_dir, other_dir = ('pt/artigos', 'en/articles') if lang == 'pt' else ('en/articles', 'pt/artigos')
+    own_url = f'{BASE_URL}/{own_dir}/{slug_full}.html'
+    links = [f'<link rel="canonical" href="{own_url}">']
+    other_slug = (other_lang_map or {}).get(month_key)
+    if other_slug:
+        other_url = f'{BASE_URL}/{other_dir}/{other_slug}.html'
+        en_url, pt_url = (other_url, own_url) if lang == 'pt' else (own_url, other_url)
+        links += [f'<link rel="alternate" hreflang="en" href="{en_url}">',
+                  f'<link rel="alternate" hreflang="pt" href="{pt_url}">',
+                  f'<link rel="alternate" hreflang="x-default" href="{en_url}">']
+    return '\n    '.join(links)
+
 # ── Core article builder (shared logic) ──────────────────────
 
 def build_articles(content_dir, output_dir, template, lang='en', other_lang_map=None):
@@ -537,6 +555,7 @@ def build_articles(content_dir, output_dir, template, lang='en', other_lang_map=
                      if cover else '')
         ml = month_label(pub_date, lang)
         lang_toggle = make_lang_toggle(lang, pub_date.strftime('%Y-%m'), other_lang_map)
+        seo_links   = make_seo_links(lang, slug_full, pub_date.strftime('%Y-%m'), other_lang_map)
 
         html = template.format(
             title           = meta.get('title', ''),
@@ -552,6 +571,7 @@ def build_articles(content_dir, output_dir, template, lang='en', other_lang_map=
             cover_img       = cover_img,
             body_html       = body_html,
             lang_toggle     = lang_toggle,
+            seo_links       = seo_links,
         )
         out_path = output_dir / f'{slug_full}.html'
         out_path.write_text(html, encoding='utf-8')
