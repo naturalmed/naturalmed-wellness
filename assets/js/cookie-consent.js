@@ -29,7 +29,11 @@ class CookieConsentManager {
                     description: 'Help us understand how visitors use the site so we can improve it. All data is anonymised.',
                     required: false,
                     enabled: false,
-                    scripts: config.analyticsScripts || []
+                    // Google Analytics only ever loads through this consent gate (never from the
+                    // page <head>). Pages may pass their own list; otherwise the site's GA4 tag is used.
+                    scripts: (config.analyticsScripts && config.analyticsScripts.length)
+                        ? config.analyticsScripts
+                        : [{ type: 'gtag', id: 'G-5175TWZGHK' }]
                 }
             }
         };
@@ -86,6 +90,8 @@ class CookieConsentManager {
     }
 
     loadGoogleAnalytics(measurementId) {
+        if (this._gaLoaded) return;   // never load the tag twice on the same page
+        this._gaLoaded = true;
         const script = document.createElement('script');
         script.async = true;
         script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
@@ -248,3 +254,11 @@ class CookieConsentManager {
 }
 
 window.CookieConsentManager = CookieConsentManager;
+
+// Pages that include this file but do not start the manager themselves get one automatically,
+// so the banner - and the consent gate for Analytics - works on every page.
+document.addEventListener('DOMContentLoaded', function () {
+    if (typeof cookieConsent === 'undefined' && !window.cookieConsent) {
+        window.cookieConsent = new CookieConsentManager();
+    }
+});
